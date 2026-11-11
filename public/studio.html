@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SYNNEXA — Tatkal Concurrency Benchmark Studio</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body data-page="studio">
+
+  <!-- 1. Luxury Frosted Glass Navbar -->
+  <header class="navbar">
+    <div class="navbar-container">
+      <a href="/" class="nav-brand-group">
+        <div class="nav-brand-logo">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+        </div>
+        <div class="nav-brand-titles">
+          <div class="brand-title">SYNNEXA <span>Studio</span></div>
+          <div class="brand-sub">IRCTC Tatkal Concurrency &amp; Benchmark Engine</div>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li class="nav-link-item"><a href="/">Curated Events</a></li>
+        <li class="nav-link-item"><a href="/studio" class="active">Concurrency Studio</a></li>
+        <li class="nav-link-item"><a href="/admin">Organizer Admin</a></li>
+        <li class="nav-link-item"><a href="/platform">Platform Settings</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="btn-luxury-outline" onclick="resetSystemState()" title="Reset all event capacities to baseline 2 Tatkal seats">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
+          </svg>
+          Reset Baseline
+        </button>
+
+        <a href="/download-ppt" class="btn-ppt-download" style="padding: 0.55rem 1.15rem; font-size: 0.85rem;" title="Download Presentation Deck (.pptx)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Download PPT
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 2. Main Content Canvas -->
+  <main class="page-container">
+
+    <!-- Page Intro Header -->
+    <div class="page-intro">
+      <h1 class="page-intro-title">Tatkal Concurrency Benchmark Studio</h1>
+      <p class="page-intro-desc">
+        Live microsecond benchmark engine modeled after IRCTC Tatkal booking rushes. Simultaneously fires concurrent asynchronous threads against the critical section to demonstrate Mutex FIFO bounded waiting vs TOCTOU race hazard overselling.
+      </p>
+    </div>
+
+    <!-- Presentation Deck Download Banner -->
+    <div class="ppt-promo-card">
+      <div class="ppt-promo-left">
+        <span class="ppt-promo-tag">Operating Systems Laboratory • Product #8</span>
+        <h2 class="ppt-promo-title">Official Viva &amp; Course Presentation Deck</h2>
+        <p class="ppt-promo-desc">
+          Complete academic slide deck covering Problem Statement, Mathematical Mutex Proofs, Keyed Registry Architecture, and Lab Demo guidelines. Features all 6 team members arranged in ascending order.
+        </p>
+      </div>
+      <a href="/download-ppt" class="btn-ppt-download">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        Download Presentation (.pptx)
+      </a>
+    </div>
+
+    <!-- 3. Studio Interactive Grid -->
+    <div class="studio-grid">
+      <!-- Left: Rush Control Panel -->
+      <div class="panel-card">
+        <div class="panel-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="4 17 10 11 4 5"></polyline>
+            <line x1="12" y1="19" x2="20" y2="19"></line>
+          </svg>
+          Tatkal Rush Parameters
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="simEventSelect">Target Event Batch</label>
+          <select class="form-control" id="simEventSelect" onchange="onSimEventChange()">
+            <!-- Populated dynamically via app.js -->
+          </select>
+        </div>
+
+        <div class="form-group">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.35rem;">
+            <label class="form-label" for="simThreadsRange" style="margin-bottom:0;">Concurrent Squads (Threads):</label>
+            <strong style="color: var(--accent-cyan); font-family: var(--font-mono); font-size: 0.88rem;" id="simThreadsVal">6 Squads</strong>
+          </div>
+          <input type="range" class="form-control" id="simThreadsRange" min="2" max="20" value="6" oninput="document.getElementById('simThreadsVal').innerText = this.value + ' Squads'">
+          <div style="display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--text-muted); margin-top: 4px;">
+            <span>2 threads</span>
+            <span>10 threads</span>
+            <span>20 threads</span>
+          </div>
+        </div>
+
+        <!-- Mutex Mode Toggle Box -->
+        <div class="toggle-card">
+          <div class="toggle-head">
+            <span class="toggle-label" id="mutexModeLabel" style="color: var(--accent-emerald);">Mutex Barrier Active (Atomic FIFO)</span>
+            <label class="toggle-switch">
+              <input type="checkbox" id="simMutexToggle" checked onchange="onMutexToggleChange()">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <div class="toggle-desc" id="mutexModeDesc">
+            Requests are serialized via an asynchronous FIFO queue. Strict mutual exclusion, bounded waiting, zero overbooking guarantee.
+          </div>
+        </div>
+
+        <button class="btn-luxury-primary" id="btnRunRush" style="width: 100%; padding: 0.85rem; font-size: 0.95rem; justify-content: center;" onclick="triggerConcurrentRush()">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+          Fire Tatkal Concurrent Rush
+        </button>
+
+        <div style="margin-top: 1.4rem; font-size: 0.8rem; color: var(--text-body); background: #FAFAF8; padding: 1rem 1.15rem; border-radius: var(--radius-sm); border: 1px solid var(--border-medium); line-height: 1.55;">
+          <strong style="color: var(--text-main);">Evaluator Demonstration Protocol:</strong>
+          <ol style="margin-left: 1.25rem; margin-top: 0.45rem;">
+            <li>Leave <strong>2 Tatkal seats</strong> available.</li>
+            <li>Set slider to <strong>6 squads</strong>.</li>
+            <li><strong>Mutex ON:</strong> Exactly 2 succeed, 4 rejected, 0 overbooking.</li>
+            <li><strong>Mutex OFF:</strong> Simultaneous dirty reads occur; seats drop below zero into negative overbooked values.</li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- Right: Real-time Telemetry & Microsecond Terminal -->
+      <div>
+        <!-- Telemetry Stat Row -->
+        <div class="telemetry-row">
+          <div class="telemetry-stat">
+            <div class="stat-label">Hardware Lock</div>
+            <div class="stat-val" id="telemLockState">
+              <span class="badge badge-success" id="pillLock" style="font-size:0.8rem;">UNLOCKED</span>
+            </div>
+          </div>
+          <div class="telemetry-stat">
+            <div class="stat-label">FIFO Wait Queue</div>
+            <div class="stat-val" id="telemQueue">0 <span style="font-size:0.75rem; color:var(--text-muted); font-weight:normal;">threads</span></div>
+          </div>
+          <div class="telemetry-stat">
+            <div class="stat-label">Remaining Seats</div>
+            <div class="stat-val" id="telemSeats" style="color: var(--accent-cyan);">2</div>
+          </div>
+        </div>
+
+        <!-- Terminal Window -->
+        <div class="terminal-window">
+          <div class="terminal-titlebar">
+            <div class="terminal-title">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+              MUTEX_KERNEL_STREAM // microsecond execution trace
+            </div>
+            <div class="terminal-dots">
+              <span class="dot-red"></span>
+              <span class="dot-yellow"></span>
+              <span class="dot-green"></span>
+            </div>
+          </div>
+          <div class="terminal-body" id="terminalOutput">
+[KERNEL] High-resolution Mutex telemetry armed.
+[SYSTEM] KeyedMutexRegistry ready. Fine-grained resource locks active.
+[READY] Select target event and click 'Fire Tatkal Concurrent Rush' to stream execution trace.
+          </div>
+        </div>
+
+        <!-- Scorecard -->
+        <div class="scorecard-bar" id="rushScorecard">
+          <div class="scorecard-cell">
+            <span class="scorecard-lbl">Last Mode</span>
+            <span class="scorecard-num" id="scoreMode" style="font-size:0.95rem;">Ready</span>
+          </div>
+          <div class="scorecard-cell">
+            <span class="scorecard-lbl">Initial Seats</span>
+            <span class="scorecard-num" id="scoreInitial">—</span>
+          </div>
+          <div class="scorecard-cell">
+            <span class="scorecard-lbl">Final Seats</span>
+            <span class="scorecard-num" id="scoreFinal">—</span>
+          </div>
+          <div class="scorecard-cell">
+            <span class="scorecard-lbl">Successful</span>
+            <span class="scorecard-num" id="scoreSuccess" style="color: var(--accent-emerald);">—</span>
+          </div>
+          <div class="scorecard-cell">
+            <span class="scorecard-lbl">Oversold Count</span>
+            <span class="scorecard-num" id="scoreOversell" style="color: #DC2626;">0</span>
+          </div>
+          <div class="scorecard-cell">
+            <span class="scorecard-lbl">Invariant</span>
+            <span class="scorecard-num" id="scoreInvariant" style="color: var(--accent-cyan); font-size: 0.95rem;">INTACT</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Institutional Footer & Roster -->
+  <footer class="footer-editorial" id="institutional">
+    <div class="footer-inner">
+      <div class="footer-institutional-banner">
+        <div class="footer-inst-left">
+          <span class="footer-inst-pill">SR UNIVERSITY</span>
+          <div>
+            <div class="footer-inst-title">Department of Computer Science &amp; Engineering</div>
+            <div class="footer-inst-sub">Operating Systems Laboratory • Product #8 • Academic Year 2026</div>
+          </div>
+        </div>
+        <a href="/download-ppt" class="btn-ppt-download" style="padding: 0.45rem 1.1rem; font-size: 0.8rem;">
+          Download Deck (.pptx)
+        </a>
+      </div>
+
+      <div class="footer-top-grid">
+        <div>
+          <div class="brand-title" style="color: #FFFFFF;">SYNNEXA <span>Studio</span></div>
+          <p class="footer-brand-desc">
+            Production-grade multi-role event management &amp; concurrent registration platform.
+            Synthesized by Shiva Ganesh, Shiva Saketh, Saicharan, Naveen Reddy, Geethika, and Vishwas.
+          </p>
+        </div>
+
+        <div>
+          <div class="footer-heading">Portals &amp; Views</div>
+          <ul class="footer-links-list">
+            <li><a href="/">Curated Events</a></li>
+            <li><a href="/studio">OS Concurrency Studio</a></li>
+            <li><a href="/admin">Organizer Admin</a></li>
+            <li><a href="/platform">Platform Settings</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-heading">Documentation</div>
+          <ul class="footer-links-list">
+            <li><a href="/download-ppt">Presentation Deck (.pptx)</a></li>
+            <li><a href="/#destinations">Tech Capitals</a></li>
+            <li><a href="/#experience">The Experience</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-heading">Brand Identity</div>
+          <p style="font-size: 0.86rem; color: #94A3B8; line-height: 1.6;">
+            <strong>SYNNEXA</strong> represents the synthesis of <strong>SYN</strong>chronization with our 6 engineering founders: 
+            <span style="color:#FCD34D;">S</span>hiva, <span style="color:#FCD34D;">S</span>aketh, <span style="color:#FCD34D;">S</span>ai, <span style="color:#FCD34D;">N</span>aveen, <span style="color:#FCD34D;">G</span>eethika &amp; <span style="color:#FCD34D;">V</span>ishwas.
+          </p>
+        </div>
+      </div>
+
+      <div style="margin-top: 2.75rem;">
+        <div style="font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #FCD34D;">
+          Institutional Engineering Team — Ascending Lineup
+        </div>
+        <div class="roster-grid-footer">
+          <div class="roster-card-footer">
+            <div class="roster-htno">2503A51108</div>
+            <div class="roster-name">Ch. Naveen Reddy</div>
+            <div class="roster-role">Systems Core &amp; Concurrency</div>
+          </div>
+          <div class="roster-card-footer">
+            <div class="roster-htno">2503A51109</div>
+            <div class="roster-name">K. Shiva Saketh</div>
+            <div class="roster-role">Payment Gateway Integration</div>
+          </div>
+          <div class="roster-card-footer lead">
+            <div class="roster-htno">2503A51110 ★</div>
+            <div class="roster-name">A. Shiva Ganesh</div>
+            <div class="roster-role">Team Leader &amp; Full-Stack Architect</div>
+          </div>
+          <div class="roster-card-footer">
+            <div class="roster-htno">2503A51111</div>
+            <div class="roster-name">V. Saicharan</div>
+            <div class="roster-role">Database &amp; State Management</div>
+          </div>
+          <div class="roster-card-footer">
+            <div class="roster-htno">2503A1112</div>
+            <div class="roster-name">T. Geethika</div>
+            <div class="roster-role">UI/UX &amp; Editorial Layouts</div>
+          </div>
+          <div class="roster-card-footer">
+            <div class="roster-htno">2503A51113</div>
+            <div class="roster-name">G. Vishwas</div>
+            <div class="roster-role">Benchmarking &amp; QA Testing</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div>© 2026 SYNNEXA Events • SR University CSE Core Product #8. All rights reserved.</div>
+        <div>Zero Bloat Native Node.js Architecture • Concurrency-Protected</div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast-container" id="toastContainer"></div>
+  <script src="/app.js"></script>
+</body>
+</html>

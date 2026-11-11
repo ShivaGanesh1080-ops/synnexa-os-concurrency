@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SYNNEXA — Platform Administration &amp; Gateway Settings</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>">
+</head>
+<body data-page="platform">
+
+  <!-- 1. Luxury Frosted Glass Navbar -->
+  <header class="navbar">
+    <div class="navbar-container">
+      <a href="/" class="nav-brand-group">
+        <div class="nav-brand-logo">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+        </div>
+        <div class="nav-brand-titles">
+          <div class="brand-title">SYNNEXA <span>Platform</span></div>
+          <div class="brand-sub">Gateway &amp; Telemetry Command Center</div>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li class="nav-link-item"><a href="/">Curated Events</a></li>
+        <li class="nav-link-item"><a href="/studio">Concurrency Studio</a></li>
+        <li class="nav-link-item"><a href="/admin">Organizer Admin</a></li>
+        <li class="nav-link-item"><a href="/platform" class="active">Platform Settings</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="btn-luxury-outline" onclick="fetchPlatformData()" title="Refresh live telemetry & stats">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="23 4 23 10 17 10"></polyline>
+            <polyline points="1 20 1 14 7 14"></polyline>
+            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+          </svg>
+          Refresh Feed
+        </button>
+
+        <a href="/download-ppt" class="btn-ppt-download" style="padding: 0.55rem 1.15rem; font-size: 0.85rem;" title="Download Presentation Deck (.pptx)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Download PPT
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 2. Main Content Canvas -->
+  <main class="page-container">
+
+    <!-- Page Intro Header -->
+    <div class="page-intro">
+      <h1 class="page-intro-title">Platform Administration &amp; Gateway Settings</h1>
+      <p class="page-intro-desc">
+        Configure live Razorpay Test Mode credentials, manage platform fee schedules, and inspect microsecond critical section telemetry logs across all concurrent batches.
+      </p>
+    </div>
+
+    <!-- Presentation Deck Download Banner -->
+    <div class="ppt-promo-card">
+      <div class="ppt-promo-left">
+        <span class="ppt-promo-tag">Operating Systems Laboratory • Product #8</span>
+        <h2 class="ppt-promo-title">Official Viva &amp; Course Presentation Deck</h2>
+        <p class="ppt-promo-desc">
+          Complete academic slide deck covering Problem Statement, Mathematical Mutex Proofs, Keyed Registry Architecture, and Lab Demo guidelines. Features all 6 team members arranged in ascending order.
+        </p>
+      </div>
+      <a href="/download-ppt" class="btn-ppt-download">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        Download Presentation (.pptx)
+      </a>
+    </div>
+
+    <!-- 3. Real-Time Telemetry Stats Grid -->
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-label">Active Events</div>
+        <div class="stat-val" id="statTotalEvents">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Registered Squads</div>
+        <div class="stat-val" id="statTotalTeams" style="color: var(--accent-cyan);">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Gross Processed Volume</div>
+        <div class="stat-val" id="statTotalRevenue" style="color: var(--accent-emerald);">₹0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Lock Acquisitions</div>
+        <div class="stat-val" id="statTotalLocks">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Contention Barriers</div>
+        <div class="stat-val" id="statTotalContentions" style="color: #D97706;">0</div>
+      </div>
+    </div>
+
+    <!-- 4. Razorpay Test Gateway Settings Card -->
+    <div class="admin-table-card" style="margin-bottom: 2.2rem;">
+      <div class="admin-table-header">
+        <div>
+          <div class="admin-table-title">Razorpay Test Mode Integration</div>
+          <div class="admin-table-sub">Live sandbox credentials dynamically injected into participant booking modals</div>
+        </div>
+        <span class="badge badge-success">SANDBOX ACTIVE</span>
+      </div>
+
+      <div style="padding: 1.6rem 1.8rem;">
+        <form id="platformSettingsForm" onsubmit="savePlatformSettings(event)">
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="rzpKeyId">Razorpay Key ID *</label>
+              <input type="text" class="form-control" id="rzpKeyId" placeholder="rzp_test_1DP5mmOlF5G5ag" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="rzpKeySecret">Razorpay Key Secret *</label>
+              <input type="password" class="form-control" id="rzpKeySecret" placeholder="••••••••••••••••••••••••" required>
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="platformFee">Platform Fee (INR)</label>
+              <input type="number" class="form-control" id="platformFee" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="rzpCurrency">Default Settlement Currency</label>
+              <select class="form-control" id="rzpCurrency">
+                <option value="INR" selected>INR (Indian Rupee ₹)</option>
+                <option value="USD">USD (US Dollar $)</option>
+                <option value="EUR">EUR (Euro €)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="rzpWebhook">Webhook Secret (Optional)</label>
+            <input type="text" class="form-control" id="rzpWebhook" placeholder="whsec_test_synnexa_2026">
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1.25rem;">
+            <button type="button" class="btn-luxury-outline" onclick="loadPlatformSettings()">Reset to Baseline</button>
+            <button type="submit" class="btn-luxury-primary">Save Gateway Credentials →</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- 5. Microsecond Critical Section Audit Trail Table -->
+    <div class="admin-table-card">
+      <div class="admin-table-header">
+        <div>
+          <div class="admin-table-title">Critical Section Microsecond Audit Trail</div>
+          <div class="admin-table-sub">Real-time ledger of Mutex acquisitions, seat reservations, lock releases, and contention events</div>
+        </div>
+        <div style="display: flex; gap: 0.65rem; align-items: center;">
+          <button class="btn-luxury-outline" onclick="fetchPlatformData()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="23 4 23 10 17 10"></polyline>
+              <polyline points="1 20 1 14 7 14"></polyline>
+              <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+            </svg>
+            Refresh Logs
+          </button>
+          <button class="btn-luxury-outline" style="color: #DC2626; border-color: rgba(220, 38, 38, 0.25);" onclick="clearAuditLogs()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="3 6 5 6 21 6"></polyline>
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+            </svg>
+            Clear Audit Trail
+          </button>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Timestamp</th>
+              <th>Action</th>
+              <th>Event ID</th>
+              <th>Squad Name</th>
+              <th>Status</th>
+              <th>Duration</th>
+              <th>Telemetry Details</th>
+            </tr>
+          </thead>
+          <tbody id="auditTableBody">
+            <!-- Populated dynamically via app.js -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Institutional Footer & Roster -->
+  <footer class="footer-editorial" id="institutional">
+    <div class="footer-inner">
+      <div class="footer-institutional-banner">
+        <div class="footer-inst-left">
+          <span class="footer-inst-pill">SR UNIVERSITY</span>
+          <div>
+            <div class="footer-inst-title">Department of Computer Science &amp; Engineering</div>
+            <div class="footer-inst-sub">Operating Systems Laboratory • Product #8 • Academic Year 2026</div>
+          </div>
+        </div>
+        <a href="/download-ppt" class="btn-ppt-download" style="padding: 0.45rem 1.1rem; font-size: 0.8rem;">
+          Download Deck (.pptx)
+        </a>
+      </div>
+
+      <div class="footer-top-grid">
+        <div>
+          <div class="brand-title" style="color: #FFFFFF;">SYNNEXA <span>Platform</span></div>
+          <p class="footer-brand-desc">
+            Production-grade multi-role event management &amp; concurrent registration platform.
+            Synthesized by Shiva Ganesh, Shiva Saketh, Saicharan, Naveen Reddy, Geethika, and Vishwas.
+          </p>
+        </div>
+
+        <div>
+          <div class="footer-heading">Portals &amp; Views</div>
+          <ul class="footer-links-list">
+            <li><a href="/">Curated Events</a></li>
+            <li><a href="/studio">OS Concurrency Studio</a></li>
+            <li><a href="/admin">Organizer Admin</a></li>
+            <li><a href="/platform">Platform Settings</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-heading">Documentation</div>
+          <ul class="footer-links-list">
+            <li><a href="/download-ppt">Presentation Deck (.pptx)</a></li>
+            <li><a href="/#destinations">Tech Capitals</a></li>
+            <li><a href="/#experience">The Experience</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-heading">Brand Identity</div>
+          <p style="font-size: 0.86rem; color: #94A3B8; line-height: 1.6;">
+            <strong>SYNNEXA</strong> represents the synthesis of <strong>SYN</strong>chronization with our 6 engineering founders: 
+            <span style="color:#FCD34D;">S</span>hiva, <span style="color:#FCD34D;">S</span>aketh, <span style="color:#FCD34D;">S</span>ai, <span style="color:#FCD34D;">N</span>aveen, <span style="color:#FCD34D;">G</span>eethika &amp; <span style="color:#FCD34D;">V</span>ishwas.
+          </p>
+        </div>
+      </div>
+
+      <div style="margin-top: 2.75rem;">
+        <div style="font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #FCD34D;">
+          Institutional Engineering Team — Ascending Lineup
+        </div>
+        <div class="roster-grid-footer">
+          <div class="roster-card-footer">
+            <div class="roster-htno">2503A51108</div>
+            <div class="roster-name">Ch. Naveen Reddy</div>
+            <div class="roster-role">Systems Core &amp; Concurrency</div>
+          </div>
+          <div class="roster-card-footer">
+            <div class="roster-htno">2503A51109</div>
+            <div class="roster-name">K. Shiva Saketh</div>
+            <div class="roster-role">Payment Gateway Integration</div>
+          </div>
+          <div class="roster-card-footer lead">
+            <div class="roster-htno">2503A51110 ★</div>
+            <div class="roster-name">A. Shiva Ganesh</div>
+            <div class="roster-role">Team Leader &amp; Full-Stack Architect</div>
+          </div>
+          <div class="roster-card-footer">
+            <div class="roster-htno">2503A51111</div>
+            <div class="roster-name">V. Saicharan</div>
+            <div class="roster-role">Database &amp; State Management</div>
+          </div>
+          <div class="roster-card-footer">
+            <div class="roster-htno">2503A1112</div>
+            <div class="roster-name">T. Geethika</div>
+            <div class="roster-role">UI/UX &amp; Editorial Layouts</div>
+          </div>
+          <div class="roster-card-footer">
+            <div class="roster-htno">2503A51113</div>
+            <div class="roster-name">G. Vishwas</div>
+            <div class="roster-role">Benchmarking &amp; QA Testing</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div>© 2026 SYNNEXA Events • SR University CSE Core Product #8. All rights reserved.</div>
+        <div>Zero Bloat Native Node.js Architecture • Concurrency-Protected</div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast-container" id="toastContainer"></div>
+  <script src="/app.js"></script>
+</body>
+</html>

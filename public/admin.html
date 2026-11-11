@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SYNNEXA — Hackathon Organizer Admin</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+</head>
+<body data-page="admin">
+
+  <!-- 1. Luxury Frosted Glass Navbar -->
+  <header class="navbar">
+    <div class="navbar-container">
+      <a href="/" class="nav-brand-group">
+        <div class="nav-brand-logo">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+        </div>
+        <div class="nav-brand-titles">
+          <div class="brand-title">SYNNEXA <span>Admin</span></div>
+          <div class="brand-sub">Hackathon Organizer & Batch Control</div>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li class="nav-link-item"><a href="/">Curated Events</a></li>
+        <li class="nav-link-item"><a href="/studio">Concurrency Studio</a></li>
+        <li class="nav-link-item"><a href="/admin" class="active">Organizer Admin</a></li>
+        <li class="nav-link-item"><a href="/platform">Platform Settings</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="btn-luxury-outline" onclick="openCheckInModal()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+          Door Check-In
+        </button>
+
+        <button class="btn-luxury-primary" onclick="openNewBatchModal()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          Release Batch
+        </button>
+
+        <a href="/download-ppt" class="btn-ppt-download" style="padding: 0.55rem 1.15rem; font-size: 0.85rem;" title="Download Presentation Deck (.pptx)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Download PPT
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 2. Main Content Canvas -->
+  <main class="page-container">
+
+    <!-- Page Intro Header -->
+    <div class="page-intro">
+      <h1 class="page-intro-title">Hackathon Organizer Console</h1>
+      <p class="page-intro-desc">
+        Release ticket batches, set Tatkal quotas, independently toggle Mutex barrier protection per event, inspect attendee rosters, export attendee CSVs, and verify check-ins in real time.
+      </p>
+    </div>
+
+    <!-- Presentation Deck Download Banner -->
+    <div class="ppt-promo-card">
+      <div class="ppt-promo-left">
+        <span class="ppt-promo-tag">Operating Systems Laboratory • Product #8</span>
+        <h2 class="ppt-promo-title">Official Viva & Course Presentation Deck</h2>
+        <p class="ppt-promo-desc">
+          Complete academic slide deck covering Problem Statement, Mathematical Mutex Proofs, Keyed Registry Architecture, and Lab Demo guidelines. Features all 6 team members arranged in ascending order.
+        </p>
+      </div>
+      <a href="/download-ppt" class="btn-ppt-download">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        Download Presentation (.pptx)
+      </a>
+    </div>
+
+    <!-- Table 1: Active Hackathons & Batches -->
+    <div class="admin-table-card">
+      <div class="admin-table-header">
+        <div>
+          <div class="admin-table-title">Active Hackathons &amp; Ticket Batches</div>
+          <div class="admin-table-sub">Live capacity tracking with per-event atomic Mutex controls</div>
+        </div>
+        <button class="btn-luxury-outline" onclick="fetchHackathons()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="23 4 23 10 17 10"></polyline>
+            <polyline points="1 20 1 14 7 14"></polyline>
+            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+          </svg>
+          Refresh Feed
+        </button>
+      </div>
+
+      <div class="table-responsive">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Hackathon Title</th>
+              <th>City / Location</th>
+              <th>Total Capacity</th>
+              <th>Tatkal Quota</th>
+              <th>Remaining Seats</th>
+              <th>Price</th>
+              <th>Mutex Protection</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="hackAdminTableBody">
+            <!-- Injected dynamically from Database.js -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Table 2: Registered Squads & Attendee Roster -->
+    <div class="admin-table-card">
+      <div class="admin-table-header">
+        <div>
+          <div class="admin-table-title">Registered Squads &amp; Attendee Roster</div>
+          <div class="admin-table-sub">Filtered: <strong id="rosterEventTitle" style="color: var(--text-main);">All Events</strong></div>
+        </div>
+        <div style="display: flex; gap: 0.65rem; align-items: center;">
+          <select class="form-control" id="rosterFilterSelect" style="width: 220px; padding: 0.45rem 0.75rem; font-size: 0.82rem;" onchange="loadRoster(this.value)">
+            <!-- Populated dynamically -->
+          </select>
+          <button class="btn-luxury-outline" onclick="exportRosterCSV()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            Export CSV
+          </button>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Ticket Code</th>
+              <th>Squad Name</th>
+              <th>Team Leader</th>
+              <th>Leader Email</th>
+              <th>Squad Members</th>
+              <th>Payment ID</th>
+              <th>Status</th>
+              <th>Booked At</th>
+            </tr>
+          </thead>
+          <tbody id="rosterTableBody">
+            <!-- Injected dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Modal 1: Release Batch -->
+  <div class="modal-backdrop" id="modalNewBatch">
+    <div class="modal-container" style="max-width: 580px;">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <div class="modal-title">Release New Ticket Batch</div>
+          <div class="modal-subtitle">Publish a new event batch to the SYNNEXA catalog</div>
+        </div>
+        <button class="modal-close-btn" onclick="closeNewBatchModal()">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <form id="newBatchForm" onsubmit="handleCreateBatch(event)">
+          <div class="form-group">
+            <label class="form-label" for="batchTitle">Hackathon Title *</label>
+            <input type="text" class="form-input" id="batchTitle" placeholder="e.g. SRU National AI HackCon 2026" required>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="batchCity">City / Tech Hub *</label>
+              <input type="text" class="form-input" id="batchCity" placeholder="e.g. San Francisco, USA" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="batchCategory">Category / Track *</label>
+              <input type="text" class="form-input" id="batchCategory" placeholder="e.g. AI & Distributed Systems" required>
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="batchVenue">Venue / Campus *</label>
+              <input type="text" class="form-input" id="batchVenue" placeholder="e.g. Innovation Hall" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="batchDates">Dates *</label>
+              <input type="text" class="form-input" id="batchDates" placeholder="e.g. Dec 10-12, 2026" required>
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="batchPrice">Price (INR) *</label>
+              <input type="number" class="form-input" id="batchPrice" min="0" value="499" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="batchTatkalSeats">Tatkal Quota Seats *</label>
+              <input type="number" class="form-input" id="batchTatkalSeats" min="1" value="4" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="batchDesc">Tagline / Overview</label>
+            <input type="text" class="form-input" id="batchDesc" placeholder="Brief summary of challenge statement...">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="batchImageUrl">Cover Image URL (Unsplash)</label>
+            <input type="url" class="form-input" id="batchImageUrl" placeholder="https://images.unsplash.com/photo-..." value="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1000&q=80">
+          </div>
+
+          <div class="payment-selector" style="margin-top: 1rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <div style="font-weight: 700; font-size: 0.9rem;">Atomic Mutex Protection</div>
+                <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">Enforces FIFO bounded waiting and zero overselling</div>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="batchMutexToggle" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="modal-footer" style="padding: 1.25rem 0 0; margin-top: 1rem;">
+            <button type="button" class="btn-luxury-outline" onclick="closeNewBatchModal()">Cancel</button>
+            <button type="submit" class="btn-luxury-primary">Publish Batch →</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Door Check-In -->
+  <div class="modal-backdrop" id="modalCheckIn">
+    <div class="modal-container" style="max-width: 440px;">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <div class="modal-title">Door Check-In</div>
+          <div class="modal-subtitle">Verify participant tickets at the venue</div>
+        </div>
+        <button class="modal-close-btn" onclick="closeCheckInModal()">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <form onsubmit="handleDoorCheckIn(event)">
+          <div class="form-group">
+            <label class="form-label" for="checkInCode">Ticket Code *</label>
+            <input type="text" class="form-input" id="checkInCode" placeholder="TKT-TATKAL-XXXXX" style="font-family: var(--font-mono); font-size: 1.05rem; font-weight: 700; text-transform: uppercase;" required>
+          </div>
+
+          <div id="checkInResultBox" style="display: none; padding: 0.9rem; border-radius: var(--radius-sm); margin-bottom: 1.25rem; font-size: 0.85rem; line-height: 1.5;"></div>
+
+          <div style="display: flex; justify-content: flex-end; gap: 0.65rem;">
+            <button type="button" class="btn-luxury-outline" onclick="closeCheckInModal()">Close</button>
+            <button type="submit" class="btn-luxury-primary">Verify &amp; Check In</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Institutional Footer & Roster -->
+  <footer class="footer-editorial" id="institutional">
+    <div class="footer-inner">
+      <div class="footer-institutional-banner">
+        <div class="footer-inst-left">
+          <span class="footer-inst-pill">SR UNIVERSITY</span>
+          <div>
+            <div class="footer-inst-title">Department of Computer Science & Engineering</div>
+            <div class="footer-inst-sub">Operating Systems Laboratory • Product #8 • Academic Year 2026</div>
+          </div>
+        </div>
+        <a href="/download-ppt" class="btn-ppt-download" style="padding: 0.45rem 1.1rem; font-size: 0.8rem;">
+          Download Deck (.pptx)
+        </a>
+      </div>
+
+      <div class="footer-top-grid">
+        <div>
+          <div class="brand-title" style="color: #FFFFFF;">SYNNEXA <span>Admin</span></div>
+          <p class="footer-brand-desc">
+            Production-grade multi-role event management & concurrent registration platform.
+            Synthesized by Shiva Ganesh, Shiva Saketh, Saicharan, Naveen Reddy, Geethika, and Vishwas.
+          </p>
+        </div>
+
+        <div>
+          <div class="footer-heading">Portals & Views</div>
+          <ul class="footer-links-list">
+            <li><a href="/">Curated Events</a></li>
+            <li><a href="/studio">OS Concurrency Studio</a></li>
+            <li><a href="/admin">Organizer Admin</a></li>
+            <li><a href="/platform">Platform Settings</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-heading">Documentation</div>
+          <ul class="footer-links-list">
+            <li><a href="/download-ppt">Presentation Deck (.pptx)</a></li>
+            <li><a href="/#destinations">Tech Capitals</a></li>
+            <li><a href="/#experience">The Experience</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-heading">Brand Identity</div>
+          <p style="font-size: 0.86rem; color: #94A3B8; line-height: 1.6;">
+            <strong>SYNNEXA</strong> represents the synthesis of <strong>SYN</strong>chronization with our 6 engineering founders: 
+            <span style="color:#FCD34D;">S</span>hiva, <span style="color:#FCD34D;">S</span>aketh, <span style="color:#FCD34D;">S</span>ai, <span style="color:#FCD34D;">N</span>aveen, <span style="color:#FCD34D;">G</span>eethika & <span style="color:#FCD34D;">V</span>ishwas.
+          </p>
+        </div>
+      </div>
+
+      <div style="margin-top: 2.75rem;">
+        <div style="font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #FCD34D;">
+          Institutional Engineering Team — Ascending Lineup
+        </div>
+        <div class="roster-grid-footer">
+          <div class="roster-card-footer">
+            <div class="roster-htno">2503A51108</div>
+            <div class="roster-name">Ch. Naveen Reddy</div>
+            <div class="roster-role">Systems Core & Concurrency</div>
+          </div>
+          <div class="roster-card-footer">
+            <div class="roster-htno">2503A51109</div>
+            <div class="roster-name">K. Shiva Saketh</div>
+            <div class="roster-role">Payment Gateway Integration</div>
+          </div>
+          <div class="roster-card-footer lead">
+            <div class="roster-htno">2503A51110 ★</div>
+            <div class="roster-name">A. Shiva Ganesh</div>
+            <div class="roster-role">Team Leader & Full-Stack Architect</div>
+          </div>
+          <div class="roster-card-footer">
+            <div class="roster-htno">2503A51111</div>
+            <div class="roster-name">V. Saicharan</div>
+            <div class="roster-role">Database & State Management</div>
+          </div>
+          <div class="roster-card-footer">
+            <div class="roster-htno">2503A1112</div>
+            <div class="roster-name">T. Geethika</div>
+            <div class="roster-role">UI/UX & Editorial Layouts</div>
+          </div>
+          <div class="roster-card-footer">
+            <div class="roster-htno">2503A51113</div>
+            <div class="roster-name">G. Vishwas</div>
+            <div class="roster-role">Benchmarking & QA Testing</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div>© 2026 SYNNEXA Events • SR University CSE Core Product #8. All rights reserved.</div>
+        <div>Zero Bloat Native Node.js Architecture • Concurrency-Protected</div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast-container" id="toastContainer"></div>
+  <script src="/app.js"></script>
+</body>
+</html>

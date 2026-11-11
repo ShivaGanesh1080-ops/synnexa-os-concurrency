@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SYNNEXA — Global Tech Summits & Squad Registration</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body data-page="hub">
+
+  <!-- ============================================================
+       0. CINEMATIC "DIVE-IN" INTRO PORTAL
+       ============================================================ -->
+  <div id="divePortal" class="dive-portal" aria-hidden="true">
+    <div class="dive-tunnel">
+      <div class="warp-ring ring-1"></div>
+      <div class="warp-ring ring-2"></div>
+      <div class="warp-ring ring-3"></div>
+      <div class="warp-ring ring-4"></div>
+      <div class="warp-ring ring-5"></div>
+    </div>
+    <div class="dive-core">
+      <div class="dive-logo">
+        <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+          <polyline points="2 17 12 22 22 17"></polyline>
+          <polyline points="2 12 12 17 22 12"></polyline>
+        </svg>
+      </div>
+      <div class="dive-brand-title">SYNNEXA <span>Events</span></div>
+      <div class="dive-team-pills">
+        <span>SHIVA</span> • <span>SAKETH</span> • <span>SAI</span> • <span>NAVEEN</span> • <span>GEETHIKA</span> • <span>VISHWAS</span>
+      </div>
+      <div class="dive-status">
+        <span class="dive-dot"></span>
+        <span>ENTERING CONCURRENCY PORTAL...</span>
+      </div>
+    </div>
+    <button class="dive-skip-btn" onclick="exitDivePortal()">Enter Platform ↵</button>
+  </div>
+
+  <!-- ============================================================
+       1. LUXURY FROSTED GLASS NAVBAR (No Ugly Wrapping)
+       ============================================================ -->
+  <header class="navbar">
+    <div class="navbar-container">
+      <a href="/" class="nav-brand-group">
+        <div class="nav-brand-logo">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+        </div>
+        <div class="nav-brand-titles">
+          <div class="brand-title">SYNNEXA <span>Events</span></div>
+          <div class="brand-sub">Global Tech Summits & Hackathon Registry</div>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li class="nav-link-item"><a href="#destinations">Tech Capitals</a></li>
+        <li class="nav-link-item"><a href="#events" class="active">Curated Events</a></li>
+        <li class="nav-link-item"><a href="#experience">The Experience</a></li>
+        <li class="nav-link-item"><a href="#institutional">Team Roster</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <!-- Discreet Lab Evaluation Studio for Viva -->
+        <a href="/studio" class="btn-luxury-text" title="Switch to OS Concurrency Benchmark Studio for Professor Demonstration">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+          OS Concurrency Studio
+        </a>
+
+        <button class="btn-luxury-outline" onclick="openMyPassesModal()" title="View your confirmed squad passes">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"></path>
+          </svg>
+          <span>My Passes</span>
+          <span class="pass-count-chip" id="userPassCount">0</span>
+        </button>
+
+        <a href="/download-ppt" class="btn-luxury-primary" title="Download Complete Presentation Deck (.pptx)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Download Deck
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       2. EDITORIAL HERO SECTION
+       ============================================================ -->
+  <section class="hero-section">
+    <div class="hero-pill-badge">
+      <span class="dot"></span>
+      <span>2026–2027 Global Innovation Calendar Now Open</span>
+    </div>
+
+    <h1 class="hero-title">
+      Where Top Engineering Minds <em>Compete, Build,</em> and Ship.
+    </h1>
+
+    <p class="hero-subtitle">
+      Curated hackathons across San Francisco, Tokyo, London, Bengaluru, Berlin, and Zurich.
+      Reserve your squad's verified passes in real time.
+    </p>
+
+    <!-- 3. Signature Floating Search Capsule -->
+    <div class="search-capsule-wrapper">
+      <div class="search-capsule">
+        <div class="capsule-segment">
+          <label class="capsule-label">Tech Capital</label>
+          <select id="searchCity" class="capsule-select" onchange="applyFilters()">
+            <option value="ALL">All Global Cities</option>
+            <option value="San Francisco">San Francisco, USA</option>
+            <option value="Tokyo">Tokyo, Japan</option>
+            <option value="London">London, UK</option>
+            <option value="Bengaluru">Bengaluru, India</option>
+            <option value="Berlin">Berlin, Germany</option>
+            <option value="Zurich">Zurich, Switzerland</option>
+          </select>
+        </div>
+
+        <div class="capsule-segment">
+          <label class="capsule-label">Track Focus</label>
+          <select id="searchCategory" class="capsule-select" onchange="applyFilters()">
+            <option value="ALL">All Disciplines</option>
+            <option value="AI & Machine Learning">AI & Foundation Models</option>
+            <option value="Cybersecurity & CTF">Zero-Trust & CyberSec</option>
+            <option value="Cloud & Systems">Cloud & Distributed Systems</option>
+            <option value="Web3 & FinTech">Web3 & FinTech</option>
+            <option value="Quantum & Compute">Quantum & Neural Compute</option>
+            <option value="Robotics & IoT">Autonomous Robotics</option>
+          </select>
+        </div>
+
+        <div class="capsule-segment">
+          <label class="capsule-label">Event Keyword</label>
+          <input type="text" id="searchKeyword" class="capsule-input" placeholder="Search hackathon title..." oninput="applyFilters()">
+        </div>
+
+        <button class="capsule-btn-search" onclick="applyFilters()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          Explore Passes
+        </button>
+      </div>
+
+      <!-- Quick Interactive Filter Pills -->
+      <div class="filter-pills-row">
+        <button class="filter-pill-btn active" data-city="ALL" onclick="setQuickCityFilter('ALL', this)">All Cities</button>
+        <button class="filter-pill-btn" data-city="San Francisco" onclick="setQuickCityFilter('San Francisco', this)">🇺🇸 San Francisco</button>
+        <button class="filter-pill-btn" data-city="Tokyo" onclick="setQuickCityFilter('Tokyo', this)">🇯🇵 Tokyo</button>
+        <button class="filter-pill-btn" data-city="London" onclick="setQuickCityFilter('London', this)">🇬🇧 London</button>
+        <button class="filter-pill-btn" data-city="Bengaluru" onclick="setQuickCityFilter('Bengaluru', this)">🇮🇳 Bengaluru</button>
+        <button class="filter-pill-btn" data-city="Berlin" onclick="setQuickCityFilter('Berlin', this)">🇩🇪 Berlin</button>
+        <button class="filter-pill-btn" data-city="Zurich" onclick="setQuickCityFilter('Zurich', this)">🇨🇭 Zurich</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       4. CURATED EVENTS GRID SECTION (3-COLUMN PERFECT FIT)
+       ============================================================ -->
+  <section class="section-container" id="events">
+    <div class="section-header">
+      <div class="section-title-group">
+        <span class="section-tag">Handpicked Global Summits</span>
+        <h2 class="section-title">Featured <em>Hackathons & Sprints</em></h2>
+        <p class="section-subtitle">Real-time seat reservation with instant verified digital boarding passes.</p>
+      </div>
+
+      <div class="section-actions">
+        <button class="btn-luxury-outline" onclick="fetchHackathons()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="23 4 23 10 17 10"></polyline>
+            <polyline points="1 20 1 14 7 14"></polyline>
+            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+          </svg>
+          Refresh Feed
+        </button>
+      </div>
+    </div>
+
+    <!-- 3-Column Luxury Event Grid -->
+    <div class="events-luxury-grid" id="eventsGrid">
+      <!-- Injected dynamically from Database.js -->
+    </div>
+  </section>
+
+  <!-- ============================================================
+       5. GLOBAL TECH CAPITALS SHOWCASE
+       ============================================================ -->
+  <section class="destinations-section" id="destinations">
+    <div class="section-container" style="padding-top: 0; padding-bottom: 0;">
+      <div class="section-header">
+        <div class="section-title-group">
+          <span class="section-tag">Global Tech Capitals</span>
+          <h2 class="section-title">Explore by <em>Innovation Hub</em></h2>
+          <p class="section-subtitle">Connect with premier engineering ecosystems across the globe.</p>
+        </div>
+      </div>
+
+      <div class="destinations-grid">
+        <div class="destination-card" onclick="setQuickCityFilter('San Francisco')">
+          <img class="destination-img" src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=800&q=80" alt="San Francisco">
+          <div class="destination-overlay">
+            <div class="destination-city">San Francisco, USA</div>
+            <div class="destination-hub">Moscone Center • AI & Agents Collective</div>
+          </div>
+        </div>
+
+        <div class="destination-card" onclick="setQuickCityFilter('Tokyo')">
+          <img class="destination-img" src="https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=800&q=80" alt="Tokyo">
+          <div class="destination-overlay">
+            <div class="destination-city">Tokyo, Japan</div>
+            <div class="destination-hub">Shibuya Stream • Cyber Warfare & CTF</div>
+          </div>
+        </div>
+
+        <div class="destination-card" onclick="setQuickCityFilter('London')">
+          <img class="destination-img" src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=800&q=80" alt="London">
+          <div class="destination-overlay">
+            <div class="destination-city">London, UK</div>
+            <div class="destination-hub">ExCeL Arena • Distributed Systems Hub</div>
+          </div>
+        </div>
+
+        <div class="destination-card" onclick="setQuickCityFilter('Bengaluru')">
+          <img class="destination-img" src="https://images.unsplash.com/photo-1596176530529-78163a4f7af2?auto=format&fit=crop&w=800&q=80" alt="Bengaluru">
+          <div class="destination-overlay">
+            <div class="destination-city">Bengaluru, India</div>
+            <div class="destination-hub">BIEC Corridor • High-Scale Web3 & FinTech</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       6. THE SYNNEXA EXPERIENCE
+       ============================================================ -->
+  <section class="experience-section" id="experience">
+    <div class="section-container" style="padding-top: 0; padding-bottom: 0;">
+      <div class="section-header">
+        <div class="section-title-group">
+          <span class="section-tag">Engineering-First Platform</span>
+          <h2 class="section-title">The <em>Synnexa</em> Experience</h2>
+          <p class="section-subtitle">Engineered for frictionless registration, guaranteed seat allocation, and verified check-ins.</p>
+        </div>
+      </div>
+
+      <div class="experience-grid">
+        <div class="experience-card">
+          <div class="experience-icon-wrap">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+              <line x1="8" y1="21" x2="16" y2="21"></line>
+              <line x1="12" y1="17" x2="12" y2="21"></line>
+            </svg>
+          </div>
+          <h3 class="experience-card-title">Instant Digital Pass Minting</h3>
+          <p class="experience-card-desc">Every confirmed registration produces an authentic digital boarding pass featuring a procedural SVG QR code for contactless entry.</p>
+        </div>
+
+        <div class="experience-card">
+          <div class="experience-icon-wrap">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </div>
+          <h3 class="experience-card-title">Zero Overbooking Guarantee</h3>
+          <p class="experience-card-desc">Our high-throughput reservation engine prevents ticket oversubscription during peak rush periods, ensuring zero false confirmations.</p>
+        </div>
+
+        <div class="experience-card">
+          <div class="experience-icon-wrap">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+              <line x1="1" y1="10" x2="23" y2="10"></line>
+            </svg>
+          </div>
+          <h3 class="experience-card-title">Razorpay Test Mode Integration</h3>
+          <p class="experience-card-desc">Production-grade payment processing with simulated test keys, automated receipt generation, and transaction audit trails.</p>
+        </div>
+
+        <div class="experience-card">
+          <div class="experience-icon-wrap">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+          </div>
+          <h3 class="experience-card-title">Dynamic Squad Management</h3>
+          <p class="experience-card-desc">Add up to four squad teammates dynamically, track attendance, and manage individual participant badges in one unified portal.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       7. INSTITUTIONAL FOOTER & ROSTER (ALL DETAILS AT BOTTOM)
+       ============================================================ -->
+  <footer class="footer-editorial" id="institutional">
+    <div class="footer-inner">
+
+      <!-- Institutional Banner inside Footer (Replaced Top Bar) -->
+      <div class="footer-institutional-banner">
+        <div class="footer-inst-left">
+          <span class="footer-inst-pill">SR UNIVERSITY</span>
+          <div>
+            <div class="footer-inst-title">Department of Computer Science & Engineering</div>
+            <div class="footer-inst-sub">Operating Systems Laboratory • Product #8 • Academic Year 2026</div>
+          </div>
+        </div>
+        <button class="footer-replay-btn" onclick="replayDivePortal()" title="Replay the 3D dive-in entrance animation">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+          Replay Dive Intro
+        </button>
+      </div>
+
+      <div class="footer-top-grid">
+        <div>
+          <div class="brand-title" style="color: #FFFFFF;">SYNNEXA <span>Events</span></div>
+          <p class="footer-brand-desc">
+            Production-grade multi-role event management & concurrent registration platform.
+            Synthesized by Shiva Ganesh, Shiva Saketh, Saicharan, Naveen Reddy, Geethika, and Vishwas.
+          </p>
+        </div>
+
+        <div>
+          <div class="footer-heading">Portals & Views</div>
+          <ul class="footer-links-list">
+            <li><a href="#events">Curated Events</a></li>
+            <li><a href="/studio">OS Concurrency Studio</a></li>
+            <li><a href="/admin">Organizer Admin</a></li>
+            <li><a href="/platform">Platform Settings</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-heading">Documentation</div>
+          <ul class="footer-links-list">
+            <li><a href="/download-ppt">Presentation Deck (.pptx)</a></li>
+            <li><a href="#destinations">Tech Capitals</a></li>
+            <li><a href="#experience">The Experience</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-heading">Brand Identity</div>
+          <p style="font-size: 0.86rem; color: #94A3B8; line-height: 1.6;">
+            <strong>SYNNEXA</strong> represents the synthesis of <strong>SYN</strong>chronization with our 6 engineering founders: 
+            <span style="color:#FCD34D;">S</span>hiva, <span style="color:#FCD34D;">S</span>aketh, <span style="color:#FCD34D;">S</span>ai, <span style="color:#FCD34D;">N</span>aveen, <span style="color:#FCD34D;">G</span>eethika & <span style="color:#FCD34D;">V</span>ishwas.
+          </p>
+        </div>
+      </div>
+
+      <!-- Institutional Team Roster arranged strictly in Ascending Order -->
+      <div style="margin-top: 2.75rem;">
+        <div style="font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #FCD34D;">
+          Institutional Engineering Team — Ascending Lineup
+        </div>
+        <div class="roster-grid-footer">
+          <div class="roster-card-footer">
+            <div class="roster-htno">2503A51108</div>
+            <div class="roster-name">Ch. Naveen Reddy</div>
+            <div class="roster-role">Systems Core & Concurrency</div>
+          </div>
+          <div class="roster-card-footer">
+            <div class="roster-htno">2503A51109</div>
+            <div class="roster-name">K. Shiva Saketh</div>
+            <div class="roster-role">Payment Gateway Integration</div>
+          </div>
+          <div class="roster-card-footer lead">
+            <div class="roster-htno">2503A51110 ★</div>
+            <div class="roster-name">A. Shiva Ganesh</div>
+            <div class="roster-role">Team Leader & Full-Stack Architect</div>
+          </div>
+          <div class="roster-card-footer">
+            <div class="roster-htno">2503A51111</div>
+            <div class="roster-name">V. Saicharan</div>
+            <div class="roster-role">Database & State Management</div>
+          </div>
+          <div class="roster-card-footer">
+            <div class="roster-htno">2503A1112</div>
+            <div class="roster-name">T. Geethika</div>
+            <div class="roster-role">UI/UX & Editorial Layouts</div>
+          </div>
+          <div class="roster-card-footer">
+            <div class="roster-htno">2503A51113</div>
+            <div class="roster-name">G. Vishwas</div>
+            <div class="roster-role">Benchmarking & QA Testing</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div>© 2026 SYNNEXA Events • SR University CSE Core Product #8. All rights reserved.</div>
+        <div>Zero Bloat Native Node.js Architecture • Concurrency-Protected</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       8. SQUAD REGISTRATION MODAL
+       ============================================================ -->
+  <div class="modal-backdrop" id="bookingModal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <div class="modal-title">Squad Registration</div>
+          <div class="modal-subtitle">Secure your team's verified passes in real time</div>
+        </div>
+        <button class="modal-close-btn" onclick="closeBookingModal()">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-event-pill">
+          <div>
+            <div class="modal-event-name" id="modalEventTitle">Event Title</div>
+            <div class="modal-event-meta" id="modalEventMeta">Location • Date</div>
+          </div>
+          <div class="modal-event-price" id="modalEventPrice">₹499</div>
+        </div>
+
+        <form id="bookingForm" onsubmit="submitBooking(event)">
+          <input type="hidden" id="bookingEventId" value="">
+
+          <div class="form-section-title">Team & Lead Details</div>
+          
+          <div class="form-group">
+            <label class="form-label">Team / Squad Name *</label>
+            <input type="text" id="teamName" class="form-input" placeholder="e.g. ByteBusters" required>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label">Team Leader Name *</label>
+              <input type="text" id="leaderName" class="form-input" placeholder="Full Name" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Leader Email Address *</label>
+              <input type="email" id="leaderEmail" class="form-input" placeholder="leader@sru.edu.in" required>
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label">College / Organization *</label>
+              <input type="text" id="collegeName" class="form-input" value="SR University" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Leader Roll / Hall Ticket No *</label>
+              <input type="text" id="leaderHtno" class="form-input" placeholder="e.g. 2503A51110" required>
+            </div>
+          </div>
+
+          <div class="form-section-title">
+            <span>Squad Members (Optional, up to 3 additional)</span>
+            <span id="memberCountBadge" style="font-size: 0.72rem; color: var(--text-muted);">1 / 4 Selected</span>
+          </div>
+
+          <div id="additionalMembersList"></div>
+
+          <button type="button" class="btn-add-member" onclick="addSquadMemberField()">
+            + Add Squad Member
+          </button>
+
+          <div class="payment-selector">
+            <div class="payment-badge">RAZORPAY TEST GATEWAY</div>
+            <div style="font-size: 0.88rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.25rem;">
+              Simulated Instant Verification
+            </div>
+            <div class="payment-note">
+              No real money is charged. Payment is validated against test keys and an instant digital pass is minted upon confirmation.
+            </div>
+          </div>
+
+          <div class="modal-footer" style="padding: 1.25rem 0 0; margin-top: 1rem;">
+            <div class="modal-total-wrap">
+              <span class="modal-total-label">Total Amount</span>
+              <span class="modal-total-val" id="modalTotalVal">₹499</span>
+            </div>
+            <button type="submit" class="btn-confirm-checkout" id="submitBookingBtn">
+              Confirm & Book Pass →
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       9. VIP DIGITAL BOARDING PASS MODAL
+       ============================================================ -->
+  <div class="modal-backdrop" id="passModal">
+    <div class="modal-container" style="max-width: 540px;">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <div class="modal-title">Official Boarding Pass</div>
+          <div class="modal-subtitle">Present this pass at physical or virtual check-in</div>
+        </div>
+        <button class="modal-close-btn" onclick="closePassModal()">✕</button>
+      </div>
+
+      <div class="modal-body" style="padding: 1.5rem;">
+        <div class="boarding-pass-card" id="printablePass">
+          <div class="pass-header">
+            <div class="pass-header-brand">SYNNEXA VIP PASS</div>
+            <div class="pass-status-pill">● VERIFIED & CONFIRMED</div>
+          </div>
+
+          <div class="pass-body">
+            <div class="pass-event-title" id="passEventTitle">Global AI HackSphere 2026</div>
+            <div class="pass-venue-text" id="passVenueText">Moscone Center, San Francisco • Nov 24–26, 2026</div>
+
+            <div class="pass-grid-info">
+              <div class="pass-info-item">
+                <span class="pass-info-label">Squad Name</span>
+                <span class="pass-info-val" id="passTeamName">ByteBusters</span>
+              </div>
+              <div class="pass-info-item">
+                <span class="pass-info-label">Team Lead</span>
+                <span class="pass-info-val" id="passLeaderName">Rahul Sharma</span>
+              </div>
+              <div class="pass-info-item">
+                <span class="pass-info-label">Squad Size</span>
+                <span class="pass-info-val" id="passSquadSize">3 Hackers</span>
+              </div>
+            </div>
+
+            <div class="pass-qr-row">
+              <div class="pass-qr-box" id="passQrContainer"></div>
+              <div class="pass-code-display">
+                <div class="pass-code-title">Booking Code</div>
+                <div class="pass-code-num" id="passTicketCode">TKT-TATKAL-89211</div>
+                <div class="pass-lead-team" id="passPaymentRef">Ref: pay_test_019283</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; margin-top: 1.5rem;">
+          <button class="btn-luxury-primary" style="flex: 1; justify-content: center;" onclick="window.print()">
+            Print Boarding Pass
+          </button>
+          <button class="btn-luxury-outline" style="flex: 1; justify-content: center;" onclick="closePassModal()">
+            Done & View Passes
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       10. "MY PASSES" DRAWER MODAL
+       ============================================================ -->
+  <div class="modal-backdrop" id="myPassesModal">
+    <div class="modal-container" style="max-width: 600px;">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <div class="modal-title">My Squad Bookings</div>
+          <div class="modal-subtitle">Review confirmed passes booked from this browser</div>
+        </div>
+        <button class="modal-close-btn" onclick="closeMyPassesModal()">✕</button>
+      </div>
+      <div class="modal-body" id="myPassesList" style="padding: 1.5rem;"></div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Root -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- App Script -->
+  <script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Workshop Seats</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .book-container { max-width: 900px; margin: 0 auto; padding: 24px 16px 48px; }
+    .back-link { display: inline-block; color: #6366f1; text-decoration: none; font-size: 14px; margin-bottom: 12px; }
+    .back-link:hover { text-decoration: underline; }
+    .book-header { text-align: center; margin-bottom: 32px; }
+    .book-header h1 { font-size: 28px; margin: 0 0 6px; }
+    .book-header p { color: #64748b; margin: 0; font-size: 15px; }
+
+    .card { background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 24px; margin-bottom: 24px; }
+    .card-title { font-size: 18px; font-weight: 700; margin: 0 0 16px; }
+
+    /* Event Selector */
+    .event-select { width: 100%; padding: 10px 14px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 15px; background: #f8fafc; }
+    .event-info { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
+    .info-chip { background: #f1f5f9; border-radius: 8px; padding: 10px 14px; font-size: 13px; color: #334155; }
+    .info-chip strong { display: block; font-size: 11px; text-transform: uppercase; color: #94a3b8; letter-spacing: 0.5px; margin-bottom: 2px; }
+
+    /* Seat Grid */
+    .stage-bar { background: linear-gradient(90deg, #e0e7ff, #c7d2fe, #e0e7ff); border-radius: 6px; text-align: center; padding: 8px; font-size: 12px; font-weight: 600; color: #4338ca; letter-spacing: 1px; margin-bottom: 20px; }
+    .seat-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; padding: 0 8px; }
+    .seat { width: 36px; height: 36px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; cursor: default; transition: transform 0.15s, box-shadow 0.15s; border: none; }
+    .seat.available { background: #dcfce7; color: #16a34a; border: 1.5px solid #86efac; cursor: pointer; }
+    .seat.available:hover { transform: scale(1.12); box-shadow: 0 2px 8px rgba(34,197,94,0.25); }
+    .seat.booked { background: #fee2e2; color: #dc2626; border: 1.5px solid #fca5a5; opacity: 0.7; }
+    .seat.aisle { width: 16px; background: transparent; border: none; pointer-events: none; }
+    .seat-summary { display: flex; justify-content: center; gap: 24px; margin-top: 18px; font-size: 14px; color: #475569; flex-wrap: wrap; }
+    .seat-summary span { display: flex; align-items: center; gap: 6px; }
+    .legend-dot { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+    .legend-dot.green { background: #86efac; }
+    .legend-dot.red { background: #fca5a5; }
+
+    /* Booking Form */
+    .form-group { margin-bottom: 14px; }
+    .form-group label { display: block; font-size: 13px; font-weight: 600; color: #475569; margin-bottom: 5px; }
+    .form-group input { width: 100%; padding: 10px 14px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 15px; box-sizing: border-box; }
+    .form-group input:focus { outline: none; border-color: #818cf8; box-shadow: 0 0 0 3px rgba(129,140,248,0.15); }
+    .btn-book { width: 100%; padding: 12px; border: none; border-radius: 10px; font-size: 16px; font-weight: 700; cursor: pointer; background: linear-gradient(135deg, #6366f1, #818cf8); color: #fff; transition: opacity 0.2s; }
+    .btn-book:hover { opacity: 0.9; }
+    .btn-book:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .alert { padding: 12px 16px; border-radius: 8px; margin-top: 14px; font-size: 14px; display: none; }
+    .alert.success { background: #dcfce7; color: #15803d; border: 1px solid #86efac; }
+    .alert.error { background: #fee2e2; color: #dc2626; border: 1px solid #fca5a5; }
+    .alert.show { display: block; animation: fadeSlide 0.3s ease; }
+
+    /* Duel Simulator */
+    .duel-desc { color: #64748b; font-size: 14px; margin: 0 0 16px; }
+    .toggle-row { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .toggle-label { font-size: 14px; font-weight: 600; color: #334155; }
+    .toggle { position: relative; width: 44px; height: 24px; }
+    .toggle input { opacity: 0; width: 0; height: 0; }
+    .toggle-slider { position: absolute; inset: 0; background: #cbd5e1; border-radius: 12px; cursor: pointer; transition: background 0.2s; }
+    .toggle-slider::before { content: ''; position: absolute; width: 18px; height: 18px; border-radius: 50%; background: #fff; top: 3px; left: 3px; transition: transform 0.2s; }
+    .toggle input:checked + .toggle-slider { background: #6366f1; }
+    .toggle input:checked + .toggle-slider::before { transform: translateX(20px); }
+    .btn-duel { padding: 10px 28px; border: none; border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer; background: linear-gradient(135deg, #f59e0b, #f97316); color: #fff; }
+    .btn-duel:disabled { opacity: 0.5; cursor: not-allowed; }
+    .duel-results { margin-top: 18px; display: none; }
+    .duel-results.show { display: block; animation: fadeSlide 0.3s ease; }
+    .duel-user { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: #f8fafc; border-radius: 8px; margin-bottom: 8px; }
+    .duel-user-name { font-weight: 600; font-size: 14px; }
+    .badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+    .badge.won { background: #dcfce7; color: #16a34a; }
+    .badge.rejected { background: #fee2e2; color: #dc2626; }
+    .duel-verdict { margin-top: 12px; padding: 12px; background: #f0f9ff; border-radius: 8px; font-size: 13px; color: #0369a1; border: 1px solid #bae6fd; }
+
+    .loading-spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid #e2e8f0; border-top-color: #6366f1; border-radius: 50%; animation: spin 0.6s linear infinite; vertical-align: middle; margin-right: 6px; }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes fadeSlide { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 600px) {
+      .event-info { grid-template-columns: 1fr; }
+      .seat { width: 30px; height: 30px; font-size: 10px; }
+      .seat.aisle { width: 10px; }
+      .seat-summary { gap: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="book-container">
+    <a href="/" class="back-link">← Back to Dashboard</a>
+    <div class="book-header">
+      <h1>🎟 Book Workshop Seats</h1>
+      <p>Real-time booking with live seat availability</p>
+    </div>
+
+    <!-- Workshop Selector -->
+    <div class="card">
+      <div class="card-title">Select Workshop</div>
+      <select class="event-select" id="eventSelect" onchange="onEventChange()">
+        <option value="">— Choose a workshop —</option>
+      </select>
+      <div class="event-info" id="eventInfo" style="display:none">
+        <div class="info-chip"><strong>Title</strong><span id="infoTitle"></span></div>
+        <div class="info-chip"><strong>Date</strong><span id="infoDate"></span></div>
+        <div class="info-chip"><strong>Location</strong><span id="infoLocation"></span></div>
+        <div class="info-chip"><strong>Speaker</strong><span id="infoSpeaker"></span></div>
+      </div>
+    </div>
+
+    <!-- Seat Grid -->
+    <div class="card" id="seatCard" style="display:none">
+      <div class="card-title">Select Your Seat</div>
+      <div class="stage-bar">◀ STAGE / SCREEN ▶</div>
+      <div class="seat-grid" id="seatGrid"></div>
+      <div class="seat-summary" id="seatSummary"></div>
+    </div>
+
+    <!-- Booking Form -->
+    <div class="card" id="bookingCard" style="display:none">
+      <div class="card-title">Book Your Seat</div>
+      <div class="form-group">
+        <label for="userName">Full Name</label>
+        <input type="text" id="userName" placeholder="Enter your name">
+      </div>
+      <div class="form-group">
+        <label for="userEmail">Email Address</label>
+        <input type="email" id="userEmail" placeholder="you@example.com">
+      </div>
+      <button class="btn-book" id="bookBtn" onclick="handleBooking()">Book Now</button>
+      <div class="alert success" id="bookSuccess"></div>
+      <div class="alert error" id="bookError"></div>
+    </div>
+
+    <!-- Duel Simulator -->
+    <div class="card" id="duelCard" style="display:none">
+      <div class="card-title">⚡ Concurrent Booking Simulation</div>
+      <p class="duel-desc">Watch what happens when 2 users try to book the last seat simultaneously</p>
+      <div class="toggle-row">
+        <label class="toggle">
+          <input type="checkbox" id="mutexToggle" checked>
+          <span class="toggle-slider"></span>
+        </label>
+        <span class="toggle-label">Mutex Protection</span>
+      </div>
+      <button class="btn-duel" id="duelBtn" onclick="handleDuel()">⚡ Simulate Duel</button>
+      <div class="duel-results" id="duelResults">
+        <div class="duel-user">
+          <span class="duel-user-name">👤 User A — Rahul</span>
+          <span class="badge" id="badgeA"></span>
+        </div>
+        <div class="duel-user">
+          <span class="duel-user-name">👤 User B — Priya</span>
+          <span class="badge" id="badgeB"></span>
+        </div>
+        <div class="duel-verdict" id="duelVerdict"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentEventId = null;
+    let pollTimer = null;
+
+    // ── Init ──
+    document.addEventListener('DOMContentLoaded', () => {
+      loadEvents();
+    });
+
+    // ── Load Events ──
+    async function loadEvents() {
+      try {
+        const res = await fetch('/api/events');
+        const json = await res.json();
+        const events = json.data || json;
+        const sel = document.getElementById('eventSelect');
+        events.forEach(ev => {
+          const opt = document.createElement('option');
+          opt.value = ev.id;
+          opt.textContent = ev.title;
+          sel.appendChild(opt);
+        });
+        // Pre-select from query param
+        const params = new URLSearchParams(window.location.search);
+        const preId = params.get('eventId');
+        if (preId) {
+          sel.value = preId;
+          onEventChange();
+        }
+      } catch (e) {
+        console.error('Failed to load events:', e);
+      }
+    }
+
+    // ── Event Change ──
+    function onEventChange() {
+      const id = document.getElementById('eventSelect').value;
+      if (!id) {
+        hideCards();
+        stopPolling();
+        currentEventId = null;
+        return;
+      }
+      currentEventId = id;
+      loadEventData(id);
+      startPolling();
+    }
+
+    // ── Load Event Data ──
+    async function loadEventData(id) {
+      try {
+        const res = await fetch(`/api/events/${id}`);
+        const json = await res.json();
+        const ev = json.data || json;
+
+        // Info chips
+        document.getElementById('infoTitle').textContent = ev.title || '—';
+        document.getElementById('infoDate').textContent = ev.date || '—';
+        document.getElementById('infoLocation').textContent = ev.location || '—';
+        document.getElementById('infoSpeaker').textContent = ev.speaker || '—';
+        document.getElementById('eventInfo').style.display = 'grid';
+
+        // Show cards
+        document.getElementById('seatCard').style.display = 'block';
+        document.getElementById('bookingCard').style.display = 'block';
+        document.getElementById('duelCard').style.display = 'block';
+
+        renderSeatGrid(ev);
+      } catch (e) {
+        console.error('Failed to load event:', e);
+      }
+    }
+
+    // ── Render Seat Grid ──
+    function renderSeatGrid(event) {
+      const total = event.totalCapacity || 0;
+      const remaining = event.remainingCapacity || 0;
+      const booked = total - remaining;
+      const grid = document.getElementById('seatGrid');
+      grid.innerHTML = '';
+
+      for (let i = 0; i < total; i++) {
+        const col = i % 8;
+        // Insert aisle after seat 4 in each row
+        if (col === 4) {
+          const aisle = document.createElement('div');
+          aisle.className = 'seat aisle';
+          grid.appendChild(aisle);
+        }
+        const seat = document.createElement('div');
+        if (i < booked) {
+          seat.className = 'seat booked';
+          seat.textContent = '✕';
+          seat.title = 'Booked';
+        } else {
+          seat.className = 'seat available';
+          seat.textContent = i + 1;
+          seat.title = `Seat ${i + 1} — Available`;
+        }
+        grid.appendChild(seat);
+      }
+
+      // Summary
+      document.getElementById('seatSummary').innerHTML =
+        `<span><span class="legend-dot green"></span> ${remaining} Available</span>` +
+        `<span><span class="legend-dot red"></span> ${booked} Booked</span>` +
+        `<span><strong>${total} Total</strong></span>`;
+    }
+
+    // ── Booking ──
+    async function handleBooking() {
+      const name = document.getElementById('userName').value.trim();
+      const email = document.getElementById('userEmail').value.trim();
+      const btn = document.getElementById('bookBtn');
+      const suc = document.getElementById('bookSuccess');
+      const err = document.getElementById('bookError');
+
+      suc.classList.remove('show');
+      err.classList.remove('show');
+
+      if (!name || !email) {
+        showAlert(err, 'Please fill in both name and email.');
+        return;
+      }
+      if (!currentEventId) {
+        showAlert(err, 'Please select a workshop first.');
+        return;
+      }
+
+      btn.disabled = true;
+      btn.innerHTML = '<span class="loading-spinner"></span>Booking...';
+
+      try {
+        const res = await fetch(`/api/events/${currentEventId}/register`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ userName: name, userEmail: email, useMutex: true })
+        });
+        const data = await res.json();
+
+        if (res.ok) {
+          showAlert(suc, `✅ Booking confirmed! Ticket ID: <strong>${(data.ticket && data.ticket.id) || 'N/A'}</strong>`);
+          loadEventData(currentEventId);
+        } else {
+          const msg = data.error || data.message || 'Booking failed';
+          showAlert(err, `❌ ${msg}`);
+        }
+      } catch (e) {
+        showAlert(err, `❌ Network error: ${e.message}`);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Book Now';
+      }
+    }
+
+    // ── Duel Simulator ──
+    async function handleDuel() {
+      const btn = document.getElementById('duelBtn');
+      const results = document.getElementById('duelResults');
+      const useMutex = document.getElementById('mutexToggle').checked;
+
+      if (!currentEventId) return;
+
+      btn.disabled = true;
+      btn.innerHTML = '<span class="loading-spinner"></span>Simulating...';
+      results.classList.remove('show');
+
+      try {
+        const res = await fetch(`/api/events/${currentEventId}/duel`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ useMutex })
+        });
+        const data = await res.json();
+
+        const badgeA = document.getElementById('badgeA');
+        const badgeB = document.getElementById('badgeB');
+        const verdict = document.getElementById('duelVerdict');
+
+        const aWon = data.contenderA?.status === 'WINNER_BOOKED';
+        const bWon = data.contenderB?.status === 'WINNER_BOOKED';
+
+        badgeA.textContent = aWon ? '✓ Won' : '✕ Rejected';
+        badgeA.className = `badge ${aWon ? 'won' : 'rejected'}`;
+        badgeB.textContent = bWon ? '✓ Won' : '✕ Rejected';
+        badgeB.className = `badge ${bWon ? 'won' : 'rejected'}`;
+
+        const cap = data.finalSeats != null ? data.finalSeats : '—';
+        const mode = useMutex ? 'WITH mutex' : 'WITHOUT mutex';
+        verdict.innerHTML = `<strong>Verdict (${mode}):</strong> ${data.verdict || (useMutex ? 'Mutex ensured only one booking succeeded — no double-booking!' : 'Without mutex, race condition may cause double-booking.')}<br><strong>Final Remaining Capacity:</strong> ${cap}`;
+
+        results.classList.add('show');
+        loadEventData(currentEventId);
+      } catch (e) {
+        console.error('Duel error:', e);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '⚡ Simulate Duel';
+      }
+    }
+
+    // ── Helpers ──
+    function showAlert(el, html) {
+      el.innerHTML = html;
+      el.classList.add('show');
+    }
+
+    function hideCards() {
+      document.getElementById('eventInfo').style.display = 'none';
+      document.getElementById('seatCard').style.display = 'none';
+      document.getElementById('bookingCard').style.display = 'none';
+      document.getElementById('duelCard').style.display = 'none';
+    }
+
+    function startPolling() {
+      stopPolling();
+      pollTimer = setInterval(() => {
+        if (currentEventId) loadEventData(currentEventId);
+      }, 2000);
+    }
+
+    function stopPolling() {
+      if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
+    }
+  </script>
+</body>
+</html>

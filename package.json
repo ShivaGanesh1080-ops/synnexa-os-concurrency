@@ -1,0 +1,24 @@
+{
+  "name": "event-registration-mutex-system",
+  "version": "1.0.0",
+  "description": "Event and Workshop Registration System demonstrating OS Critical Section and Mutex Concurrency Control",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "node tests/run-tests.js",
+    "test:concurrency": "node tests/concurrency-stress-test.js"
+  },
+  "keywords": [
+    "operating-systems",
+    "critical-section",
+    "mutex",
+    "concurrency",
+    "race-condition",
+    "event-registration",
+    "atomic-updates"
+  ],
+  "author": "Antigravity OS Systems Lab",
+  "license": "MIT"
+}

@@ -1,0 +1,506 @@
+{
+  "platform_settings": {
+    "razorpay_key_id": "rzp_test_1DP5mmOlF5G5ag",
+    "razorpay_key_secret": "mock_secret_test_key_sync_reg",
+    "payment_mode": "test",
+    "platform_name": "SyncReg IRCTC-Grade Tatkal Concurrency Platform",
+    "currency": "INR",
+    "platform_fee_percent": 2.5
+  },
+  "hackathons": [
+    {
+      "id": 1,
+      "title": "Global AI HackSphere 2026: Foundation Models & Agents",
+      "tagline": "Build, train, and deploy real-time LLM agents and multi-modal systems",
+      "organizer": "SRU CSE & Silicon Valley AI Research Collective",
+      "venue": "Moscone Center, San Francisco & Virtual Hub",
+      "city": "San Francisco, USA",
+      "dates": "Nov 24–26, 2026",
+      "total_tickets": 10,
+      "tatkal_quota": 4,
+      "remaining_tickets": 2,
+      "ticket_price": 499,
+      "mutex_enabled": true,
+      "status": "ACTIVE",
+      "badge": "2 Seats Left (Flash Quota)",
+      "category": "AI & Machine Learning",
+      "image_url": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1000&q=80"
+    },
+    {
+      "id": 2,
+      "title": "Tokyo CyberCon 48h: Zero-Trust Security & CTF Warfare",
+      "tagline": "Offensive security, reverse engineering, and cloud kernel defense",
+      "organizer": "Shibuya Cyber Defense Lab & Global InfoSec Alliance",
+      "venue": "Shibuya Stream Hall, Tokyo, Japan",
+      "city": "Tokyo, Japan",
+      "dates": "Dec 02–04, 2026",
+      "total_tickets": 8,
+      "tatkal_quota": 3,
+      "remaining_tickets": -5,
+      "ticket_price": 299,
+      "mutex_enabled": true,
+      "status": "ACTIVE",
+      "badge": "⚠️ OVERBOOKED (-5)",
+      "category": "Cybersecurity & CTF",
+      "image_url": "https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=1000&q=80"
+    },
+    {
+      "id": 3,
+      "title": "London CloudScale: High-Throughput Distributed Systems",
+      "tagline": "Architect resilient lock managers, raft consensus, and streaming backends",
+      "organizer": "SRU Cloud Computing Lab & UK Tech Council",
+      "venue": "ExCeL London International Arena",
+      "city": "London, UK",
+      "dates": "Dec 12–14, 2026",
+      "total_tickets": 8,
+      "tatkal_quota": 3,
+      "remaining_tickets": 2,
+      "ticket_price": 399,
+      "mutex_enabled": true,
+      "status": "ACTIVE",
+      "badge": "2 Seats Left",
+      "category": "Cloud & Systems",
+      "image_url": "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=1000&q=80"
+    },
+    {
+      "id": 4,
+      "title": "Bengaluru TechSummit 2026: Web3 & High-Scale FinTech",
+      "tagline": "Building zero-knowledge transaction pipelines and real-time settlement engines",
+      "organizer": "Indiranagar Tech Guild & SRU Innovation",
+      "venue": "Bengaluru International Exhibition Centre",
+      "city": "Bengaluru, India",
+      "dates": "Dec 18–20, 2026",
+      "total_tickets": 12,
+      "tatkal_quota": 4,
+      "remaining_tickets": 3,
+      "ticket_price": 499,
+      "mutex_enabled": true,
+      "status": "ACTIVE",
+      "badge": "Popular Batch",
+      "category": "Web3 & FinTech",
+      "image_url": "https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=1000&q=80"
+    },
+    {
+      "id": 5,
+      "title": "Berlin Quantum & Neural Computing Hackathon",
+      "tagline": "Hybrid quantum algorithms, tensor processing, and next-gen silicon compute",
+      "organizer": "European Quantum Consortium & KiteKraft",
+      "venue": "Arena Berlin, Eichenstraße, Germany",
+      "city": "Berlin, Germany",
+      "dates": "Jan 08–10, 2027",
+      "total_tickets": 6,
+      "tatkal_quota": 2,
+      "remaining_tickets": 2,
+      "ticket_price": 349,
+      "mutex_enabled": true,
+      "status": "ACTIVE",
+      "badge": "Exclusive Pass",
+      "category": "Quantum & Compute",
+      "image_url": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1000&q=80"
+    },
+    {
+      "id": 6,
+      "title": "Zurich Autonomous Robotics & Embedded Systems Sprint",
+      "tagline": "ROS 2 navigation, computer vision sensor fusion, and real-time kinematics",
+      "organizer": "Swiss Robotics Innovation Labs",
+      "venue": "ETH Zurich Innovation Campus, Switzerland",
+      "city": "Zurich, Switzerland",
+      "dates": "Jan 18–20, 2027",
+      "total_tickets": 6,
+      "tatkal_quota": 2,
+      "remaining_tickets": 1,
+      "ticket_price": 599,
+      "mutex_enabled": true,
+      "status": "ACTIVE",
+      "badge": "1 Seat Remaining",
+      "category": "Robotics & IoT",
+      "image_url": "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1000&q=80"
+    }
+  ],
+  "teams": [
+    {
+      "id": "TEAM-101",
+      "hackathon_id": 1,
+      "team_name": "ByteBusters",
+      "leader_name": "Rahul Sharma",
+      "leader_email": "rahul.sharma@sru.edu.in",
+      "members": [
+        {
+          "name": "Rahul Sharma",
+          "email": "rahul.sharma@sru.edu.in",
+          "role": "Team Leader",
+          "htno": "2503A51001"
+        },
+        {
+          "name": "Ananya Iyer",
+          "email": "ananya.i@sru.edu.in",
+          "role": "Frontend Dev",
+          "htno": "2503A51002"
+        },
+        {
+          "name": "Karthik Raja",
+          "email": "karthik.r@sru.edu.in",
+          "role": "Backend Dev",
+          "htno": "2503A51003"
+        }
+      ],
+      "ticket_code": "TKT-TATKAL-89211",
+      "payment_status": "PAID_TEST_MODE",
+      "payment_id": "pay_test_01928374",
+      "booked_at": "2026-11-09T10:14:00.000Z",
+      "is_checked_in": false,
+      "checked_in_at": null
+    },
+    {
+      "id": "TEAM-102",
+      "hackathon_id": 1,
+      "team_name": "NullPointers",
+      "leader_name": "Priya Varma",
+      "leader_email": "priya.v@sru.edu.in",
+      "members": [
+        {
+          "name": "Priya Varma",
+          "email": "priya.v@sru.edu.in",
+          "role": "Team Leader",
+          "htno": "2503A51010"
+        },
+        {
+          "name": "Vikram Sen",
+          "email": "vikram.s@sru.edu.in",
+          "role": "ML Engineer",
+          "htno": "2503A51011"
+        }
+      ],
+      "ticket_code": "TKT-TATKAL-89212",
+      "payment_status": "PAID_TEST_MODE",
+      "payment_id": "pay_test_01928375",
+      "booked_at": "2026-11-09T11:22:00.000Z",
+      "is_checked_in": true,
+      "checked_in_at": "2026-11-09T14:30:00.000Z"
+    },
+    {
+      "id": "TEAM-43588-202",
+      "hackathon_id": 2,
+      "team_name": "AlphaKernels",
+      "leader_name": "Leader AlphaKernels",
+      "leader_email": "alphakernels@hack.org",
+      "members": [
+        {
+          "name": "Leader AlphaKernels",
+          "role": "Captain",
+          "email": "alphakernels@hack.org",
+          "htno": "2503A5110"
+        },
+        {
+          "name": "Hacker AlphaKernels 2",
+          "role": "Developer",
+          "email": "dev.alphakernels@hack.org",
+          "htno": "2503A5120"
+        }
+      ],
+      "ticket_code": "TKT-TATKAL-87073",
+      "payment_status": "RACE_CONDITION_DIRTY_WRITE",
+      "payment_id": "rzp_rush_1794371543531_0",
+      "booked_at": "2026-11-11T04:32:23.588Z",
+      "is_checked_in": false,
+      "checked_in_at": null
+    },
+    {
+      "id": "TEAM-43593-966",
+      "hackathon_id": 2,
+      "team_name": "ByteBusters",
+      "leader_name": "Leader ByteBusters",
+      "leader_email": "bytebusters@hack.org",
+      "members": [
+        {
+          "name": "Leader ByteBusters",
+          "role": "Captain",
+          "email": "bytebusters@hack.org",
+          "htno": "2503A5111"
+        },
+        {
+          "name": "Hacker ByteBusters 2",
+          "role": "Developer",
+          "email": "dev.bytebusters@hack.org",
+          "htno": "2503A5121"
+        }
+      ],
+      "ticket_code": "TKT-TATKAL-66910",
+      "payment_status": "RACE_CONDITION_DIRTY_WRITE",
+      "payment_id": "rzp_rush_1794371543531_1",
+      "booked_at": "2026-11-11T04:32:23.593Z",
+      "is_checked_in": false,
+      "checked_in_at": null
+    },
+    {
+      "id": "TEAM-43595-907",
+      "hackathon_id": 2,
+      "team_name": "CipherStorm",
+      "leader_name": "Leader CipherStorm",
+      "leader_email": "cipherstorm@hack.org",
+      "members": [
+        {
+          "name": "Leader CipherStorm",
+          "role": "Captain",
+          "email": "cipherstorm@hack.org",
+          "htno": "2503A5112"
+        },
+        {
+          "name": "Hacker CipherStorm 2",
+          "role": "Developer",
+          "email": "dev.cipherstorm@hack.org",
+          "htno": "2503A5122"
+        }
+      ],
+      "ticket_code": "TKT-TATKAL-14307",
+      "payment_status": "RACE_CONDITION_DIRTY_WRITE",
+      "payment_id": "rzp_rush_1794371543531_2",
+      "booked_at": "2026-11-11T04:32:23.596Z",
+      "is_checked_in": false,
+      "checked_in_at": null
+    },
+    {
+      "id": "TEAM-43598-959",
+      "hackathon_id": 2,
+      "team_name": "DevDynamos",
+      "leader_name": "Leader DevDynamos",
+      "leader_email": "devdynamos@hack.org",
+      "members": [
+        {
+          "name": "Leader DevDynamos",
+          "role": "Captain",
+          "email": "devdynamos@hack.org",
+          "htno": "2503A5113"
+        },
+        {
+          "name": "Hacker DevDynamos 2",
+          "role": "Developer",
+          "email": "dev.devdynamos@hack.org",
+          "htno": "2503A5123"
+        }
+      ],
+      "ticket_code": "TKT-TATKAL-26722",
+      "payment_status": "RACE_CONDITION_DIRTY_WRITE",
+      "payment_id": "rzp_rush_1794371543531_3",
+      "booked_at": "2026-11-11T04:32:23.598Z",
+      "is_checked_in": false,
+      "checked_in_at": null
+    },
+    {
+      "id": "TEAM-43600-985",
+      "hackathon_id": 2,
+      "team_name": "EchoTracer",
+      "leader_name": "Leader EchoTracer",
+      "leader_email": "echotracer@hack.org",
+      "members": [
+        {
+          "name": "Leader EchoTracer",
+          "role": "Captain",
+          "email": "echotracer@hack.org",
+          "htno": "2503A5114"
+        },
+        {
+          "name": "Hacker EchoTracer 2",
+          "role": "Developer",
+          "email": "dev.echotracer@hack.org",
+          "htno": "2503A5124"
+        }
+      ],
+      "ticket_code": "TKT-TATKAL-90993",
+      "payment_status": "RACE_CONDITION_DIRTY_WRITE",
+      "payment_id": "rzp_rush_1794371543531_4",
+      "booked_at": "2026-11-11T04:32:23.600Z",
+      "is_checked_in": false,
+      "checked_in_at": null
+    },
+    {
+      "id": "TEAM-43602-396",
+      "hackathon_id": 2,
+      "team_name": "ForkBombSquad",
+      "leader_name": "Leader ForkBombSquad",
+      "leader_email": "forkbombsquad@hack.org",
+      "members": [
+        {
+          "name": "Leader ForkBombSquad",
+          "role": "Captain",
+          "email": "forkbombsquad@hack.org",
+          "htno": "2503A5115"
+        },
+        {
+          "name": "Hacker ForkBombSquad 2",
+          "role": "Developer",
+          "email": "dev.forkbombsquad@hack.org",
+          "htno": "2503A5125"
+        }
+      ],
+      "ticket_code": "TKT-TATKAL-12800",
+      "payment_status": "RACE_CONDITION_DIRTY_WRITE",
+      "payment_id": "rzp_rush_1794371543531_5",
+      "booked_at": "2026-11-11T04:32:23.602Z",
+      "is_checked_in": false,
+      "checked_in_at": null
+    }
+  ],
+  "audit_logs": [
+    {
+      "id": "LOG-1794371543603-ixy7",
+      "timestamp": "2026-11-11T04:32:23.603Z",
+      "event_id": 2,
+      "action": "CONCURRENCY_RUSH_COMPLETE",
+      "thread_id": "SIMULATOR",
+      "team_name": "BATCH_RUNNER",
+      "lock_state": "MUTEX_DISABLED",
+      "seats_remaining": -5,
+      "message": "⚠️ Rush Complete in 71ms: RACE CONDITION PROVED! 5 excess tickets oversold."
+    },
+    {
+      "id": "LOG-1794371543603-ucwd",
+      "timestamp": "2026-11-11T04:32:23.603Z",
+      "event_id": 2,
+      "action": "RACE_CONDITION_OVERSOLD",
+      "thread_id": "th-3537-110",
+      "team_name": "ForkBombSquad",
+      "lock_state": "UNPROTECTED",
+      "ticket_code": "TKT-TATKAL-12800",
+      "seats_remaining": -5,
+      "message": "🚨 RACE HAZARD! 'ForkBombSquad' booked ticket beyond capacity! Seats are now -5."
+    },
+    {
+      "id": "LOG-1794371543601-lx3b",
+      "timestamp": "2026-11-11T04:32:23.601Z",
+      "event_id": 2,
+      "action": "RACE_CONDITION_OVERSOLD",
+      "thread_id": "th-3536-346",
+      "team_name": "EchoTracer",
+      "lock_state": "UNPROTECTED",
+      "ticket_code": "TKT-TATKAL-90993",
+      "seats_remaining": -4,
+      "message": "🚨 RACE HAZARD! 'EchoTracer' booked ticket beyond capacity! Seats are now -4."
+    },
+    {
+      "id": "LOG-1794371543598-byox",
+      "timestamp": "2026-11-11T04:32:23.598Z",
+      "event_id": 2,
+      "action": "RACE_CONDITION_OVERSOLD",
+      "thread_id": "th-3535-197",
+      "team_name": "DevDynamos",
+      "lock_state": "UNPROTECTED",
+      "ticket_code": "TKT-TATKAL-26722",
+      "seats_remaining": -3,
+      "message": "🚨 RACE HAZARD! 'DevDynamos' booked ticket beyond capacity! Seats are now -3."
+    },
+    {
+      "id": "LOG-1794371543596-bjqe",
+      "timestamp": "2026-11-11T04:32:23.596Z",
+      "event_id": 2,
+      "action": "RACE_CONDITION_OVERSOLD",
+      "thread_id": "th-3534-830",
+      "team_name": "CipherStorm",
+      "lock_state": "UNPROTECTED",
+      "ticket_code": "TKT-TATKAL-14307",
+      "seats_remaining": -2,
+      "message": "🚨 RACE HAZARD! 'CipherStorm' booked ticket beyond capacity! Seats are now -2."
+    },
+    {
+      "id": "LOG-1794371543593-3wrm",
+      "timestamp": "2026-11-11T04:32:23.593Z",
+      "event_id": 2,
+      "action": "RACE_CONDITION_OVERSOLD",
+      "thread_id": "th-3533-607",
+      "team_name": "ByteBusters",
+      "lock_state": "UNPROTECTED",
+      "ticket_code": "TKT-TATKAL-66910",
+      "seats_remaining": -1,
+      "message": "🚨 RACE HAZARD! 'ByteBusters' booked ticket beyond capacity! Seats are now -1."
+    },
+    {
+      "id": "LOG-1794371543590-p7a6",
+      "timestamp": "2026-11-11T04:32:23.590Z",
+      "event_id": 2,
+      "action": "DIRTY_WRITE_SUCCESS",
+      "thread_id": "th-3532-234",
+      "team_name": "AlphaKernels",
+      "lock_state": "UNPROTECTED",
+      "ticket_code": "TKT-TATKAL-87073",
+      "seats_remaining": 0,
+      "message": "Ticket issued without lock to 'AlphaKernels'. Seats remaining: 0."
+    },
+    {
+      "id": "LOG-1794371543537-b7d1",
+      "timestamp": "2026-11-11T04:32:23.537Z",
+      "event_id": 2,
+      "action": "MUTEX_BYPASSED",
+      "thread_id": "th-3537-110",
+      "team_name": "ForkBombSquad",
+      "lock_state": "UNPROTECTED",
+      "seats_remaining": 1,
+      "message": "[RACE CONDITION RISK] Team 'ForkBombSquad' accessing shared state without lock."
+    },
+    {
+      "id": "LOG-1794371543536-97ys",
+      "timestamp": "2026-11-11T04:32:23.536Z",
+      "event_id": 2,
+      "action": "MUTEX_BYPASSED",
+      "thread_id": "th-3536-346",
+      "team_name": "EchoTracer",
+      "lock_state": "UNPROTECTED",
+      "seats_remaining": 1,
+      "message": "[RACE CONDITION RISK] Team 'EchoTracer' accessing shared state without lock."
+    },
+    {
+      "id": "LOG-1794371543535-6wv1",
+      "timestamp": "2026-11-11T04:32:23.535Z",
+      "event_id": 2,
+      "action": "MUTEX_BYPASSED",
+      "thread_id": "th-3535-197",
+      "team_name": "DevDynamos",
+      "lock_state": "UNPROTECTED",
+      "seats_remaining": 1,
+      "message": "[RACE CONDITION RISK] Team 'DevDynamos' accessing shared state without lock."
+    },
+    {
+      "id": "LOG-1794371543534-h1mg",
+      "timestamp": "2026-11-11T04:32:23.534Z",
+      "event_id": 2,
+      "action": "MUTEX_BYPASSED",
+      "thread_id": "th-3534-830",
+      "team_name": "CipherStorm",
+      "lock_state": "UNPROTECTED",
+      "seats_remaining": 1,
+      "message": "[RACE CONDITION RISK] Team 'CipherStorm' accessing shared state without lock."
+    },
+    {
+      "id": "LOG-1794371543533-l0tv",
+      "timestamp": "2026-11-11T04:32:23.533Z",
+      "event_id": 2,
+      "action": "MUTEX_BYPASSED",
+      "thread_id": "th-3533-607",
+      "team_name": "ByteBusters",
+      "lock_state": "UNPROTECTED",
+      "seats_remaining": 1,
+      "message": "[RACE CONDITION RISK] Team 'ByteBusters' accessing shared state without lock."
+    },
+    {
+      "id": "LOG-1794371543532-hdup",
+      "timestamp": "2026-11-11T04:32:23.532Z",
+      "event_id": 2,
+      "action": "MUTEX_BYPASSED",
+      "thread_id": "th-3532-234",
+      "team_name": "AlphaKernels",
+      "lock_state": "UNPROTECTED",
+      "seats_remaining": 1,
+      "message": "[RACE CONDITION RISK] Team 'AlphaKernels' accessing shared state without lock."
+    },
+    {
+      "id": "LOG-1794371543531-yqd0",
+      "timestamp": "2026-11-11T04:32:23.531Z",
+      "event_id": 2,
+      "action": "CONCURRENCY_RUSH_START",
+      "thread_id": "SIMULATOR",
+      "team_name": "BATCH_RUNNER",
+      "lock_state": "MUTEX_DISABLED",
+      "seats_remaining": 1,
+      "message": "🚀 Launching 6 simultaneous requests against 1 remaining seats (Mutex: OFF)."
+    }
+  ]
+}
