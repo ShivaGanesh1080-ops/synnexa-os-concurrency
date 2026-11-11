@@ -97,10 +97,8 @@ const server = http.createServer((req, res) => {
     targetFile = 'index.html';
   } else if (cleanPath === '/studio' || cleanPath === '/concurrency' || cleanPath === '/benchmark') {
     targetFile = 'studio.html';
-  } else if (cleanPath === '/admin' || cleanPath === '/organizer' || cleanPath === '/hackathon-admin') {
+  } else if (cleanPath === '/admin' || cleanPath === '/organizer' || cleanPath === '/hackathon-admin' || cleanPath === '/platform' || cleanPath === '/settings' || cleanPath === '/platform-admin') {
     targetFile = 'admin.html';
-  } else if (cleanPath === '/platform' || cleanPath === '/settings' || cleanPath === '/platform-admin') {
-    targetFile = 'platform.html';
   }
 
   if (targetFile) {

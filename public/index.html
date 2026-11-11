@@ -6,6 +6,8 @@
   <title>SYNNEXA — Global Tech Summits & Squad Registration</title>
   <link rel="stylesheet" href="/style.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+  <!-- Official Razorpay Standard Checkout SDK -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 <body data-page="hub">
 
@@ -60,20 +62,22 @@
       </a>
 
       <ul class="nav-links">
-        <li class="nav-link-item"><a href="#destinations">Tech Capitals</a></li>
         <li class="nav-link-item"><a href="#events" class="active">Curated Events</a></li>
         <li class="nav-link-item"><a href="#experience">The Experience</a></li>
         <li class="nav-link-item"><a href="#institutional">Team Roster</a></li>
       </ul>
 
       <div class="nav-actions">
-        <!-- Discreet Lab Evaluation Studio for Viva -->
-        <a href="/studio" class="btn-luxury-text" title="Switch to OS Concurrency Benchmark Studio for Professor Demonstration">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+        <!-- Direct link to Organizer Admin Console -->
+        <a href="/admin" class="btn-luxury-text" title="Switch to Organizer Admin & Concurrency Console">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
           </svg>
-          <span class="btn-text-full">OS Concurrency Studio</span>
-          <span class="btn-text-short">Studio</span>
+          <span class="btn-text-full">Admin Console</span>
+          <span class="btn-text-short">Admin</span>
         </a>
 
         <button class="btn-luxury-outline" onclick="openMyPassesModal()" title="View your confirmed squad passes">
@@ -485,12 +489,12 @@
           </button>
 
           <div class="payment-selector">
-            <div class="payment-badge">RAZORPAY TEST GATEWAY</div>
+            <div class="payment-badge">OFFICIAL RAZORPAY STANDARD CHECKOUT</div>
             <div style="font-size: 0.88rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.25rem;">
-              Simulated Instant Verification
+              Secure Razorpay Checkout Modal
             </div>
             <div class="payment-note">
-              No real money is charged. Payment is validated against test keys and an instant digital pass is minted upon confirmation.
+              Launches official Razorpay standard popup with test UPI, NetBanking, and Card options. Zero real charges in sandbox mode.
             </div>
           </div>
 
@@ -500,7 +504,7 @@
               <span class="modal-total-val" id="modalTotalVal">₹499</span>
             </div>
             <button type="submit" class="btn-confirm-checkout" id="submitBookingBtn">
-              Confirm & Book Pass →
+              Pay with Razorpay →
             </button>
           </div>
         </form>

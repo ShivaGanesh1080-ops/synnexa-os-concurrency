@@ -10,8 +10,10 @@
 const db = require('../storage/Database');
 const { defaultRegistry } = require('../core/KeyedMutexRegistry');
 
-// Artificial processing delay simulating network I/O, Razorpay verification & cryptographic ticket signing
+// Processing delay simulating network I/O, Razorpay verification & cryptographic ticket signing
 const SIMULATED_IO_DELAY_MS = 40;
+// Extended TOCTOU window for manual multi-device live demonstrations (Teacher vs Friend)
+const MANUAL_RACE_WINDOW_MS = 2500;
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -37,7 +39,8 @@ class BookingService {
     leader_email,
     members = [],
     payment_details = {},
-    force_no_mutex = false
+    force_no_mutex = false,
+    delay_ms = null
   }) {
     const threadId = `th-${Date.now().toString().slice(-4)}-${Math.floor(Math.random() * 900 + 100)}`;
     const event = db.getHackathonById(hackathon_id);
@@ -48,6 +51,9 @@ class BookingService {
 
     const useMutex = force_no_mutex ? false : event.mutex_enabled;
     const mutex = defaultRegistry.get(hackathon_id);
+    const effectiveDelay = delay_ms !== null 
+      ? delay_ms 
+      : (useMutex ? SIMULATED_IO_DELAY_MS : MANUAL_RACE_WINDOW_MS);
 
     // -------------------------------------------------------------
     // PATH A: MUTEX PROTECTED (Atomic Critical Section - ACID)
@@ -83,7 +89,7 @@ class BookingService {
         const currentEvent = db.getHackathonById(hackathon_id);
 
         // 2. Realistic Processing Delay (Payment Verification & Cryptographic Token Generation)
-        await sleep(SIMULATED_IO_DELAY_MS);
+        await sleep(effectiveDelay);
 
         // 3. EVALUATE & MODIFY: Atomic Inventory Check
         if (currentEvent.remaining_tickets <= 0) {
@@ -177,7 +183,7 @@ class BookingService {
 
       // 2. Interleaved Asynchronous Window:
       // While this thread pauses, other concurrent threads also read the identical remaining_tickets!
-      await sleep(SIMULATED_IO_DELAY_MS);
+      await sleep(effectiveDelay);
 
       // 3. TOCTOU DIRTY EVALUATE:
       // Thread evaluates cached variable or outdated local state
@@ -283,7 +289,8 @@ class BookingService {
         { name: `Hacker ${name} 2`, role: "Developer", email: `dev.${name.toLowerCase()}@hack.org`, htno: `2503A512${idx}` }
       ],
       payment_details: { payment_id: `rzp_rush_${Date.now()}_${idx}` },
-      force_no_mutex: !with_mutex
+      force_no_mutex: !with_mutex,
+      delay_ms: 30
     }));
 
     db.addAuditLog({

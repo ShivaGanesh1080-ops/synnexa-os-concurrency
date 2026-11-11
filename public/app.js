@@ -1,5 +1,5 @@
 /**
- * AVENORA EVENTS — Global Hackathons & Tech Summits
+ * SYNNEXA EVENTS — Global Hackathons & Tech Summits
  * Client Application Logic & Concurrency Engine Interface
  * SR University • CSE Core • Operating Systems Lab • Product #8
  */
@@ -32,15 +32,21 @@
     updatePassCountBadge();
     initDivePortal();
 
-    // Load events on Hub & User Portal
+    // Load events on Hub & User Portal with real-time live polling for 2-device sync
     if (page === 'hub' || page === 'user') {
       fetchHackathons();
+      state.pollInterval = setInterval(fetchHackathons, 2500);
     } else if (page === 'studio') {
       fetchHackathons().then(() => {
         state.pollInterval = setInterval(pollTelemetry, 2000);
       });
     } else if (page === 'admin') {
       fetchHackathons();
+      if (typeof fetchPlatformData === 'function') fetchPlatformData();
+      state.pollInterval = setInterval(() => {
+        fetchHackathons();
+        if (typeof fetchPlatformData === 'function') fetchPlatformData();
+      }, 3000);
     } else if (page === 'platform') {
       fetchPlatformData();
       state.pollInterval = setInterval(fetchPlatformData, 5000);
@@ -158,7 +164,7 @@
   };
 
   // -------------------------------------------------------------
-  // AVENORA LUXURY CARDS RENDERING (NO UGLY MUTEX LABELS)
+  // SYNNEXA LUXURY CARDS RENDERING (NO UGLY MUTEX LABELS)
   // -------------------------------------------------------------
   function renderLuxuryEventCards() {
     const grid = document.getElementById('eventsGrid');
@@ -419,7 +425,7 @@
     if (!btn) return;
 
     btn.disabled = true;
-    btn.innerHTML = `<span class="dot" style="width:8px;height:8px;border-radius:50%;background:#fff;display:inline-block;animation:pulse-dot 1s infinite;"></span> Processing Reservation...`;
+    btn.innerHTML = `<span class="dot" style="width:8px;height:8px;border-radius:50%;background:#fff;display:inline-block;animation:pulse-dot 1s infinite;"></span> Initializing Secure Checkout...`;
 
     const eventId = Number(document.getElementById('bookingEventId').value);
     const teamName = document.getElementById('teamName').value.trim();
@@ -442,40 +448,108 @@
       }
     });
 
-    const payload = {
+    const targetEvent = state.selectedEventForBooking || state.hackathons.find(h => h.id === eventId);
+    const amountInr = (targetEvent && targetEvent.ticket_price) ? targetEvent.ticket_price : 499;
+
+    const basePayload = {
       hackathon_id: eventId,
       team_name: teamName,
       leader_name: leaderName,
       leader_email: leaderEmail,
-      members,
-      payment_details: {
-        method: "razorpay_test_mode",
-        gateway_key: state.settings.razorpay_key_id,
-        auth_status: "SUCCESS"
-      }
+      members
     };
 
-    try {
-      const res = await api('/api/book', 'POST', payload);
-      const booking = res.ticket || res.booking;
+    // Helper to send final booking to server
+    async function completeBookingWithBackend(payload) {
+      try {
+        btn.innerHTML = `<span class="dot" style="width:8px;height:8px;border-radius:50%;background:#fff;display:inline-block;animation:pulse-dot 1s infinite;"></span> Committing Ticket to Database...`;
+        const res = await api('/api/book', 'POST', payload);
+        const booking = res.ticket || res.booking;
 
-      closeBookingModal();
-      showToast(`Pass Confirmed! Ticket Code: ${booking.ticket_code}`, 'success');
+        closeBookingModal();
+        if (res.status === 'OVERSOLD') {
+          showToast(`⚠️ RACE CONDITION CONFIRMED! Pass issued but seats are OVERBOOKED (${res.seats_remaining})!`, 'warning');
+        } else {
+          showToast(`Pass Confirmed! Ticket Code: ${booking.ticket_code}`, 'success');
+        }
 
-      // Save pass locally
-      savePassLocally(booking, state.selectedEventForBooking);
-      updatePassCountBadge();
+        savePassLocally(booking, targetEvent);
+        updatePassCountBadge();
+        renderBoardingPass(booking, targetEvent);
+        fetchHackathons();
+      } catch (err) {
+        closeBookingModal();
+        showToast(err.message || 'Pass reservation failed. Capacity exhausted.', 'danger');
+      } finally {
+        btn.disabled = false;
+        btn.innerText = 'Pay with Razorpay →';
+      }
+    }
 
-      // Show Boarding Pass
-      renderBoardingPass(booking, state.selectedEventForBooking);
+    // Check if official Razorpay Standard SDK is available
+    if (typeof window.Razorpay === 'function') {
+      const rzpKey = (state.settings && state.settings.razorpay_key_id) || "rzp_test_1DP5mmOlF5G5ag";
+      const options = {
+        key: rzpKey,
+        amount: amountInr * 100, // in paise
+        currency: "INR",
+        name: "SYNNEXA Global Summits",
+        description: `Squad Pass Reservation: ${targetEvent ? targetEvent.title : 'Tech Summit 2026'}`,
+        prefill: {
+          name: leaderName,
+          email: leaderEmail,
+          contact: "9876543210"
+        },
+        theme: {
+          color: "#0B1120"
+        },
+        handler: async function (response) {
+          const finalPayload = {
+            ...basePayload,
+            payment_details: {
+              method: "razorpay_standard_checkout",
+              payment_id: response.razorpay_payment_id || `rzp_pay_${Date.now()}`,
+              order_id: response.razorpay_order_id,
+              signature: response.razorpay_signature,
+              auth_status: "SUCCESS"
+            }
+          };
+          await completeBookingWithBackend(finalPayload);
+        },
+        modal: {
+          ondismiss: function () {
+            btn.disabled = false;
+            btn.innerText = 'Pay with Razorpay →';
+            showToast('Razorpay checkout cancelled. Seat not booked.', 'warning');
+          }
+        }
+      };
 
-      // Refresh hackathons so remaining spots reflect
-      fetchHackathons();
-    } catch (err) {
-      showToast(err.message || 'Seat unavailable or sold out.', 'danger');
-    } finally {
-      btn.disabled = false;
-      btn.innerText = 'Confirm & Book Pass →';
+      try {
+        const rzp = new window.Razorpay(options);
+        rzp.on('payment.failed', function (resp) {
+          showToast(`Payment failed: ${resp.error ? resp.error.description : 'Transaction cancelled'}`, 'danger');
+          btn.disabled = false;
+          btn.innerText = 'Pay with Razorpay →';
+        });
+        rzp.open();
+      } catch (err) {
+        console.warn('Razorpay checkout initialization error, falling back to simulated verification', err);
+        basePayload.payment_details = {
+          method: "razorpay_test_mode",
+          payment_id: `rzp_mock_${Date.now()}`,
+          auth_status: "SUCCESS"
+        };
+        await completeBookingWithBackend(basePayload);
+      }
+    } else {
+      // Direct simulated verification fallback
+      basePayload.payment_details = {
+        method: "razorpay_test_mode",
+        payment_id: `rzp_mock_${Date.now()}`,
+        auth_status: "SUCCESS"
+      };
+      await completeBookingWithBackend(basePayload);
     }
   };
 
@@ -664,7 +738,7 @@
 
   window.viewStoredPass = function (idx) {
     try {
-      const passes = JSON.parse(localStorage.getItem('avenora_passes') || '[]');
+      const passes = getStoredPasses();
       const target = passes[idx];
       if (target) {
         closeMyPassesModal();
@@ -672,6 +746,20 @@
       }
     } catch (e) {
       console.warn('Error displaying stored pass', e);
+    }
+  };
+
+  window.primeEventForDemo = async function (eventId) {
+    try {
+      await api(`/api/hackathons/${eventId}`, 'PUT', { 
+        remaining_tickets: 1,
+        badge: '1 Seat Left (Demo Mode)' 
+      });
+      showToast(`Event #${eventId} primed! Exactly 1 Tatkal seat left. Ready for Teacher vs Friend test.`, 'success');
+      await fetchHackathons();
+      if (typeof fetchPlatformData === 'function') fetchPlatformData();
+    } catch (err) {
+      showToast(err.message || 'Failed to update capacity', 'danger');
     }
   };
 
@@ -692,6 +780,15 @@
       const quota = h.tatkal_quota !== undefined ? h.tatkal_quota : (h.tatkal_seats || 4);
       const total = h.total_tickets !== undefined ? h.total_tickets : (h.total_seats || 10);
 
+      let badgeHtml = '';
+      if (rem < 0) {
+        badgeHtml = `<span class="badge badge-danger" style="background:#FEE2E2;color:#DC2626;border:1px solid #FECACA;font-weight:800;animation:pulse-dot 1s infinite alternate;">⚠️ OVERBOOKED (${rem})</span>`;
+      } else if (rem === 0) {
+        badgeHtml = `<span class="badge badge-danger" style="background:#F1F5F9;color:#64748B;border:1px solid #CBD5E1;">SOLD OUT (0)</span>`;
+      } else {
+        badgeHtml = `<span class="badge badge-success">${rem} Left</span>`;
+      }
+
       return `
         <tr>
           <td style="font-family:var(--font-mono);font-size:0.8rem;color:var(--text-muted);">#${h.id}</td>
@@ -706,9 +803,7 @@
           <td style="font-family:var(--font-mono);font-weight:600;">${total}</td>
           <td style="font-family:var(--font-mono);font-weight:600;color:var(--accent-cyan);">${quota}</td>
           <td>
-            <span class="badge ${rem > 0 ? 'badge-success' : 'badge-danger'}">
-              ${rem} Left
-            </span>
+            ${badgeHtml}
           </td>
           <td style="font-family:var(--font-mono);font-weight:700;">₹${h.ticket_price || 499}</td>
           <td>
@@ -723,9 +818,14 @@
             </div>
           </td>
           <td>
-            <button class="btn-luxury-outline" style="padding:0.35rem 0.75rem;font-size:0.78rem;" onclick="selectRosterEvent(${h.id})">
-              View Squads
-            </button>
+            <div style="display:flex;gap:0.4rem;align-items:center;">
+              <button class="btn-luxury-outline" style="padding:0.35rem 0.65rem;font-size:0.75rem;background:#F0FDF4;color:#15803D;border-color:#BBF7D0;" onclick="primeEventForDemo(${h.id})" title="Set remaining capacity to exactly 1 seat for live Teacher vs Friend test">
+                ⚡ Set 1 Seat
+              </button>
+              <button class="btn-luxury-outline" style="padding:0.35rem 0.65rem;font-size:0.75rem;" onclick="selectRosterEvent(${h.id})">
+                Roster
+              </button>
+            </div>
           </td>
         </tr>
       `;

@@ -27,36 +27,41 @@
       </a>
 
       <ul class="nav-links">
-        <li class="nav-link-item"><a href="/">Curated Events</a></li>
-        <li class="nav-link-item"><a href="/studio">Concurrency Studio</a></li>
-        <li class="nav-link-item"><a href="/admin" class="active">Organizer Admin</a></li>
-        <li class="nav-link-item"><a href="/platform">Platform Settings</a></li>
+        <li class="nav-link-item"><a href="/" target="_blank">Live Site ↗</a></li>
+        <li class="nav-link-item"><a href="#demoStation" class="active">Live Demo</a></li>
+        <li class="nav-link-item"><a href="#batchesSection">Batches</a></li>
+        <li class="nav-link-item"><a href="#rosterSection">Roster</a></li>
+        <li class="nav-link-item"><a href="#platformSection">Gateway</a></li>
+        <li class="nav-link-item"><a href="#auditSection">Audit Trail</a></li>
       </ul>
 
       <div class="nav-actions">
-        <button class="btn-luxury-outline" onclick="openCheckInModal()">
+        <button class="btn-luxury-outline" onclick="openCheckInModal()" title="Door Check-In">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
             <polyline points="22 4 12 14.01 9 11.01"></polyline>
           </svg>
-          Door Check-In
+          <span class="btn-text-full">Door Check-In</span>
+          <span class="btn-text-short">Check-In</span>
         </button>
 
-        <button class="btn-luxury-primary" onclick="openNewBatchModal()">
+        <button class="btn-luxury-primary" onclick="openNewBatchModal()" title="Release New Event Batch">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <line x1="12" y1="5" x2="12" y2="19"></line>
             <line x1="5" y1="12" x2="19" y2="12"></line>
           </svg>
-          Release Batch
+          <span class="btn-text-full">+ Release Batch</span>
+          <span class="btn-text-short">+ Batch</span>
         </button>
 
-        <a href="/download-ppt" class="btn-ppt-download" style="padding: 0.55rem 1.15rem; font-size: 0.85rem;" title="Download Presentation Deck (.pptx)">
+        <a href="/download-ppt" class="btn-ppt-download" title="Download Presentation Deck (.pptx)">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
             <polyline points="7 10 12 15 17 10"></polyline>
             <line x1="12" y1="15" x2="12" y2="3"></line>
           </svg>
-          Download PPT
+          <span class="btn-text-full">Download PPT</span>
+          <span class="btn-text-short">PPT Deck</span>
         </a>
       </div>
     </div>
@@ -67,9 +72,9 @@
 
     <!-- Page Intro Header -->
     <div class="page-intro">
-      <h1 class="page-intro-title">Hackathon Organizer Console</h1>
+      <h1 class="page-intro-title">Organizer &amp; Platform Command Center</h1>
       <p class="page-intro-desc">
-        Release ticket batches, set Tatkal quotas, independently toggle Mutex barrier protection per event, inspect attendee rosters, export attendee CSVs, and verify check-ins in real time.
+        Release ticket batches, set Tatkal quotas, independently toggle Mutex barrier protection per event, test live multi-device concurrency, manage Razorpay test credentials, and inspect microsecond audit logs in real time.
       </p>
     </div>
 
@@ -77,7 +82,7 @@
     <div class="ppt-promo-card">
       <div class="ppt-promo-left">
         <span class="ppt-promo-tag">Operating Systems Laboratory • Product #8</span>
-        <h2 class="ppt-promo-title">Official Viva & Course Presentation Deck</h2>
+        <h2 class="ppt-promo-title">Official Viva &amp; Course Presentation Deck</h2>
         <p class="ppt-promo-desc">
           Complete academic slide deck covering Problem Statement, Mathematical Mutex Proofs, Keyed Registry Architecture, and Lab Demo guidelines. Features all 6 team members arranged in ascending order.
         </p>
@@ -92,12 +97,66 @@
       </a>
     </div>
 
+    <!-- 0. Live Concurrency Demonstration Control Station (Teacher vs Friend) -->
+    <div class="panel-card" id="demoStation" style="border: 2px solid #0284C7; background: linear-gradient(180deg, #F0F9FF 0%, #FFFFFF 100%);">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 0.75rem;">
+        <div>
+          <span class="badge" style="background:#0284C7; color:#FFFFFF; font-weight:800; font-size:0.75rem; padding: 2px 10px; border-radius: 9999px;">
+            REAL-DEVICE VIVA TEST RIG (TEACHER VS FRIEND)
+          </span>
+          <h2 style="font-size: 1.25rem; font-weight: 800; color: #0F172A; margin-top: 0.4rem;">
+            Live 2-Device Concurrency &amp; Race Hazard Station
+          </h2>
+          <p style="font-size: 0.86rem; color: #475569; max-width: 800px; line-height: 1.5; margin-top: 0.2rem;">
+            Test concurrency in real time across two separate devices (e.g. <strong>Teacher on Laptop</strong> and <strong>Friend on Mobile</strong>).
+            Prime an event to <strong>1 seat left</strong>, and demonstrate how toggling Mutex OFF causes both devices to claim the single seat (overselling to <strong>-1</strong>), while Mutex ON strictly confirms the first transaction and rejects the second with <strong>Sold Out</strong>.
+          </p>
+        </div>
+        <div style="display: flex; gap: 0.6rem; align-items: center; flex-wrap: wrap;">
+          <button class="btn-luxury-primary" onclick="primeEventForDemo(1)" style="background: #0284C7;">
+            ⚡ Prime Event #1 to Exactly 1 Seat
+          </button>
+          <button class="btn-luxury-outline" onclick="toggleLiveMutex(1)">
+            Toggle Event #1 Mutex
+          </button>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid #BAE6FD;">
+        <div style="background: #FFFFFF; border: 1px solid #FECACA; border-radius: var(--radius-sm); padding: 0.85rem;">
+          <div style="font-weight: 800; font-size: 0.85rem; color: #DC2626; margin-bottom: 0.25rem;">
+            🔴 TEST 1: Mutex OFF (Race Condition Occurs)
+          </div>
+          <ol style="font-size: 0.78rem; color: #64748B; padding-left: 1.1rem; line-height: 1.5;">
+            <li>In the table below, switch Event #1 Mutex to <strong>OFF</strong>.</li>
+            <li>Click <strong>⚡ Prime Event #1 to Exactly 1 Seat</strong>.</li>
+            <li>Teacher &amp; Friend both open Event #1 and click <em>Book Team Pass</em>.</li>
+            <li>Both proceed without lock -> <strong>Both get confirmed passes!</strong></li>
+            <li>Remaining seats drops to <strong style="color:#DC2626;">-1 (OVERSOLD!)</strong></li>
+          </ol>
+        </div>
+
+        <div style="background: #FFFFFF; border: 1px solid #BBF7D0; border-radius: var(--radius-sm); padding: 0.85rem;">
+          <div style="font-weight: 800; font-size: 0.85rem; color: #16A34A; margin-bottom: 0.25rem;">
+            🟢 TEST 2: Mutex ON (Mutual Exclusion Enforced)
+          </div>
+          <ol style="font-size: 0.78rem; color: #64748B; padding-left: 1.1rem; line-height: 1.5;">
+            <li>Switch Event #1 Mutex back to <strong>ON</strong>.</li>
+            <li>Click <strong>⚡ Prime Event #1 to Exactly 1 Seat</strong>.</li>
+            <li>Teacher &amp; Friend both click <em>Book Team Pass</em>.</li>
+            <li>Whichever completes first secures the pass (seats -> 0).</li>
+            <li>The 2nd device is serialized &amp; rejected with <strong style="color:#16A34A;">"Sold Out"</strong>!</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
     <!-- Table 1: Active Hackathons & Batches -->
-    <div class="admin-table-card">
+    <div class="admin-table-card" id="batchesSection">
       <div class="admin-table-header">
         <div>
           <div class="admin-table-title">Active Hackathons &amp; Ticket Batches</div>
-          <div class="admin-table-sub">Live capacity tracking with per-event atomic Mutex controls</div>
+          <div class="admin-table-sub">Live capacity tracking with per-event atomic Mutex controls and 1-seat demo primer</div>
         </div>
         <button class="btn-luxury-outline" onclick="fetchHackathons()">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -132,7 +191,7 @@
     </div>
 
     <!-- Table 2: Registered Squads & Attendee Roster -->
-    <div class="admin-table-card">
+    <div class="admin-table-card" id="rosterSection">
       <div class="admin-table-header">
         <div>
           <div class="admin-table-title">Registered Squads &amp; Attendee Roster</div>
@@ -169,6 +228,129 @@
           </thead>
           <tbody id="rosterTableBody">
             <!-- Injected dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Table 3: Platform Telemetry & Gateway Settings (Merged from /platform) -->
+    <div id="platformSection" style="margin-top: 2.2rem;">
+      <div class="stat-grid" style="margin-bottom: 1.8rem;">
+        <div class="stat-card">
+          <div class="stat-label">Active Events</div>
+          <div class="stat-val" id="statTotalEvents">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Registered Squads</div>
+          <div class="stat-val" id="statTotalTeams" style="color: var(--accent-cyan);">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Gross Processed Volume</div>
+          <div class="stat-val" id="statTotalRevenue" style="color: var(--accent-emerald);">₹0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Lock Acquisitions</div>
+          <div class="stat-val" id="statTotalLocks">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Contention Barriers</div>
+          <div class="stat-val" id="statTotalContentions" style="color: #D97706;">0</div>
+        </div>
+      </div>
+
+      <!-- Razorpay Test Gateway Settings Card -->
+      <div class="admin-table-card" style="margin-bottom: 2.2rem;">
+        <div class="admin-table-header">
+          <div>
+            <div class="admin-table-title">Razorpay Standard Checkout &amp; Gateway Settings</div>
+            <div class="admin-table-sub">Live sandbox credentials dynamically injected into official Razorpay Standard Checkout SDK modals</div>
+          </div>
+          <span class="badge badge-success">SANDBOX ACTIVE</span>
+        </div>
+
+        <div style="padding: 1.6rem 1.8rem;">
+          <form id="platformSettingsForm" onsubmit="savePlatformSettings(event)">
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label" for="rzpKeyId">Razorpay Key ID *</label>
+                <input type="text" class="form-control" id="rzpKeyId" placeholder="rzp_test_1DP5mmOlF5G5ag" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="rzpKeySecret">Razorpay Key Secret *</label>
+                <input type="password" class="form-control" id="rzpKeySecret" placeholder="••••••••••••••••••••••••" required>
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label" for="platformFee">Platform Fee (INR)</label>
+                <input type="number" class="form-control" id="platformFee" min="0" value="0">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="rzpCurrency">Default Settlement Currency</label>
+                <select class="form-control" id="rzpCurrency">
+                  <option value="INR" selected>INR (Indian Rupee ₹)</option>
+                  <option value="USD">USD (US Dollar $)</option>
+                  <option value="EUR">EUR (Euro €)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="rzpWebhook">Webhook Secret (Optional)</label>
+              <input type="text" class="form-control" id="rzpWebhook" placeholder="whsec_test_synnexa_2026">
+            </div>
+
+            <div style="display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1.25rem;">
+              <button type="button" class="btn-luxury-outline" onclick="loadPlatformSettings()">Reset to Baseline</button>
+              <button type="submit" class="btn-luxury-primary">Save Gateway Credentials →</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table 4: Microsecond Critical Section Audit Trail Table -->
+    <div class="admin-table-card" id="auditSection">
+      <div class="admin-table-header">
+        <div>
+          <div class="admin-table-title">Critical Section Microsecond Audit Trail</div>
+          <div class="admin-table-sub">Real-time ledger of Mutex acquisitions, seat reservations, lock releases, and contention events</div>
+        </div>
+        <div style="display: flex; gap: 0.65rem; align-items: center;">
+          <button class="btn-luxury-outline" onclick="fetchPlatformData()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="23 4 23 10 17 10"></polyline>
+              <polyline points="1 20 1 14 7 14"></polyline>
+              <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+            </svg>
+            Refresh Logs
+          </button>
+          <button class="btn-luxury-outline" style="color: #DC2626; border-color: rgba(220, 38, 38, 0.25);" onclick="clearAuditLogs()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="3 6 5 6 21 6"></polyline>
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+            </svg>
+            Clear Audit Trail
+          </button>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Timestamp</th>
+              <th>Action</th>
+              <th>Event ID</th>
+              <th>Squad Name</th>
+              <th>Status</th>
+              <th>Duration</th>
+              <th>Telemetry Details</th>
+            </tr>
+          </thead>
+          <tbody id="auditTableBody">
+            <!-- Populated dynamically via app.js -->
           </tbody>
         </table>
       </div>
@@ -316,10 +498,10 @@
         <div>
           <div class="footer-heading">Portals & Views</div>
           <ul class="footer-links-list">
-            <li><a href="/">Curated Events</a></li>
-            <li><a href="/studio">OS Concurrency Studio</a></li>
-            <li><a href="/admin">Organizer Admin</a></li>
-            <li><a href="/platform">Platform Settings</a></li>
+            <li><a href="/">Curated Events (Public)</a></li>
+            <li><a href="#demoStation">Live 2-Device Demo</a></li>
+            <li><a href="#batchesSection">Batches &amp; Mutex</a></li>
+            <li><a href="#platformSection">Gateway Settings</a></li>
           </ul>
         </div>
 
