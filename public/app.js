@@ -344,28 +344,44 @@
   // SQUAD BOOKING MODAL LOGIC
   // -------------------------------------------------------------
   window.openBookingModal = function (eventId) {
-    const event = state.hackathons.find(h => h.id === Number(eventId));
-    if (!event) return;
+    const event = state.hackathons.find(h => String(h.id) === String(eventId));
+    if (!event) {
+      showToast('Event information loading, please try again.', 'warning');
+      return;
+    }
 
     state.selectedEventForBooking = event;
 
-    document.getElementById('bookingEventId').value = event.id;
-    document.getElementById('modalEventTitle').innerText = event.title;
-    document.getElementById('modalEventMeta').innerText = `${event.city || 'Global Hub'} • ${event.dates || '2026'}`;
-    document.getElementById('modalEventPrice').innerText = `₹${event.ticket_price || 499}`;
-    document.getElementById('modalTotalVal').innerText = `₹${event.ticket_price || 499}`;
+    const idInput = document.getElementById('bookingEventId');
+    const titleEl = document.getElementById('modalEventTitle');
+    const metaEl = document.getElementById('modalEventMeta');
+    const priceEl = document.getElementById('modalEventPrice');
+    const totalEl = document.getElementById('modalTotalVal');
+    const membersList = document.getElementById('additionalMembersList');
+
+    if (idInput) idInput.value = event.id;
+    if (titleEl) titleEl.innerText = event.title;
+    if (metaEl) metaEl.innerText = `${event.city || 'Global Hub'} • ${event.dates || '2026'}`;
+    if (priceEl) priceEl.innerText = `₹${event.ticket_price || 499}`;
+    if (totalEl) totalEl.innerText = `₹${event.ticket_price || 499}`;
 
     // Reset member fields
-    document.getElementById('additionalMembersList').innerHTML = '';
+    if (membersList) membersList.innerHTML = '';
     updateMemberCountBadge();
 
     const modal = document.getElementById('bookingModal');
-    if (modal) modal.classList.add('active');
+    if (modal) {
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      const container = modal.querySelector('.modal-container');
+      if (container) container.scrollTop = 0;
+    }
   };
 
   window.closeBookingModal = function () {
     const modal = document.getElementById('bookingModal');
     if (modal) modal.classList.remove('active');
+    document.body.style.overflow = '';
   };
 
   window.addSquadMemberField = function () {
@@ -547,11 +563,13 @@
     document.getElementById('passQrContainer').innerHTML = qrSvg;
 
     modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
   }
 
   window.closePassModal = function () {
     const modal = document.getElementById('passModal');
     if (modal) modal.classList.remove('active');
+    document.body.style.overflow = '';
   };
 
   // -------------------------------------------------------------
@@ -635,11 +653,13 @@
     }
 
     modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
   };
 
   window.closeMyPassesModal = function () {
     const modal = document.getElementById('myPassesModal');
     if (modal) modal.classList.remove('active');
+    document.body.style.overflow = '';
   };
 
   window.viewStoredPass = function (idx) {
@@ -1265,6 +1285,25 @@
       // Ignore poll error
     }
   }
+
+  // -------------------------------------------------------------
+  // GLOBAL MODAL BACKDROP & ESCAPE CONTROLS
+  // -------------------------------------------------------------
+  document.addEventListener('click', (e) => {
+    if (e.target && e.target.classList.contains('modal-backdrop')) {
+      e.target.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-backdrop.active').forEach(m => {
+        m.classList.remove('active');
+      });
+      document.body.style.overflow = '';
+    }
+  });
 
   // -------------------------------------------------------------
   // HTML ESCAPING SANITIZER

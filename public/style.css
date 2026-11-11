@@ -58,6 +58,8 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 body {
@@ -259,46 +261,54 @@ body {
   border-color: rgba(255, 255, 255, 0.4);
 }
 
-/* Page Entry Fade (triggers as dive completes) */
+/* Page Entry Fade (triggers as dive completes - NO transform to avoid breaking fixed modals) */
 .page-loaded-enter {
-  animation: content-reveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: content-reveal 0.5s ease forwards;
 }
 
 @keyframes content-reveal {
   0% {
     opacity: 0;
-    transform: translateY(18px) scale(0.99);
   }
   100% {
     opacity: 1;
-    transform: translateY(0) scale(1);
   }
 }
 
 /* ============================================================
-   2. LUXURY FROSTED GLASS NAVBAR (No Wrapping Bugs)
+   2. LUXURY FROSTED GLASS NAVBAR (Laptop & Desktop Responsive)
    ============================================================ */
 .navbar {
   position: sticky;
   top: 0;
-  z-index: 100;
-  background: rgba(251, 251, 250, 0.94);
+  z-index: 1000;
+  background: rgba(251, 251, 250, 0.95);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border-subtle);
   width: 100%;
+  box-sizing: border-box;
   transition: var(--transition-smooth);
 }
 
 .navbar-container {
-  max-width: 1320px;
+  max-width: 1360px;
   width: 100%;
   margin: 0 auto;
-  padding: 0.85rem 1.5rem;
+  padding: 0.75rem 1.25rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.5rem;
+  gap: 1rem;
+  box-sizing: border-box;
+}
+
+.btn-text-short {
+  display: none;
+}
+
+.btn-text-full {
+  display: inline;
 }
 
 .nav-brand-group {
@@ -1107,38 +1117,50 @@ body {
    ============================================================ */
 .modal-backdrop {
   position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   inset: 0;
-  background: rgba(11, 17, 32, 0.65);
+  background: rgba(9, 14, 23, 0.72);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  z-index: 1000;
+  z-index: 999999;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.5rem;
+  padding: 1.25rem;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.25s ease;
+  visibility: hidden;
+  overflow-y: auto;
+  box-sizing: border-box;
+  transition: opacity 0.22s ease, visibility 0.22s ease;
 }
 
 .modal-backdrop.active {
   opacity: 1;
   pointer-events: auto;
+  visibility: visible;
 }
 
 .modal-container {
   background: #FFFFFF;
+  color: var(--text-main);
   width: 100%;
-  max-width: 620px;
-  max-height: 90vh;
+  max-width: 580px;
+  max-height: calc(100vh - 2.5rem);
+  margin: auto;
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-modal);
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.45);
   border: 1px solid var(--border-medium);
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+  position: relative;
+  z-index: 1000000;
   transform: scale(0.96) translateY(10px);
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .modal-backdrop.active .modal-container {
@@ -1780,6 +1802,66 @@ body {
   }
   .footer-top-grid {
     grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Responsive Navbar for Laptops (1024px to 1350px) */
+@media (max-width: 1320px) {
+  .brand-sub {
+    display: none !important;
+  }
+  .nav-links {
+    gap: 1.15rem;
+  }
+  .nav-link-item a {
+    font-size: 0.85rem;
+  }
+  .btn-text-full {
+    display: none !important;
+  }
+  .btn-text-short {
+    display: inline !important;
+  }
+  .nav-actions {
+    gap: 0.45rem;
+  }
+  .btn-luxury-outline {
+    padding: 0.48rem 0.85rem;
+    font-size: 0.82rem;
+  }
+  .btn-luxury-primary, .btn-ppt-download {
+    padding: 0.5rem 1rem;
+    font-size: 0.82rem;
+  }
+}
+
+@media (max-width: 1120px) {
+  .nav-links {
+    gap: 0.8rem;
+  }
+  .nav-link-item a {
+    font-size: 0.8rem;
+  }
+  .navbar-container {
+    padding: 0.65rem 0.95rem;
+  }
+  .btn-luxury-text {
+    padding: 0.45rem 0.65rem;
+    font-size: 0.8rem;
+  }
+  .btn-luxury-outline {
+    padding: 0.45rem 0.75rem;
+    font-size: 0.78rem;
+  }
+  .btn-luxury-primary, .btn-ppt-download {
+    padding: 0.45rem 0.85rem;
+    font-size: 0.78rem;
+  }
+}
+
+@media (max-width: 960px) {
+  .nav-links {
+    display: none !important;
   }
 }
 
