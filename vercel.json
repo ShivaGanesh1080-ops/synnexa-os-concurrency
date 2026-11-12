@@ -1,11 +1,13 @@
 {
   "version": 2,
-  "name": "synnexa",
   "cleanUrls": true,
   "regions": ["bom1"],
   "rewrites": [
-    { "source": "/download-ppt", "destination": "/api/index" },
-    { "source": "/download-presentation", "destination": "/api/index" },
+    { "source": "/download-ppt", "destination": "/SYNNEXA_OS_Product8_Presentation.pptx" },
+    { "source": "/download-presentation", "destination": "/SYNNEXA_OS_Product8_Presentation.pptx" },
+    { "source": "/presentation.pptx", "destination": "/SYNNEXA_OS_Product8_Presentation.pptx" },
+    { "source": "/deck.pptx", "destination": "/SYNNEXA_OS_Product8_Presentation.pptx" },
+    { "source": "/ppt", "destination": "/SYNNEXA_OS_Product8_Presentation.pptx" },
     { "source": "/admin", "destination": "/admin.html" },
     { "source": "/platform", "destination": "/admin.html" },
     { "source": "/studio", "destination": "/studio.html" },
