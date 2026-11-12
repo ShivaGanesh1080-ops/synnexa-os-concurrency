@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "name": "synnexa",
+  "cleanUrls": true,
+  "regions": ["bom1"],
+  "rewrites": [
+    { "source": "/download-ppt", "destination": "/api/index" },
+    { "source": "/download-presentation", "destination": "/api/index" },
+    { "source": "/admin", "destination": "/admin.html" },
+    { "source": "/platform", "destination": "/admin.html" },
+    { "source": "/studio", "destination": "/studio.html" },
+    { "source": "/user", "destination": "/index.html" },
+    { "source": "/portal", "destination": "/index.html" },
+    { "source": "/events", "destination": "/index.html" }
+  ]
+}

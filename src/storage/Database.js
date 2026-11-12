@@ -1,7 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 
-const DATA_DIR = path.join(__dirname, '..', '..', 'data');
+const IS_VERCEL = Boolean(process.env.VERCEL || process.env.NOW_REGION);
+const LOCAL_DATA_DIR = path.join(__dirname, '..', '..', 'data');
+const DATA_DIR = IS_VERCEL ? '/tmp' : LOCAL_DATA_DIR;
+const SEED_FILE = path.join(LOCAL_DATA_DIR, 'database.json');
 const DB_FILE = path.join(DATA_DIR, 'database.json');
 
 const INITIAL_PLATFORM_SETTINGS = {
@@ -174,8 +177,18 @@ class Database {
   }
 
   _init() {
-    if (!fs.existsSync(DATA_DIR)) {
-      fs.mkdirSync(DATA_DIR, { recursive: true });
+    if (IS_VERCEL) {
+      if (!fs.existsSync(DB_FILE) && fs.existsSync(SEED_FILE)) {
+        try {
+          fs.writeFileSync(DB_FILE, fs.readFileSync(SEED_FILE, 'utf-8'), 'utf-8');
+        } catch (e) {
+          console.warn('[Database] Seed write to /tmp skipped:', e.message);
+        }
+      }
+    } else {
+      if (!fs.existsSync(DATA_DIR)) {
+        fs.mkdirSync(DATA_DIR, { recursive: true });
+      }
     }
 
     if (fs.existsSync(DB_FILE)) {
@@ -202,6 +215,9 @@ class Database {
 
   save() {
     try {
+      if (!IS_VERCEL && !fs.existsSync(DATA_DIR)) {
+        fs.mkdirSync(DATA_DIR, { recursive: true });
+      }
       fs.writeFileSync(DB_FILE, JSON.stringify(this._data, null, 2), 'utf-8');
     } catch (err) {
       console.error('[Database] Failed to persist data:', err.message);
