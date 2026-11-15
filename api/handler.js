@@ -62,14 +62,31 @@ module.exports = async (req, res) => {
 
   // Handle Presentation Deck Download
   if (pathname === '/download-ppt' || pathname === '/download-presentation' || pathname === '/presentation.pptx' || pathname === '/deck.pptx' || pathname === '/ppt') {
-    const rootPpt = path.join(__dirname, '..', 'SyncReg_OS_Product8_Presentation.pptx');
-    const publicPpt = path.join(__dirname, '..', 'public', 'SyncReg_OS_Product8_Presentation.pptx');
-    const fileToServe = fs.existsSync(publicPpt) ? publicPpt : (fs.existsSync(rootPpt) ? rootPpt : null);
+    const rootPpt = path.join(__dirname, '..', 'SYNNEXA_OS_Product8_Presentation.pptx');
+    const publicPpt = path.join(__dirname, '..', 'public', 'SYNNEXA_OS_Product8_Presentation.pptx');
+    const legacyPpt = path.join(__dirname, '..', 'SyncReg_OS_Product8_Presentation.pptx');
+    const fileToServe = fs.existsSync(publicPpt) ? publicPpt : (fs.existsSync(rootPpt) ? rootPpt : (fs.existsSync(legacyPpt) ? legacyPpt : null));
 
     if (fileToServe) {
       res.writeHead(200, {
         'Content-Type': 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-        'Content-Disposition': 'attachment; filename="SyncReg_OS_Product8_Presentation.pptx"'
+        'Content-Disposition': 'attachment; filename="SYNNEXA_OS_Product8_Presentation.pptx"'
+      });
+      fs.createReadStream(fileToServe).pipe(res);
+      return;
+    }
+  }
+
+  // Handle Academic Project Report PDF Download
+  if (pathname === '/report.pdf' || pathname === '/download-report' || pathname === '/report-pdf') {
+    const rootPdf = path.join(__dirname, '..', 'SYNNEXA_OS_Course_Project_Report_Product8.pdf');
+    const publicPdf = path.join(__dirname, '..', 'public', 'SYNNEXA_OS_Course_Project_Report_Product8.pdf');
+    const fileToServe = fs.existsSync(publicPdf) ? publicPdf : (fs.existsSync(rootPdf) ? rootPdf : null);
+
+    if (fileToServe) {
+      res.writeHead(200, {
+        'Content-Type': 'application/pdf',
+        'Content-Disposition': 'inline; filename="SYNNEXA_OS_Course_Project_Report_Product8.pdf"'
       });
       fs.createReadStream(fileToServe).pipe(res);
       return;

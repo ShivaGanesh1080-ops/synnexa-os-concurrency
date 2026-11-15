@@ -77,14 +77,31 @@ const server = http.createServer((req, res) => {
 
   // 2. PowerPoint Deck Download Endpoint
   if (cleanPath === '/download-ppt' || cleanPath === '/download-presentation' || cleanPath === '/presentation.pptx' || cleanPath === '/SyncReg_OS_Product8_Presentation.pptx' || cleanPath === '/deck.pptx' || cleanPath === '/ppt') {
-    const pptFile = path.join(__dirname, 'SyncReg_OS_Product8_Presentation.pptx');
-    const publicPpt = path.join(PUBLIC_DIR, 'SyncReg_OS_Product8_Presentation.pptx');
-    const fileToServe = fs.existsSync(pptFile) ? pptFile : (fs.existsSync(publicPpt) ? publicPpt : null);
+    const pptFile = path.join(__dirname, 'SYNNEXA_OS_Product8_Presentation.pptx');
+    const publicPpt = path.join(PUBLIC_DIR, 'SYNNEXA_OS_Product8_Presentation.pptx');
+    const legacyPpt = path.join(__dirname, 'SyncReg_OS_Product8_Presentation.pptx');
+    const fileToServe = fs.existsSync(pptFile) ? pptFile : (fs.existsSync(publicPpt) ? publicPpt : (fs.existsSync(legacyPpt) ? legacyPpt : null));
 
     if (fileToServe) {
       res.writeHead(200, {
         'Content-Type': 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-        'Content-Disposition': 'attachment; filename="SyncReg_OS_Product8_Presentation.pptx"'
+        'Content-Disposition': 'attachment; filename="SYNNEXA_OS_Product8_Presentation.pptx"'
+      });
+      fs.createReadStream(fileToServe).pipe(res);
+      return;
+    }
+  }
+
+  // Handle Project Report PDF Download
+  if (cleanPath === '/report.pdf' || cleanPath === '/download-report') {
+    const reportPdf = path.join(__dirname, 'SYNNEXA_OS_Course_Project_Report_Product8.pdf');
+    const publicPdf = path.join(PUBLIC_DIR, 'SYNNEXA_OS_Course_Project_Report_Product8.pdf');
+    const fileToServe = fs.existsSync(reportPdf) ? reportPdf : (fs.existsSync(publicPdf) ? publicPdf : null);
+
+    if (fileToServe) {
+      res.writeHead(200, {
+        'Content-Type': 'application/pdf',
+        'Content-Disposition': 'inline; filename="SYNNEXA_OS_Course_Project_Report_Product8.pdf"'
       });
       fs.createReadStream(fileToServe).pipe(res);
       return;
@@ -95,6 +112,8 @@ const server = http.createServer((req, res) => {
   let targetFile = null;
   if (cleanPath === '/' || cleanPath === '/index' || cleanPath === '/user' || cleanPath === '/portal' || cleanPath === '/events') {
     targetFile = 'index.html';
+  } else if (cleanPath === '/report') {
+    targetFile = 'report.html';
   } else if (cleanPath === '/studio' || cleanPath === '/concurrency' || cleanPath === '/benchmark') {
     targetFile = 'studio.html';
   } else if (cleanPath === '/admin' || cleanPath === '/organizer' || cleanPath === '/hackathon-admin' || cleanPath === '/platform' || cleanPath === '/settings' || cleanPath === '/platform-admin') {

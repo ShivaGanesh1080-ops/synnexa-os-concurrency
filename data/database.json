@@ -181,7 +181,7 @@
       "checked_in_at": "2026-11-09T14:30:00.000Z"
     },
     {
-      "id": "TEAM-02553-361",
+      "id": "TEAM-45818-971",
       "hackathon_id": 3,
       "team_name": "KernelMasters",
       "leader_name": "Shiva Ganesh",
@@ -200,43 +200,43 @@
           "htno": "2503A51108"
         }
       ],
-      "ticket_code": "TKT-TATKAL-70821",
+      "ticket_code": "TKT-TATKAL-75460",
       "payment_status": "PAID_RAZORPAY_TEST",
       "payment_id": "rzp_test_manual_check_88291",
-      "booked_at": "2026-11-12T05:43:22.553Z",
+      "booked_at": "2026-11-15T08:10:45.819Z",
       "is_checked_in": false,
       "checked_in_at": null
     }
   ],
   "audit_logs": [
     {
-      "id": "LOG-1794462202554-sz5p",
-      "timestamp": "2026-11-12T05:43:22.554Z",
+      "id": "LOG-1794730245823-gqko",
+      "timestamp": "2026-11-15T08:10:45.823Z",
       "event_id": 3,
       "action": "CRITICAL_SECTION_EXIT",
-      "thread_id": "th-2505-112",
+      "thread_id": "th-5760-842",
       "team_name": "KernelMasters",
       "lock_state": "UNLOCKED",
       "message": "Lock released by 'KernelMasters'. Next waiter alerted."
     },
     {
-      "id": "LOG-1794462202553-w69j",
-      "timestamp": "2026-11-12T05:43:22.553Z",
+      "id": "LOG-1794730245822-0ajk",
+      "timestamp": "2026-11-15T08:10:45.822Z",
       "event_id": 3,
       "action": "BOOKING_SUCCESS",
-      "thread_id": "th-2505-112",
+      "thread_id": "th-5760-842",
       "team_name": "KernelMasters",
       "lock_state": "LOCKED",
-      "ticket_code": "TKT-TATKAL-70821",
+      "ticket_code": "TKT-TATKAL-75460",
       "seats_remaining": 1,
-      "message": "Ticket TKT-TATKAL-70821 issued to 'KernelMasters'. Seats remaining: 1."
+      "message": "Ticket TKT-TATKAL-75460 issued to 'KernelMasters'. Seats remaining: 1."
     },
     {
-      "id": "LOG-1794462202506-luy6",
-      "timestamp": "2026-11-12T05:43:22.506Z",
+      "id": "LOG-1794730245760-yl0i",
+      "timestamp": "2026-11-15T08:10:45.760Z",
       "event_id": 3,
       "action": "CRITICAL_SECTION_ENTER",
-      "thread_id": "th-2505-112",
+      "thread_id": "th-5760-842",
       "team_name": "KernelMasters",
       "lock_state": "LOCKED",
       "wait_duration_ms": 0,
@@ -244,11 +244,11 @@
       "message": "Lock granted. Team 'KernelMasters' entered Critical Section (Waited 0ms)."
     },
     {
-      "id": "LOG-1794462202505-59ng",
-      "timestamp": "2026-11-12T05:43:22.505Z",
+      "id": "LOG-1794730245760-a342",
+      "timestamp": "2026-11-15T08:10:45.760Z",
       "event_id": 3,
       "action": "LOCK_REQUESTED",
-      "thread_id": "th-2505-112",
+      "thread_id": "th-5760-842",
       "team_name": "KernelMasters",
       "lock_state": "WAITING",
       "seats_remaining": 2,

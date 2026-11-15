@@ -101,9 +101,17 @@
     if (body) opts.body = JSON.stringify(body);
 
     const res = await fetch(path, opts);
-    const data = await res.json();
+    let data;
+    try {
+      data = await res.json();
+    } catch (e) {
+      data = { error: `HTTP ${res.status}` };
+    }
     if (!res.ok) {
-      throw new Error(data.message || data.error || `HTTP ${res.status}`);
+      const err = new Error(data.message || data.error || `HTTP ${res.status}`);
+      err.status = res.status;
+      err.data = data;
+      throw err;
     }
     return data;
   }
@@ -479,7 +487,26 @@
         fetchHackathons();
       } catch (err) {
         closeBookingModal();
-        showToast(err.message || 'Pass reservation failed. Capacity exhausted.', 'danger');
+        const isSoldOut = err.status === 409 || 
+                          (err.data && (err.data.status === 'SOLD_OUT' || err.data.seats_remaining <= 0)) ||
+                          (err.message && (err.message.includes('exhausted') || err.message.includes('Sold Out') || err.message.includes('SOLD_OUT') || err.message.includes('409')));
+
+        if (isSoldOut) {
+          const refundRef = (payload.payment_details && payload.payment_details.payment_id) 
+            ? payload.payment_details.payment_id.replace('rzp_', 'REFUND_RZP_') 
+            : `REFUND_RZP_${Date.now()}`;
+          
+          openRefundNoticeModal({
+            event: targetEvent,
+            team_name: payload.team_name,
+            amount: amountInr,
+            ref_id: refundRef
+          });
+          showToast(`⚠️ Booking Rejected: Tatkal quota exhausted. Automated refund of ₹${amountInr} initiated!`, 'danger');
+        } else {
+          showToast(err.message || 'Pass reservation failed. Capacity exhausted.', 'danger');
+        }
+        fetchHackathons();
       } finally {
         btn.disabled = false;
         btn.innerText = 'Pay with Razorpay →';
@@ -642,6 +669,38 @@
 
   window.closePassModal = function () {
     const modal = document.getElementById('passModal');
+    if (modal) modal.classList.remove('active');
+    document.body.style.overflow = '';
+  };
+
+  // -------------------------------------------------------------
+  // REFUND REASSURANCE MODAL LOGIC (MUTEX LOSER PROTECT)
+  // -------------------------------------------------------------
+  window.openRefundNoticeModal = function (info = {}) {
+    const modal = document.getElementById('refundNoticeModal');
+    if (!modal) return;
+
+    const eventTitle = (info.event && info.event.title) || 'Global AI HackSphere 2026';
+    const teamName = info.team_name || 'Squad Member';
+    const amount = info.amount || 499;
+    const refId = info.ref_id || `RZP-REF-${Math.floor(100000 + Math.random() * 900000)}`;
+
+    const elTitle = document.getElementById('refundModalEventTitle');
+    const elTeam = document.getElementById('refundModalTeamName');
+    const elAmount = document.getElementById('refundModalAmount');
+    const elRef = document.getElementById('refundModalRefId');
+
+    if (elTitle) elTitle.innerText = eventTitle;
+    if (elTeam) elTeam.innerText = teamName;
+    if (elAmount) elAmount.innerText = `₹${amount}.00`;
+    if (elRef) elRef.innerText = refId;
+
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  };
+
+  window.closeRefundNoticeModal = function () {
+    const modal = document.getElementById('refundNoticeModal');
     if (modal) modal.classList.remove('active');
     document.body.style.overflow = '';
   };

@@ -590,6 +590,92 @@
     </div>
   </div>
 
+  <!-- ============================================================
+       11. TICKET FAILED & AUTOMATED REFUND REASSURANCE MODAL
+       ============================================================ -->
+  <div class="modal-backdrop" id="refundNoticeModal">
+    <div class="modal-container" style="max-width: 540px;">
+      <div class="modal-header" style="background: #FEF2F2; border-bottom: 1px solid #FEE2E2;">
+        <div class="modal-title-wrap">
+          <div class="modal-title" style="color: #991B1B; display: flex; align-items: center; gap: 8px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2.2">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+              <line x1="12" y1="9" x2="12" y2="13"></line>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+            Tatkal Quota Exhausted
+          </div>
+          <div class="modal-subtitle" style="color: #B91C1C;">Another squad secured the last remaining seat milliseconds earlier</div>
+        </div>
+        <button class="modal-close-btn" onclick="closeRefundNoticeModal()" style="color: #991B1B;">✕</button>
+      </div>
+
+      <div class="modal-body" style="padding: 1.5rem;">
+        <div style="background: #FFFBEB; border: 1px solid #FDE68A; border-radius: 8px; padding: 1rem; margin-bottom: 1.25rem;">
+          <div style="display: flex; align-items: flex-start; gap: 10px;">
+            <span style="font-size: 1.25rem;">🛡️</span>
+            <div>
+              <div style="font-weight: 700; color: #92400E; font-size: 0.95rem;">Automated Refund Protection Initiated</div>
+              <p style="font-size: 0.85rem; color: #78350F; line-height: 1.5; margin-top: 4px;">
+                Due to strict <strong>OS Mutex Synchronization</strong>, overselling is physically blocked. Because your transaction arrived after the final seat was locked, your ticket could not be minted. <strong>Any debited payment will be automatically refunded to your original payment method.</strong>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 1.2rem; font-size: 0.88rem;">
+          <div style="font-weight: 700; color: #0F172A; margin-bottom: 0.75rem; border-bottom: 1px dashed #CBD5E1; padding-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.75rem;">
+            Transaction Rollback &amp; Refund Receipt
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+            <span style="color: #64748B;">Target Summit:</span>
+            <strong style="color: #0F172A;" id="refundModalEventTitle">Global AI HackSphere 2026</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+            <span style="color: #64748B;">Squad Attempted:</span>
+            <strong style="color: #0F172A;" id="refundModalTeamName">ByteBusters</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+            <span style="color: #64748B;">Amount Deducted:</span>
+            <strong style="color: #DC2626;" id="refundModalAmount">₹499.00</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+            <span style="color: #64748B;">Refund Status:</span>
+            <span style="background: #DCFCE7; color: #166534; font-weight: 700; padding: 2px 8px; border-radius: 4px; font-size: 0.78rem;">
+              ● REVERSAL INITIATED
+            </span>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+            <span style="color: #64748B;">Refund Timeline:</span>
+            <strong style="color: #0F172A;">5–7 Business Days</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+            <span style="color: #64748B;">Destination:</span>
+            <strong style="color: #0F172A;">Original Payment Method (Razorpay)</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span style="color: #64748B;">Refund Reference ID:</span>
+            <code style="background: #E2E8F0; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 0.8rem;" id="refundModalRefId">RZP-REF-849204</code>
+          </div>
+        </div>
+
+        <div style="margin-top: 1rem; font-size: 0.78rem; color: #64748B; background: #F1F5F9; border-radius: 6px; padding: 8px 12px; display: flex; align-items: center; gap: 8px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+          <span>OS Concurrency Metric: Thread safely serialized via Mutex. Zero negative capacity anomaly.</span>
+        </div>
+
+        <div style="display: flex; gap: 12px; margin-top: 1.5rem;">
+          <a href="#eventsSection" onclick="closeRefundNoticeModal()" class="btn-luxury-primary" style="flex: 1; text-align: center; text-decoration: none; justify-content: center;">
+            Explore Other Summits
+          </a>
+          <button class="btn-luxury-outline" style="flex: 1; justify-content: center;" onclick="closeRefundNoticeModal()">
+            Dismiss
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Toast Notification Root -->
   <div class="toast-container" id="toastContainer"></div>
 
