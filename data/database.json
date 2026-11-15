@@ -17,10 +17,10 @@
       "organizer": "SRU CSE & Silicon Valley AI Research Collective",
       "venue": "Moscone Center, San Francisco & Virtual Hub",
       "city": "San Francisco, USA",
-      "dates": "Nov 24–26, 2026",
+      "dates": "Nov 24\u201326, 2026",
       "total_tickets": 10,
       "tatkal_quota": 4,
-      "remaining_tickets": 0,
+      "remaining_tickets": 2,
       "ticket_price": 499,
       "mutex_enabled": true,
       "status": "ACTIVE",
@@ -35,7 +35,7 @@
       "organizer": "Shibuya Cyber Defense Lab & Global InfoSec Alliance",
       "venue": "Shibuya Stream Hall, Tokyo, Japan",
       "city": "Tokyo, Japan",
-      "dates": "Dec 02–04, 2026",
+      "dates": "Dec 02\u201304, 2026",
       "total_tickets": 8,
       "tatkal_quota": 3,
       "remaining_tickets": 0,
@@ -53,7 +53,7 @@
       "organizer": "SRU Cloud Computing Lab & UK Tech Council",
       "venue": "ExCeL London International Arena",
       "city": "London, UK",
-      "dates": "Dec 12–14, 2026",
+      "dates": "Dec 12\u201314, 2026",
       "total_tickets": 8,
       "tatkal_quota": 3,
       "remaining_tickets": 1,
@@ -71,7 +71,7 @@
       "organizer": "Indiranagar Tech Guild & SRU Innovation",
       "venue": "Bengaluru International Exhibition Centre",
       "city": "Bengaluru, India",
-      "dates": "Dec 18–20, 2026",
+      "dates": "Dec 18\u201320, 2026",
       "total_tickets": 12,
       "tatkal_quota": 4,
       "remaining_tickets": 3,
@@ -87,9 +87,9 @@
       "title": "Berlin Quantum & Neural Computing Hackathon",
       "tagline": "Hybrid quantum algorithms, tensor processing, and next-gen silicon compute",
       "organizer": "European Quantum Consortium & KiteKraft",
-      "venue": "Arena Berlin, Eichenstraße, Germany",
+      "venue": "Arena Berlin, Eichenstra\u00dfe, Germany",
       "city": "Berlin, Germany",
-      "dates": "Jan 08–10, 2027",
+      "dates": "Jan 08\u201310, 2027",
       "total_tickets": 6,
       "tatkal_quota": 2,
       "remaining_tickets": 2,
@@ -107,7 +107,7 @@
       "organizer": "Swiss Robotics Innovation Labs",
       "venue": "ETH Zurich Innovation Campus, Switzerland",
       "city": "Zurich, Switzerland",
-      "dates": "Jan 18–20, 2027",
+      "dates": "Jan 18\u201320, 2027",
       "total_tickets": 6,
       "tatkal_quota": 2,
       "remaining_tickets": 1,
@@ -480,7 +480,7 @@
       "lock_state": "UNPROTECTED",
       "ticket_code": "TKT-TATKAL-21983",
       "seats_remaining": -1,
-      "message": "🚨 RACE HAZARD! 'Friend Mobile' booked ticket beyond capacity! Seats are now -1."
+      "message": "\ud83d\udea8 RACE HAZARD! 'Friend Mobile' booked ticket beyond capacity! Seats are now -1."
     },
     {
       "id": "LOG-1794753888458-0w9b",
@@ -525,7 +525,7 @@
       "team_name": "BATCH_RUNNER",
       "lock_state": "MUTEX_ENABLED",
       "seats_remaining": 0,
-      "message": "✅ Rush Complete in 290ms: Zero overselling. 0 confirmed, 6 rejected."
+      "message": "\u2705 Rush Complete in 290ms: Zero overselling. 0 confirmed, 6 rejected."
     },
     {
       "id": "LOG-1794753865587-9g6u",
@@ -800,7 +800,7 @@
       "team_name": "BATCH_RUNNER",
       "lock_state": "MUTEX_ENABLED",
       "seats_remaining": 0,
-      "message": "🚀 Launching 6 simultaneous requests against 0 remaining seats (Mutex: ON)."
+      "message": "\ud83d\ude80 Launching 6 simultaneous requests against 0 remaining seats (Mutex: ON)."
     },
     {
       "id": "LOG-1794753850130-is8p",
@@ -946,7 +946,7 @@
       "lock_state": "UNPROTECTED",
       "ticket_code": "TKT-TATKAL-76034",
       "seats_remaining": -1,
-      "message": "🚨 RACE HAZARD! 'Friend Mobile' booked ticket beyond capacity! Seats are now -1."
+      "message": "\ud83d\udea8 RACE HAZARD! 'Friend Mobile' booked ticket beyond capacity! Seats are now -1."
     },
     {
       "id": "LOG-1794753576194-y2ls",
@@ -991,7 +991,7 @@
       "team_name": "BATCH_RUNNER",
       "lock_state": "MUTEX_ENABLED",
       "seats_remaining": 0,
-      "message": "✅ Rush Complete in 287ms: Zero overselling. 0 confirmed, 6 rejected."
+      "message": "\u2705 Rush Complete in 287ms: Zero overselling. 0 confirmed, 6 rejected."
     },
     {
       "id": "LOG-1794753551717-iux8",
@@ -1266,7 +1266,7 @@
       "team_name": "BATCH_RUNNER",
       "lock_state": "MUTEX_ENABLED",
       "seats_remaining": 0,
-      "message": "🚀 Launching 6 simultaneous requests against 0 remaining seats (Mutex: ON)."
+      "message": "\ud83d\ude80 Launching 6 simultaneous requests against 0 remaining seats (Mutex: ON)."
     },
     {
       "id": "LOG-1794753535145-27qh",
@@ -1322,7 +1322,7 @@
       "team_name": "BATCH_RUNNER",
       "lock_state": "MUTEX_ENABLED",
       "seats_remaining": 0,
-      "message": "✅ Rush Complete in 270ms: Zero overselling. 0 confirmed, 6 rejected."
+      "message": "\u2705 Rush Complete in 270ms: Zero overselling. 0 confirmed, 6 rejected."
     },
     {
       "id": "LOG-1794753424415-ozef",
@@ -1597,7 +1597,7 @@
       "team_name": "BATCH_RUNNER",
       "lock_state": "MUTEX_ENABLED",
       "seats_remaining": 0,
-      "message": "🚀 Launching 6 simultaneous requests against 0 remaining seats (Mutex: ON)."
+      "message": "\ud83d\ude80 Launching 6 simultaneous requests against 0 remaining seats (Mutex: ON)."
     },
     {
       "id": "LOG-1794753420992-yk8n",

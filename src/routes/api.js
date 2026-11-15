@@ -24,8 +24,14 @@ async function handleApiRequest(req, res, pathname, queryParams, body) {
           const tatkalRemaining = h.remaining_tickets !== undefined ? h.remaining_tickets : (h.tatkal_remaining || 0);
           const tatkalQuota = h.tatkal_quota !== undefined ? h.tatkal_quota : (h.tatkal_seats || 4);
           const totalSeats = h.total_tickets !== undefined ? h.total_tickets : (h.total_seats || 10);
+          const price = h.ticket_price !== undefined ? h.ticket_price : (h.price_inr || 499);
           return {
             ...h,
+            city: h.city || "Global Hub",
+            category: h.category || "Tech Hackathon",
+            image_url: h.image_url || "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1000&q=80",
+            ticket_price: price,
+            price_inr: price,
             tatkal_remaining: tatkalRemaining,
             tatkal_seats: tatkalQuota,
             total_seats: totalSeats,
@@ -47,7 +53,7 @@ async function handleApiRequest(req, res, pathname, queryParams, body) {
       }
     }
 
-    // 2. Specific Hackathon Details, Update, Mutex Toggle
+    // 2. Specific Hackathon Details, Update, Delete, Mutex Toggle
     const hackathonMatch = pathname.match(/^\/api\/hackathons\/(\d+)$/);
     if (hackathonMatch) {
       const eventId = Number(hackathonMatch[1]);
@@ -66,6 +72,12 @@ async function handleApiRequest(req, res, pathname, queryParams, body) {
       if (method === 'PUT') {
         const updated = db.updateHackathon(eventId, body);
         return sendJson(res, 200, { success: true, hackathon: updated });
+      }
+
+      if (method === 'DELETE') {
+        const removed = db.deleteHackathon(eventId);
+        if (!removed) return sendJson(res, 404, { success: false, error: "Hackathon not found" });
+        return sendJson(res, 200, { success: true, message: "Hackathon deleted", hackathon: removed });
       }
     }
 

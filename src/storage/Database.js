@@ -250,25 +250,56 @@ class Database {
 
   createHackathon(eventData) {
     const nextId = this._data.hackathons.reduce((max, h) => Math.max(max, h.id), 0) + 1;
+    const price = Number(eventData.ticket_price || eventData.price_inr || eventData.price || 499);
+    const tatkalQuota = Number(eventData.tatkal_quota || eventData.tatkal_seats || 4);
+    const totalTickets = Number(eventData.total_tickets || eventData.total_seats || tatkalQuota * 2 || 10);
+    const remaining = Number(eventData.remaining_tickets !== undefined ? eventData.remaining_tickets : tatkalQuota);
+
     const newEvent = {
-      id: nextId,
+      id: eventData.id ? Number(eventData.id) : nextId,
       title: eventData.title || `Hackathon #${nextId}`,
-      tagline: eventData.tagline || "Real-time Flash Registration",
+      tagline: eventData.tagline || eventData.desc || "Real-time Flash Registration & Concurrency Testing",
       organizer: eventData.organizer || "SR University Organizer",
-      venue: eventData.venue || "Campus Lab / Hybrid",
+      venue: eventData.venue || "Campus Lab / Hybrid Hub",
+      city: eventData.city || "Hyderabad, India",
       dates: eventData.dates || "Dec 2026",
-      total_tickets: Number(eventData.total_tickets) || 10,
-      tatkal_quota: Number(eventData.tatkal_quota) || 5,
-      remaining_tickets: Number(eventData.remaining_tickets || eventData.tatkal_quota || 5),
-      ticket_price: Number(eventData.ticket_price) || 0,
+      total_tickets: totalTickets,
+      total_seats: totalTickets,
+      tatkal_quota: tatkalQuota,
+      tatkal_seats: tatkalQuota,
+      remaining_tickets: remaining,
+      tatkal_remaining: remaining,
+      ticket_price: price,
+      price_inr: price,
       mutex_enabled: eventData.mutex_enabled !== undefined ? Boolean(eventData.mutex_enabled) : true,
       status: "ACTIVE",
-      badge: `${eventData.remaining_tickets || 5} Seats Left`,
-      category: eventData.category || "General Hackathon"
+      badge: `${remaining} Seats Left`,
+      category: eventData.category || "AI & Distributed Systems",
+      image_url: eventData.image_url || "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1000&q=80",
+      is_custom: true,
+      created_at: eventData.created_at || new Date().toISOString()
     };
-    this._data.hackathons.push(newEvent);
+
+    const existingIndex = this._data.hackathons.findIndex(h => h.id === newEvent.id);
+    if (existingIndex >= 0) {
+      this._data.hackathons[existingIndex] = newEvent;
+    } else {
+      this._data.hackathons.push(newEvent);
+    }
+
     this.save();
     return newEvent;
+  }
+
+  deleteHackathon(id) {
+    const numId = Number(id);
+    const index = this._data.hackathons.findIndex(h => h.id === numId);
+    if (index >= 0) {
+      const removed = this._data.hackathons.splice(index, 1)[0];
+      this.save();
+      return removed;
+    }
+    return null;
   }
 
   updateHackathon(id, updates) {
