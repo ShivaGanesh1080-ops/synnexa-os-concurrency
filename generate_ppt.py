@@ -96,19 +96,19 @@ def create_deck(output_path):
     p.space_after = Pt(10)
 
     p = tf.add_paragraph()
-    p.text = "Critical Section & Mutex Synchronization"
-    p.font.size = Pt(32)
+    p.text = "SYNNEXA: Critical Section & Mutex Synchronization"
+    p.font.size = Pt(30)
     p.font.bold = True
     p.font.color.rgb = TEXT_DARK
     p.font.name = "Segoe UI"
-    p.space_after = Pt(6)
+    p.space_after = Pt(4)
 
     p = tf.add_paragraph()
-    p.text = "High-Throughput Tatkal Event & Hackathon Registration Platform"
-    p.font.size = Pt(17)
+    p.text = "High-Throughput Tatkal Event & Hackathon Registration Platform • Live at https://synnexa.vercel.app"
+    p.font.size = Pt(14)
     p.font.color.rgb = SECONDARY
     p.font.name = "Segoe UI"
-    p.space_after = Pt(20)
+    p.space_after = Pt(16)
 
     p = tf.add_paragraph()
     p.text = "Team Leader: A. Shiva Ganesh (HTNO: 2503A51110)  |  B.Tech CSE Core (2nd Year)"
@@ -173,7 +173,7 @@ def create_deck(output_path):
         ("2503A51111", "V. Saicharan", "REST API & High-Throughput Dispatcher",
          "Implemented high-performance zero-dependency Node.js HTTP controllers, CORS pipeline, and microsecond audit telemetry.",
          ACCENT),
-        ("2503A51112", "T. Geethika", "Full-Stack UI/UX & Portal Experience",
+        ("2503A1112", "T. Geethika", "Full-Stack UI/UX & Portal Experience",
          "Built responsive light-slate dashboard, dynamic team member roster inputs, and pure procedural SVG QR boarding pass engine.",
          SECONDARY),
         ("2503A51113", "G. Vishwas", "Platform Administration & System QA",
@@ -873,7 +873,7 @@ def create_deck(output_path):
     p.space_after = Pt(4)
 
     p = ctf.add_paragraph()
-    p.text = "• User Booking Portal:      http://localhost:3000/#user\n• Tatkal Concurrency Studio: http://localhost:3000/#concurrency\n• Hackathon Admin Console:   http://localhost:3000/#hackadmin\n• Platform Admin Settings:   http://localhost:3000/#platform\n• Viva & OS Theory Center:   http://localhost:3000/#viva"
+    p.text = "• Live Global Cloud Platform: https://synnexa.vercel.app\n• Organizer & Live Demo Rig:  https://synnexa.vercel.app/admin\n• Official Slide Deck Stream: https://synnexa.vercel.app/download-ppt\n• Local Evaluation Node:     http://localhost:3000 (LAN: 192.168.1.9:3000)\n• GitHub Source Repository:    https://github.com/ShivaGanesh1080-ops/synnexa-os-concurrency"
     p.font.size = Pt(10.5)
     p.font.name = "Consolas"
     p.font.color.rgb = PRIMARY_DARK
