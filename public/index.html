@@ -69,7 +69,7 @@
 
       <div class="nav-actions">
         <!-- Direct link to Organizer Admin Console -->
-        <a href="/admin" class="btn-luxury-text" title="Switch to Organizer Admin & Concurrency Console">
+        <a href="/admin" class="btn-luxury-text btn-admin-nav" title="Switch to Organizer Admin & Concurrency Console">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <rect x="3" y="3" width="7" height="7"></rect>
             <rect x="14" y="3" width="7" height="7"></rect>
@@ -80,7 +80,7 @@
           <span class="btn-text-short">Admin</span>
         </a>
 
-        <button class="btn-luxury-outline" onclick="openMyPassesModal()" title="View your confirmed squad passes">
+        <button class="btn-luxury-outline btn-passes-nav" onclick="openMyPassesModal()" title="View your confirmed squad passes">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"></path>
           </svg>
@@ -89,7 +89,7 @@
           <span class="pass-count-chip" id="userPassCount">0</span>
         </button>
 
-        <a href="/download-ppt" class="btn-luxury-primary" title="Download Complete Presentation Deck (.pptx)">
+        <a href="/download-ppt" class="btn-luxury-primary btn-ppt-header" title="Download Complete Presentation Deck (.pptx)">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
             <polyline points="7 10 12 15 17 10"></polyline>
@@ -566,7 +566,7 @@
           <button class="btn-luxury-primary" style="flex: 1; justify-content: center;" onclick="window.print()">
             Print Boarding Pass
           </button>
-          <button class="btn-luxury-outline" style="flex: 1; justify-content: center;" onclick="closePassModal()">
+          <button class="btn-luxury-outline" style="flex: 1; justify-content: center;" onclick="closePassModal(true)">
             Done & View Passes
           </button>
         </div>
@@ -675,6 +675,13 @@
       </div>
     </div>
   </div>
+
+  <!-- Floating Mobile Passes Pill (Visible on Mobile when passes exist) -->
+  <button class="floating-mobile-passes-btn" id="floatingMobilePassesBtn" onclick="openMyPassesModal()" title="View My Passes">
+    <span class="floating-ticket-icon">🎟️</span>
+    <span class="floating-label">My Passes</span>
+    <span class="floating-chip" id="floatingPassCount">0</span>
+  </button>
 
   <!-- Toast Notification Root -->
   <div class="toast-container" id="toastContainer"></div>

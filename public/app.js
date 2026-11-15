@@ -667,10 +667,13 @@
     document.body.style.overflow = 'hidden';
   }
 
-  window.closePassModal = function () {
+  window.closePassModal = function (openPasses = false) {
     const modal = document.getElementById('passModal');
     if (modal) modal.classList.remove('active');
     document.body.style.overflow = '';
+    if (openPasses && typeof window.openMyPassesModal === 'function') {
+      window.openMyPassesModal();
+    }
   };
 
   // -------------------------------------------------------------
@@ -710,6 +713,8 @@
   // -------------------------------------------------------------
   function getStoredPasses() {
     try {
+      const reg = localStorage.getItem('event_registration_passes');
+      if (reg) return JSON.parse(reg);
       const syn = localStorage.getItem('synnexa_passes');
       if (syn) return JSON.parse(syn);
       const av = localStorage.getItem('avenora_passes');
@@ -743,12 +748,26 @@
   function updatePassCountBadge() {
     try {
       const existing = getStoredPasses();
+      const count = existing.length;
       const badge = document.getElementById('userPassCount');
-      if (badge) badge.innerText = existing.length;
+      if (badge) badge.innerText = count;
+
+      const floatingBtn = document.getElementById('floatingMobilePassesBtn');
+      const floatingBadge = document.getElementById('floatingPassCount');
+      if (floatingBadge) floatingBadge.innerText = count;
+      if (floatingBtn) {
+        if (count > 0 && window.innerWidth <= 768) {
+          floatingBtn.style.display = 'flex';
+        } else {
+          floatingBtn.style.display = 'none';
+        }
+      }
     } catch (e) {
       // Ignore
     }
   }
+
+  window.addEventListener('resize', updatePassCountBadge);
 
   window.openMyPassesModal = function () {
     const modal = document.getElementById('myPassesModal');
