@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Registration — Complete Testing Walkthrough Video</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
+  <style>
+    .video-hero-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-medium);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      margin-bottom: 2.5rem;
+    }
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: #0B1120;
+      box-shadow: 0 20px 40px rgba(11, 17, 32, 0.25);
+    }
+    video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .test-scenes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+    .scene-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .scene-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    }
+    .scene-pill {
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      display: inline-block;
+      margin-bottom: 0.5rem;
+    }
+    .scene-pill.cyan { background: #E0F2FE; color: #0284C7; }
+    .scene-pill.emerald { background: #D1FAE5; color: #059669; }
+    .scene-pill.gold { background: #FEF3C7; color: #B45309; }
+    .scene-pill.red { background: #FEE2E2; color: #DC2626; }
+    .scene-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #0F172A;
+      margin-bottom: 0.35rem;
+    }
+    .scene-desc {
+      font-size: 0.85rem;
+      color: #475569;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body data-page="demo">
+
+  <!-- 1. Luxury Navbar -->
+  <header class="navbar">
+    <div class="navbar-container">
+      <a href="/" class="nav-brand-group">
+        <div class="nav-brand-logo">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+        </div>
+        <div class="nav-brand-titles">
+          <div class="brand-title">Event Registration <span>Testing Walkthrough</span></div>
+          <div class="brand-sub">Operating Systems Laboratory • Product #8</div>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li class="nav-link-item"><a href="/">Curated Events</a></li>
+        <li class="nav-link-item"><a href="/studio">Concurrency Studio</a></li>
+        <li class="nav-link-item"><a href="/admin">Organizer Admin</a></li>
+        <li class="nav-link-item"><a href="/demo" class="active">Video Demo</a></li>
+        <li class="nav-link-item"><a href="/report.pdf" target="_blank">Report PDF</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="/Event_Registration_Full_Testing_Demo.webm" download class="btn-luxury-primary" title="Download High-Definition Video (.webm)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          <span class="btn-text-full">Download Video (.webm)</span>
+          <span class="btn-text-short">Video</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 2. Main Content Canvas -->
+  <main class="page-container" style="max-width: 1200px; padding: 2rem 1.25rem;">
+    
+    <div class="page-intro" style="text-align: center; margin-bottom: 2rem;">
+      <span class="badge" style="background:#E0F2FE; color:#0284C7; font-weight:800; font-size:0.75rem; padding: 3px 12px; border-radius: 9999px;">
+        OFFICIAL PRODUCT VERIFICATION
+      </span>
+      <h1 class="page-intro-title" style="margin-top: 0.5rem; font-size: 2.2rem;">Complete End-to-End Testing Video</h1>
+      <p class="page-intro-desc" style="margin: 0 auto; max-width: 750px;">
+        Watch the complete automated testing walkthrough of the Event Registration Concurrency Control Platform. Includes live participant booking, Tatkal 50-thread surge benchmark, TOCTOU race condition provocation (Mutex OFF), Dijkstra critical section enforcement (Mutex ON), and the automated refund reassurance workflow.
+      </p>
+    </div>
+
+    <div class="video-hero-card">
+      <div class="video-wrapper">
+        <video controls autoplay loop playsinline>
+          <source src="/Event_Registration_Full_Testing_Demo.webm" type="video/webm">
+          Your browser does not support the video tag. You can download the video below.
+        </video>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--border-subtle);">
+        <div>
+          <div style="font-weight: 700; color: #0F172A; font-size: 0.95rem;">Video Specifications</div>
+          <div style="font-size: 0.8rem; color: #64748B; margin-top: 2px;">
+            Resolution: 1280×720 HD (60fps) • Codec: VP8/VP9 WebM • File Size: 10.8 MB • Audio: Clean Subtitled Playthrough
+          </div>
+        </div>
+        <div style="display: flex; gap: 0.75rem;">
+          <a href="/Event_Registration_Full_Testing_Demo.webm" download class="btn-luxury-primary">
+            Download File (10.8 MB)
+          </a>
+          <a href="/admin" class="btn-luxury-outline">
+            Open Live Admin Rig ↗
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Test Scene Index -->
+    <h2 style="font-size: 1.4rem; font-weight: 800; color: #0F172A; margin-bottom: 0.5rem;">Test Scenarios Demonstrated</h2>
+    <p style="font-size: 0.88rem; color: #64748B; margin-bottom: 1.25rem;">The video systematically executes and verifies every functional test case required by the course guidelines:</p>
+
+    <div class="test-scenes-grid">
+      <div class="scene-card">
+        <span class="scene-pill cyan">Scene 1 • 00:00 - 00:15</span>
+        <div class="scene-title">Portal Overview & Brand Architecture</div>
+        <div class="scene-desc">Navigates the luxury editorial layout, institutional headers, and SR University Department of CSE product attribution.</div>
+      </div>
+
+      <div class="scene-card">
+        <span class="scene-pill cyan">Scene 2 • 00:15 - 00:35</span>
+        <div class="scene-title">Curated Events & Tatkal Seat Meters</div>
+        <div class="scene-desc">Inspects live tech summit cards, city filters, pricing tiers, and dynamic inventory gauges reflecting remaining seats.</div>
+      </div>
+
+      <div class="scene-card">
+        <span class="scene-pill emerald">Scene 3 • 00:35 - 00:55</span>
+        <div class="scene-title">Squad Booking & VIP Boarding Pass</div>
+        <div class="scene-desc">Completes a multi-member team checkout, validates fields, and mints an authentic SVG QR Code boarding pass with Ticket Hash.</div>
+      </div>
+
+      <div class="scene-card">
+        <span class="scene-pill gold">Scene 4 • 00:55 - 01:25</span>
+        <div class="scene-title">50-Thread Tatkal Rush Benchmark</div>
+        <div class="scene-desc">Fires 50 simultaneous asynchronous reservation microtasks in Concurrency Studio. Proves exactly 2 confirmed passes and 48 rejections with 0 oversold.</div>
+      </div>
+
+      <div class="scene-card">
+        <span class="scene-pill red">Scene 5 • 01:25 - 01:55</span>
+        <div class="scene-title">TOCTOU Race Condition (Mutex OFF)</div>
+        <div class="scene-desc">Disables Mutex protection and executes simultaneous checkouts on 1 remaining seat. Confirms catastrophic overselling to -1 capacity.</div>
+      </div>
+
+      <div class="scene-card">
+        <span class="scene-pill emerald">Scene 6 • 01:55 - 02:25</span>
+        <div class="scene-title">Dijkstra Critical Section (Mutex ON)</div>
+        <div class="scene-desc">Re-enables Mutex lock. The first request claims seat #1; the second thread is safely queued, re-reads capacity = 0, and receives atomic HTTP 409.</div>
+      </div>
+
+      <div class="scene-card">
+        <span class="scene-pill gold">Scene 7 • 02:25 - 02:45</span>
+        <div class="scene-title">Automated Refund Reassurance Modal</div>
+        <div class="scene-desc">Catches HTTP 409 and immediately presents the refund notice with tracking ID (RZP-REF-849204) and 5–7 day refund guarantee.</div>
+      </div>
+
+      <div class="scene-card">
+        <span class="scene-pill cyan">Scene 8 • 02:45 - 03:05</span>
+        <div class="scene-title">Microsecond Audit Trail Verification</div>
+        <div class="scene-desc">Inspects the real-time stream recording every MUTEX_ACQUIRE, FIFO_WAIT_ENQUEUE, and CRITICAL_SECTION_ENTER transition.</div>
+      </div>
+
+      <div class="scene-card">
+        <span class="scene-pill emerald">Scene 9 • 03:05 - 03:25</span>
+        <div class="scene-title">Door Check-In Verification Scanner</div>
+        <div class="scene-desc">Tests the organizer gate verification tool, checking ticket validity and updating attendee status in the ACID database.</div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer-editorial">
+    <div class="footer-inner" style="text-align: center; padding: 2rem 0;">
+      <div>© 2026 Event Registration • SR University CSE Core Product #8. All rights reserved.</div>
+    </div>
+  </footer>
+
+</body>
+</html>

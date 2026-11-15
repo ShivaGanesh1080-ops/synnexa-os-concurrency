@@ -115,6 +115,8 @@ const server = http.createServer((req, res) => {
     targetFile = 'index.html';
   } else if (cleanPath === '/report') {
     targetFile = 'report.html';
+  } else if (cleanPath === '/demo' || cleanPath === '/video' || cleanPath === '/walkthrough') {
+    targetFile = 'demo.html';
   } else if (cleanPath === '/studio' || cleanPath === '/concurrency' || cleanPath === '/benchmark') {
     targetFile = 'studio.html';
   } else if (cleanPath === '/admin' || cleanPath === '/organizer' || cleanPath === '/hackathon-admin' || cleanPath === '/platform' || cleanPath === '/settings' || cleanPath === '/platform-admin') {
