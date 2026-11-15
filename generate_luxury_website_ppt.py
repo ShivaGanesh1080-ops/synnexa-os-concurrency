@@ -68,7 +68,7 @@ def create_deck(output_path):
         ftf.word_wrap = True
         ftf.margin_left = ftf.margin_top = ftf.margin_right = ftf.margin_bottom = 0
         p = ftf.paragraphs[0]
-        p.text = "SYNNEXA • Product #8 Operating Systems Concurrency Control • SR University CSE Core"
+        p.text = "Event Registration • Product #8 Concurrency Control • SR University CSE Core"
         p.font.size = Pt(8.5)
         p.font.color.rgb = TEXT_MUTED
         p.font.name = "Segoe UI"
@@ -130,7 +130,7 @@ def create_deck(output_path):
     p.space_after = Pt(8)
 
     p = tf.add_paragraph()
-    p.text = "SYNNEXA: Critical Section & Mutex Synchronization"
+    p.text = "Event Registration: Critical Section & Mutex Synchronization"
     p.font.size = Pt(27)
     p.font.bold = True
     p.font.color.rgb = TEXT_MAIN
@@ -384,7 +384,7 @@ def create_deck(output_path):
     # ────────────────────────────────────────────────────────────────
     s5 = prs.slides.add_slide(blank_layout)
     add_header(s5, "Dijkstra's Criteria", "The 3 Pillars of the Critical Section Solution",
-               "Formal theoretical criteria established by Edsger W. Dijkstra (1965) satisfied by SYNNEXA")
+               "Formal theoretical criteria established by Edsger W. Dijkstra (1965) satisfied by Event Registration")
 
     pillars = [
         ("Pillar 1: Mutual Exclusion",
@@ -447,7 +447,7 @@ def create_deck(output_path):
     # ────────────────────────────────────────────────────────────────
     s6 = prs.slides.add_slide(blank_layout)
     add_header(s6, "Core Primitive Design", "The 4-Stage Asynchronous Mutex Lifecycle",
-               "How SYNNEXA coordinates asynchronous event-loop execution without external libraries or locks")
+               "How Event Registration coordinates asynchronous event-loop execution without external libraries or locks")
 
     stages = [
         ("Stage 1: Barrier Evaluation",
@@ -574,7 +574,7 @@ def create_deck(output_path):
     p.space_after = Pt(6)
 
     p = ctf2.add_paragraph()
-    p.text = "SYNNEXA allocates independent named Mutex instances per event identifier in a Map."
+    p.text = "Event Registration allocates independent named Mutex instances per event identifier in a Map."
     p.font.size = Pt(10)
     p.font.color.rgb = TEXT_BODY
     p.space_after = Pt(10)
@@ -673,7 +673,7 @@ def create_deck(output_path):
     # ────────────────────────────────────────────────────────────────
     s9 = prs.slides.add_slide(blank_layout)
     add_header(s9, "Resilient User Experience", "Automated Refund Reassurance on Tatkal Exhaustion",
-               "How SYNNEXA gracefully handles the out-raced concurrent buyer who authorized payment for the final seat")
+               "How Event Registration gracefully handles the out-raced concurrent buyer who authorized payment for the final seat")
 
     refund_steps = [
         ("Step 1: Rapid Contention", "Buyer Authorizes Payment",
@@ -976,5 +976,5 @@ def create_deck(output_path):
     print(f"Presentation saved successfully to: {output_path}")
 
 if __name__ == "__main__":
-    out = sys.argv[1] if len(sys.argv) > 1 else "SYNNEXA_OS_Product8_Presentation.pptx"
+    out = sys.argv[1] if len(sys.argv) > 1 else "Event_Registration_OS_Product8_Presentation.pptx"
     create_deck(out)

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 generate_synnexa_clean_report.py
-Two-pass compiler for SYNNEXA (Product #8) Operating Systems Course Project Report PDF:
+Two-pass compiler for Event Registration (Product #8) Operating Systems Course Project Report PDF:
 - Exact same visual styling, font (Segoe UI), color palette, and layout as CRC_Project_Report.pdf
 - Modern developer code cards with macOS dots (red/yellow/green), line numbers, and Pygments highlighting
 - Detailed millisecond execution trace card for Mutex serialization vs Race Hazard
@@ -922,7 +922,7 @@ module.exports = { KeyedMutexRegistry, defaultRegistry };"""
     </div>
     
     <div class="project-banner">
-        <h2>SYNNEXA: Critical Section &amp; Mutex Synchronization in High-Contention Ticketing</h2>
+        <h2>Event Registration: Critical Section &amp; Mutex Synchronization in High-Contention Ticketing</h2>
         <p>A Zero-Overbooking Event Reservation Kernel with Automated Refund Reassurance &amp; Live Concurrency Testing</p>
     </div>
     
@@ -1002,7 +1002,7 @@ module.exports = { KeyedMutexRegistry, defaultRegistry };"""
     </div>
 
     <div class="callout" style="font-size: 9pt; line-height: 1.6; margin: 16px 0;">
-        This is to certify that the course project titled <strong>"SYNNEXA: Critical Section &amp; Mutex Synchronization in High-Contention Ticketing"</strong> is a bonafide record of work carried out by the undergraduate students of B.Tech CSE Core (2nd Year) under Product #8:
+        This is to certify that the course project titled <strong>"Event Registration: Critical Section &amp; Mutex Synchronization in High-Contention Ticketing"</strong> is a bonafide record of work carried out by the undergraduate students of B.Tech CSE Core (2nd Year) under Product #8:
         <br><br>
         <strong>1. Ch. Naveen Reddy (2503A51108)</strong> &nbsp;&bull;&nbsp;
         <strong>2. K. Shiva Saketh (2503A51109)</strong> &nbsp;&bull;&nbsp;
@@ -1032,7 +1032,7 @@ module.exports = { KeyedMutexRegistry, defaultRegistry };"""
         In modern networked computing, high-demand web services (such as IRCTC Tatkal railway ticketing, concert ticket drops, and flash sales) frequently suffer from severe concurrency hazards. When hundreds or thousands of distributed user requests contend for a single remaining resource (<i>C</i> = 1) across asynchronous network boundaries, unsynchronized database transactions lead to the classic <strong>Time-of-Check to Time-of-Use (TOCTOU)</strong> race condition. Under this anomaly, multiple server threads observe valid capacity simultaneously before any write operation commits, resulting in catastrophic overbooking where inventory plunges below zero (<i>C</i> &lt; 0), minting duplicate tickets and causing significant financial liability.
     </p>
     <p>
-        This laboratory project presents <strong>SYNNEXA (Product #8)</strong>, an enterprise-grade concurrency control engine and real-time event booking platform engineered from fundamental Operating System synchronization primitives. Rather than relying on heavy third-party ORMs or external database locks, SYNNEXA implements a native, zero-dependency <strong>Asynchronous Mutex Primitive</strong> coupled with a <strong>Keyed Mutex Registry</strong> in Node.js.
+        This laboratory project presents <strong>Event Registration (Product #8)</strong>, an enterprise-grade concurrency control engine and real-time event booking platform engineered from fundamental Operating System synchronization primitives. Rather than relying on heavy third-party ORMs or external database locks, SYNNEXA implements a native, zero-dependency <strong>Asynchronous Mutex Primitive</strong> coupled with a <strong>Keyed Mutex Registry</strong> in Node.js.
     </p>
 
     <h2 class="sub-sec-title">Key Architectural Features &amp; Research Innovations</h2>
@@ -1138,7 +1138,7 @@ module.exports = { KeyedMutexRegistry, defaultRegistry };"""
 
     <h2 class="sub-sec-title">1.5 Problem Statement and Product Requirements</h2>
     <p>
-        The objective of this project is to architect, implement, and rigorously verify <strong>SYNNEXA (Product #8)</strong>—a high-throughput Tatkal hackathon reservation platform that guarantees <strong>Zero Overbooking</strong> under extreme concurrent loads.
+        The objective of this project is to architect, implement, and rigorously verify <strong>Event Registration (Product #8)</strong>—a high-throughput Tatkal hackathon reservation platform that guarantees <strong>Zero Overbooking</strong> under extreme concurrent loads.
     </p>
     <ul>
         <li><strong>Core Functional Requirements:</strong> Multi-event catalog, dynamic squad pass registration, official Razorpay test payments, and printable SVG QR passes.</li>
@@ -1674,7 +1674,7 @@ module.exports = { KeyedMutexRegistry, defaultRegistry };"""
         </tbody>
     </table>
     <div class="callout" style="margin-top: 10px;">
-        <strong>Final Conclusion:</strong> SYNNEXA successfully bridges foundational Operating Systems theory with modern cloud engineering, proving that rigorous concurrency control is vital for data integrity in distributed web applications.
+        <strong>Final Conclusion:</strong> Event Registration successfully bridges foundational Operating Systems theory with modern cloud engineering, proving that rigorous concurrency control is vital for data integrity in distributed web applications.
     </div>
 </div>
 
@@ -1756,12 +1756,12 @@ module.exports = { KeyedMutexRegistry, defaultRegistry };"""
 <div class="page-break">
     <h1 class="sec-title">APPENDIX C - DASHBOARD SCREENSHOTS</h1>
     <p style="font-size: 8.5pt; color: #475569; margin-bottom: 8px;">
-        The following fresh screenshots demonstrate the production operation of the SYNNEXA portal, modal dialogs, and admin command center:
+        The following fresh screenshots demonstrate the production operation of the Event Registration portal, modal dialogs, and admin command center:
     </p>
 
     <div class="screenshot-card">
         <img src="{shot_landing_b64}" alt="SYNNEXA Event Registry Landing Page">
-        <div class="caption">Figure C.1: SYNNEXA Curated Events Landing Portal displaying real-time Tatkal seat gauges, Book Team Pass buttons, and active event cards.</div>
+        <div class="caption">Figure C.1: Event Registration Curated Events Landing Portal displaying real-time Tatkal seat gauges, Book Team Pass buttons, and active event cards.</div>
     </div>
 </div>
 
@@ -1807,7 +1807,7 @@ module.exports = { KeyedMutexRegistry, defaultRegistry };"""
                 <span class="dot dot-red"></span>
                 <span class="dot dot-yellow"></span>
                 <span class="dot dot-green"></span>
-                <span>SYNNEXA Concurrency &amp; Backend Test Suite Runner</span>
+                <span>Event Registration Concurrency &amp; Backend Test Suite Runner</span>
             </div>
             <div class="trace-badge">7/7 Tests Passed (100%)</div>
         </div>
@@ -1913,7 +1913,7 @@ Simultaneous Requests Fired: 50 Threads
 
     <h2 class="sub-sec-title">Cloud Deployment &amp; Public Access Configuration</h2>
     <div class="callout">
-        <strong>Vercel Production Edge Deployment:</strong> The SYNNEXA platform is continuously deployed to Vercel global edge infrastructure. Serverless function routing is declared in <code>vercel.json</code>, routing <code>/api/*</code> requests to the serverless REST handler, while serving static frontend assets from <code>public/</code>.
+        <strong>Vercel Production Edge Deployment:</strong> The Event Registration platform is continuously deployed to Vercel global edge infrastructure. Serverless function routing is declared in <code>vercel.json</code>, routing <code>/api/*</code> requests to the serverless REST handler, while serving static frontend assets from <code>public/</code>.
     </div>
 </div>
 
@@ -2099,6 +2099,14 @@ def main():
 
     # Also copy to report.pdf in public
     with open(scratch_pdf, "rb") as src, open(public_report_pdf, "wb") as dst:
+        dst.write(src.read())
+
+    
+    event_reg_desktop = r"C:\Users\DELL\Desktop\Event_Registration_OS_Course_Project_Report_Product8.pdf"
+    event_reg_public = os.path.join(base_dir, "public", "Event_Registration_OS_Course_Project_Report_Product8.pdf")
+    with open(scratch_pdf, "rb") as src, open(event_reg_desktop, "wb") as dst:
+        dst.write(src.read())
+    with open(scratch_pdf, "rb") as src, open(event_reg_public, "wb") as dst:
         dst.write(src.read())
 
     print(f"Compilation fully complete!\nDesktop: {desktop_pdf}\nScratch: {scratch_pdf}\nPublic: {public_pdf}")
