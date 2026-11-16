@@ -17,14 +17,14 @@
       "organizer": "SRU CSE & Silicon Valley AI Research Collective",
       "venue": "Moscone Center, San Francisco & Virtual Hub",
       "city": "San Francisco, USA",
-      "dates": "Nov 24\u201326, 2026",
+      "dates": "Nov 24–26, 2026",
       "total_tickets": 10,
       "tatkal_quota": 4,
-      "remaining_tickets": 2,
+      "remaining_tickets": 0,
       "ticket_price": 499,
       "mutex_enabled": true,
       "status": "ACTIVE",
-      "badge": "SOLD OUT",
+      "badge": "0 Seats Left",
       "category": "AI & Machine Learning",
       "image_url": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1000&q=80"
     },
@@ -35,7 +35,7 @@
       "organizer": "Shibuya Cyber Defense Lab & Global InfoSec Alliance",
       "venue": "Shibuya Stream Hall, Tokyo, Japan",
       "city": "Tokyo, Japan",
-      "dates": "Dec 02\u201304, 2026",
+      "dates": "Dec 02–04, 2026",
       "total_tickets": 8,
       "tatkal_quota": 3,
       "remaining_tickets": 0,
@@ -53,7 +53,7 @@
       "organizer": "SRU Cloud Computing Lab & UK Tech Council",
       "venue": "ExCeL London International Arena",
       "city": "London, UK",
-      "dates": "Dec 12\u201314, 2026",
+      "dates": "Dec 12–14, 2026",
       "total_tickets": 8,
       "tatkal_quota": 3,
       "remaining_tickets": 1,
@@ -71,7 +71,7 @@
       "organizer": "Indiranagar Tech Guild & SRU Innovation",
       "venue": "Bengaluru International Exhibition Centre",
       "city": "Bengaluru, India",
-      "dates": "Dec 18\u201320, 2026",
+      "dates": "Dec 18–20, 2026",
       "total_tickets": 12,
       "tatkal_quota": 4,
       "remaining_tickets": 3,
@@ -87,9 +87,9 @@
       "title": "Berlin Quantum & Neural Computing Hackathon",
       "tagline": "Hybrid quantum algorithms, tensor processing, and next-gen silicon compute",
       "organizer": "European Quantum Consortium & KiteKraft",
-      "venue": "Arena Berlin, Eichenstra\u00dfe, Germany",
+      "venue": "Arena Berlin, Eichenstraße, Germany",
       "city": "Berlin, Germany",
-      "dates": "Jan 08\u201310, 2027",
+      "dates": "Jan 08–10, 2027",
       "total_tickets": 6,
       "tatkal_quota": 2,
       "remaining_tickets": 2,
@@ -107,7 +107,7 @@
       "organizer": "Swiss Robotics Innovation Labs",
       "venue": "ETH Zurich Innovation Campus, Switzerland",
       "city": "Zurich, Switzerland",
-      "dates": "Jan 18\u201320, 2027",
+      "dates": "Jan 18–20, 2027",
       "total_tickets": 6,
       "tatkal_quota": 2,
       "remaining_tickets": 1,
@@ -378,9 +378,289 @@
       "booked_at": "2026-11-15T14:45:03.843Z",
       "is_checked_in": false,
       "checked_in_at": null
+    },
+    {
+      "id": "TEAM-79603-750",
+      "hackathon_id": 2,
+      "team_name": "Laptop_A",
+      "leader_name": "User A",
+      "leader_email": "a@sru.edu.in",
+      "members": [],
+      "ticket_code": "TKT-TATKAL-90020",
+      "payment_status": "CONFIRMED",
+      "payment_id": "rzp_mock_1794806179603",
+      "booked_at": "2026-11-16T05:16:19.603Z",
+      "is_checked_in": false,
+      "checked_in_at": null
+    },
+    {
+      "id": "TEAM-40884-864",
+      "hackathon_id": 1,
+      "team_name": "Device_A_Teacher_Laptop",
+      "leader_name": "Prof. Sharma",
+      "leader_email": "prof.sharma@sru.edu.in",
+      "members": [],
+      "ticket_code": "TKT-TATKAL-42965",
+      "payment_status": "CONFIRMED",
+      "payment_id": "rzp_mock_1794806740884",
+      "booked_at": "2026-11-16T05:25:40.884Z",
+      "is_checked_in": false,
+      "checked_in_at": null
+    },
+    {
+      "id": "TEAM-52711-320",
+      "hackathon_id": 1,
+      "team_name": "Device_A_Teacher",
+      "leader_name": "Prof. Sharma",
+      "leader_email": "prof.sharma@sru.edu.in",
+      "members": [],
+      "ticket_code": "TKT-TATKAL-95956",
+      "payment_status": "RACE_CONDITION_DIRTY_WRITE",
+      "payment_id": "rzp_mock_1794806752711",
+      "booked_at": "2026-11-16T05:25:52.711Z",
+      "is_checked_in": false,
+      "checked_in_at": null
+    },
+    {
+      "id": "TEAM-52808-968",
+      "hackathon_id": 1,
+      "team_name": "Device_B_Friend",
+      "leader_name": "Karthik Raja",
+      "leader_email": "karthik.r@sru.edu.in",
+      "members": [],
+      "ticket_code": "TKT-TATKAL-89359",
+      "payment_status": "RACE_CONDITION_DIRTY_WRITE",
+      "payment_id": "rzp_mock_1794806752808",
+      "booked_at": "2026-11-16T05:25:52.808Z",
+      "is_checked_in": false,
+      "checked_in_at": null
     }
   ],
   "audit_logs": [
+    {
+      "id": "LOG-1794806752810-6sqi",
+      "timestamp": "2026-11-16T05:25:52.810Z",
+      "event_id": 1,
+      "action": "DIRTY_WRITE_SUCCESS",
+      "thread_id": "th-2059-178",
+      "team_name": "Device_B_Friend",
+      "lock_state": "UNPROTECTED",
+      "ticket_code": "TKT-TATKAL-89359",
+      "seats_remaining": 0,
+      "message": "Ticket issued without lock to 'Device_B_Friend'. Seats remaining: 0."
+    },
+    {
+      "id": "LOG-1794806752713-s6h8",
+      "timestamp": "2026-11-16T05:25:52.713Z",
+      "event_id": 1,
+      "action": "DIRTY_WRITE_SUCCESS",
+      "thread_id": "th-2058-702",
+      "team_name": "Device_A_Teacher",
+      "lock_state": "UNPROTECTED",
+      "ticket_code": "TKT-TATKAL-95956",
+      "seats_remaining": 0,
+      "message": "Ticket issued without lock to 'Device_A_Teacher'. Seats remaining: 0."
+    },
+    {
+      "id": "LOG-1794806752435-sr3b",
+      "timestamp": "2026-11-16T05:25:52.435Z",
+      "event_id": 1,
+      "action": "MUTEX_BYPASSED",
+      "thread_id": "th-2059-178",
+      "team_name": "Device_B_Friend",
+      "lock_state": "UNPROTECTED",
+      "seats_remaining": 1,
+      "message": "[RACE CONDITION RISK] Team 'Device_B_Friend' accessing shared state without lock."
+    },
+    {
+      "id": "LOG-1794806752351-nz2h",
+      "timestamp": "2026-11-16T05:25:52.351Z",
+      "event_id": 1,
+      "action": "MUTEX_BYPASSED",
+      "thread_id": "th-2058-702",
+      "team_name": "Device_A_Teacher",
+      "lock_state": "UNPROTECTED",
+      "seats_remaining": 1,
+      "message": "[RACE CONDITION RISK] Team 'Device_A_Teacher' accessing shared state without lock."
+    },
+    {
+      "id": "LOG-1794806741601-4k1z",
+      "timestamp": "2026-11-16T05:25:41.601Z",
+      "event_id": 1,
+      "action": "CRITICAL_SECTION_EXIT",
+      "thread_id": "th-0069-359",
+      "team_name": "Device_B_Friend_Mobile",
+      "lock_state": "UNLOCKED",
+      "message": "Lock released by 'Device_B_Friend_Mobile'. Next waiter alerted."
+    },
+    {
+      "id": "LOG-1794806741599-24xb",
+      "timestamp": "2026-11-16T05:25:41.599Z",
+      "event_id": 1,
+      "action": "TATKAL_QUOTA_EXHAUSTED",
+      "thread_id": "th-0069-359",
+      "team_name": "Device_B_Friend_Mobile",
+      "lock_state": "LOCKED",
+      "seats_remaining": 0,
+      "message": "Booking REJECTED. Tatkal quota exhausted (0 seats left)."
+    },
+    {
+      "id": "LOG-1794806741425-f627",
+      "timestamp": "2026-11-16T05:25:41.425Z",
+      "event_id": 1,
+      "action": "CRITICAL_SECTION_ENTER",
+      "thread_id": "th-0069-359",
+      "team_name": "Device_B_Friend_Mobile",
+      "lock_state": "LOCKED",
+      "wait_duration_ms": 1123,
+      "seats_remaining": 0,
+      "message": "Lock granted. Team 'Device_B_Friend_Mobile' entered Critical Section (Waited 1123ms)."
+    },
+    {
+      "id": "LOG-1794806740888-hjpz",
+      "timestamp": "2026-11-16T05:25:40.888Z",
+      "event_id": 1,
+      "action": "CRITICAL_SECTION_EXIT",
+      "thread_id": "th-0069-102",
+      "team_name": "Device_A_Teacher_Laptop",
+      "lock_state": "UNLOCKED",
+      "message": "Lock released by 'Device_A_Teacher_Laptop'. Next waiter alerted."
+    },
+    {
+      "id": "LOG-1794806740886-2ddm",
+      "timestamp": "2026-11-16T05:25:40.886Z",
+      "event_id": 1,
+      "action": "BOOKING_SUCCESS",
+      "thread_id": "th-0069-102",
+      "team_name": "Device_A_Teacher_Laptop",
+      "lock_state": "LOCKED",
+      "ticket_code": "TKT-TATKAL-42965",
+      "seats_remaining": 0,
+      "message": "Ticket TKT-TATKAL-42965 issued to 'Device_A_Teacher_Laptop'. Seats remaining: 0."
+    },
+    {
+      "id": "LOG-1794806740472-f8hz",
+      "timestamp": "2026-11-16T05:25:40.472Z",
+      "event_id": 1,
+      "action": "CRITICAL_SECTION_ENTER",
+      "thread_id": "th-0069-102",
+      "team_name": "Device_A_Teacher_Laptop",
+      "lock_state": "LOCKED",
+      "wait_duration_ms": 270,
+      "seats_remaining": 2,
+      "message": "Lock granted. Team 'Device_A_Teacher_Laptop' entered Critical Section (Waited 270ms)."
+    },
+    {
+      "id": "LOG-1794806740300-7x8g",
+      "timestamp": "2026-11-16T05:25:40.300Z",
+      "event_id": 1,
+      "action": "LOCK_REQUESTED",
+      "thread_id": "th-0069-359",
+      "team_name": "Device_B_Friend_Mobile",
+      "lock_state": "WAITING",
+      "seats_remaining": 1,
+      "message": "Team 'Device_B_Friend_Mobile' queued for Tatkal lock."
+    },
+    {
+      "id": "LOG-1794806740198-teky",
+      "timestamp": "2026-11-16T05:25:40.198Z",
+      "event_id": 1,
+      "action": "LOCK_REQUESTED",
+      "thread_id": "th-0069-102",
+      "team_name": "Device_A_Teacher_Laptop",
+      "lock_state": "WAITING",
+      "seats_remaining": 1,
+      "message": "Team 'Device_A_Teacher_Laptop' queued for Tatkal lock."
+    },
+    {
+      "id": "LOG-1794806179663-vqlv",
+      "timestamp": "2026-11-16T05:16:19.663Z",
+      "event_id": 2,
+      "action": "CRITICAL_SECTION_EXIT",
+      "thread_id": "th-9541-712",
+      "team_name": "Laptop_B",
+      "lock_state": "UNLOCKED",
+      "message": "Lock released by 'Laptop_B'. Next waiter alerted."
+    },
+    {
+      "id": "LOG-1794806179662-xtb0",
+      "timestamp": "2026-11-16T05:16:19.662Z",
+      "event_id": 2,
+      "action": "TATKAL_QUOTA_EXHAUSTED",
+      "thread_id": "th-9541-712",
+      "team_name": "Laptop_B",
+      "lock_state": "LOCKED",
+      "seats_remaining": 0,
+      "message": "Booking REJECTED. Tatkal quota exhausted (0 seats left)."
+    },
+    {
+      "id": "LOG-1794806179608-1lvx",
+      "timestamp": "2026-11-16T05:16:19.608Z",
+      "event_id": 2,
+      "action": "CRITICAL_SECTION_ENTER",
+      "thread_id": "th-9541-712",
+      "team_name": "Laptop_B",
+      "lock_state": "LOCKED",
+      "wait_duration_ms": 65,
+      "seats_remaining": 0,
+      "message": "Lock granted. Team 'Laptop_B' entered Critical Section (Waited 65ms)."
+    },
+    {
+      "id": "LOG-1794806179605-twnj",
+      "timestamp": "2026-11-16T05:16:19.605Z",
+      "event_id": 2,
+      "action": "CRITICAL_SECTION_EXIT",
+      "thread_id": "th-9538-281",
+      "team_name": "Laptop_A",
+      "lock_state": "UNLOCKED",
+      "message": "Lock released by 'Laptop_A'. Next waiter alerted."
+    },
+    {
+      "id": "LOG-1794806179604-npta",
+      "timestamp": "2026-11-16T05:16:19.604Z",
+      "event_id": 2,
+      "action": "BOOKING_SUCCESS",
+      "thread_id": "th-9538-281",
+      "team_name": "Laptop_A",
+      "lock_state": "LOCKED",
+      "ticket_code": "TKT-TATKAL-90020",
+      "seats_remaining": 0,
+      "message": "Ticket TKT-TATKAL-90020 issued to 'Laptop_A'. Seats remaining: 0."
+    },
+    {
+      "id": "LOG-1794806179543-a0pd",
+      "timestamp": "2026-11-16T05:16:19.543Z",
+      "event_id": 2,
+      "action": "CRITICAL_SECTION_ENTER",
+      "thread_id": "th-9538-281",
+      "team_name": "Laptop_A",
+      "lock_state": "LOCKED",
+      "wait_duration_ms": 2,
+      "seats_remaining": 1,
+      "message": "Lock granted. Team 'Laptop_A' entered Critical Section (Waited 2ms)."
+    },
+    {
+      "id": "LOG-1794806179541-5jxl",
+      "timestamp": "2026-11-16T05:16:19.541Z",
+      "event_id": 2,
+      "action": "LOCK_REQUESTED",
+      "thread_id": "th-9541-712",
+      "team_name": "Laptop_B",
+      "lock_state": "WAITING",
+      "seats_remaining": 1,
+      "message": "Team 'Laptop_B' queued for Tatkal lock."
+    },
+    {
+      "id": "LOG-1794806179538-qpbf",
+      "timestamp": "2026-11-16T05:16:19.538Z",
+      "event_id": 2,
+      "action": "LOCK_REQUESTED",
+      "thread_id": "th-9538-281",
+      "team_name": "Laptop_A",
+      "lock_state": "WAITING",
+      "seats_remaining": 1,
+      "message": "Team 'Laptop_A' queued for Tatkal lock."
+    },
     {
       "id": "LOG-1794753903903-kx9z",
       "timestamp": "2026-11-15T14:45:03.903Z",
@@ -480,7 +760,7 @@
       "lock_state": "UNPROTECTED",
       "ticket_code": "TKT-TATKAL-21983",
       "seats_remaining": -1,
-      "message": "\ud83d\udea8 RACE HAZARD! 'Friend Mobile' booked ticket beyond capacity! Seats are now -1."
+      "message": "🚨 RACE HAZARD! 'Friend Mobile' booked ticket beyond capacity! Seats are now -1."
     },
     {
       "id": "LOG-1794753888458-0w9b",
@@ -525,7 +805,7 @@
       "team_name": "BATCH_RUNNER",
       "lock_state": "MUTEX_ENABLED",
       "seats_remaining": 0,
-      "message": "\u2705 Rush Complete in 290ms: Zero overselling. 0 confirmed, 6 rejected."
+      "message": "✅ Rush Complete in 290ms: Zero overselling. 0 confirmed, 6 rejected."
     },
     {
       "id": "LOG-1794753865587-9g6u",
@@ -800,7 +1080,7 @@
       "team_name": "BATCH_RUNNER",
       "lock_state": "MUTEX_ENABLED",
       "seats_remaining": 0,
-      "message": "\ud83d\ude80 Launching 6 simultaneous requests against 0 remaining seats (Mutex: ON)."
+      "message": "🚀 Launching 6 simultaneous requests against 0 remaining seats (Mutex: ON)."
     },
     {
       "id": "LOG-1794753850130-is8p",
@@ -946,7 +1226,7 @@
       "lock_state": "UNPROTECTED",
       "ticket_code": "TKT-TATKAL-76034",
       "seats_remaining": -1,
-      "message": "\ud83d\udea8 RACE HAZARD! 'Friend Mobile' booked ticket beyond capacity! Seats are now -1."
+      "message": "🚨 RACE HAZARD! 'Friend Mobile' booked ticket beyond capacity! Seats are now -1."
     },
     {
       "id": "LOG-1794753576194-y2ls",
@@ -991,7 +1271,7 @@
       "team_name": "BATCH_RUNNER",
       "lock_state": "MUTEX_ENABLED",
       "seats_remaining": 0,
-      "message": "\u2705 Rush Complete in 287ms: Zero overselling. 0 confirmed, 6 rejected."
+      "message": "✅ Rush Complete in 287ms: Zero overselling. 0 confirmed, 6 rejected."
     },
     {
       "id": "LOG-1794753551717-iux8",
@@ -1266,7 +1546,7 @@
       "team_name": "BATCH_RUNNER",
       "lock_state": "MUTEX_ENABLED",
       "seats_remaining": 0,
-      "message": "\ud83d\ude80 Launching 6 simultaneous requests against 0 remaining seats (Mutex: ON)."
+      "message": "🚀 Launching 6 simultaneous requests against 0 remaining seats (Mutex: ON)."
     },
     {
       "id": "LOG-1794753535145-27qh",
@@ -1322,7 +1602,7 @@
       "team_name": "BATCH_RUNNER",
       "lock_state": "MUTEX_ENABLED",
       "seats_remaining": 0,
-      "message": "\u2705 Rush Complete in 270ms: Zero overselling. 0 confirmed, 6 rejected."
+      "message": "✅ Rush Complete in 270ms: Zero overselling. 0 confirmed, 6 rejected."
     },
     {
       "id": "LOG-1794753424415-ozef",
@@ -1597,7 +1877,7 @@
       "team_name": "BATCH_RUNNER",
       "lock_state": "MUTEX_ENABLED",
       "seats_remaining": 0,
-      "message": "\ud83d\ude80 Launching 6 simultaneous requests against 0 remaining seats (Mutex: ON)."
+      "message": "🚀 Launching 6 simultaneous requests against 0 remaining seats (Mutex: ON)."
     },
     {
       "id": "LOG-1794753420992-yk8n",
