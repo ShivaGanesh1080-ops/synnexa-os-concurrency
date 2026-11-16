@@ -1,6 +1,7 @@
 const db = require('../storage/Database');
 const bookingService = require('../services/BookingService');
 const { defaultRegistry } = require('../core/KeyedMutexRegistry');
+const dlm = require('../core/DistributedLockManager');
 
 function sendJson(res, statusCode, data) {
   res.writeHead(statusCode, {
@@ -18,10 +19,16 @@ async function handleApiRequest(req, res, pathname, queryParams, body) {
     if (pathname === '/api/hackathons') {
       if (method === 'GET') {
         const hackathons = db.getHackathons();
-        // Append current live mutex snapshot to each event
-        const enriched = hackathons.map(h => {
+        // Append current live mutex snapshot and distributed global state to each event
+        const enriched = await Promise.all(hackathons.map(async h => {
           const mutex = defaultRegistry.get(h.id);
-          const tatkalRemaining = h.remaining_tickets !== undefined ? h.remaining_tickets : (h.tatkal_remaining || 0);
+          const globalState = await dlm.getGlobalEventState(h.id);
+          const tatkalRemaining = globalState && globalState.remaining !== undefined
+            ? globalState.remaining
+            : (h.remaining_tickets !== undefined ? h.remaining_tickets : (h.tatkal_remaining || 0));
+          const mutexEnabled = globalState && globalState.mutex_enabled !== undefined
+            ? globalState.mutex_enabled
+            : (h.mutex_enabled !== undefined ? h.mutex_enabled : true);
           const tatkalQuota = h.tatkal_quota !== undefined ? h.tatkal_quota : (h.tatkal_seats || 4);
           const totalSeats = h.total_tickets !== undefined ? h.total_tickets : (h.total_seats || 10);
           const price = h.ticket_price !== undefined ? h.ticket_price : (h.price_inr || 499);
@@ -36,9 +43,10 @@ async function handleApiRequest(req, res, pathname, queryParams, body) {
             tatkal_seats: tatkalQuota,
             total_seats: totalSeats,
             remaining_tickets: tatkalRemaining,
+            mutex_enabled: mutexEnabled,
             mutex_snapshot: mutex.getSnapshot()
           };
-        });
+        }));
         return sendJson(res, 200, { success: true, hackathons: enriched });
       }
 
@@ -71,6 +79,15 @@ async function handleApiRequest(req, res, pathname, queryParams, body) {
 
       if (method === 'PUT') {
         const updated = db.updateHackathon(eventId, body);
+        if (body.remaining_tickets !== undefined) {
+          await dlm.setGlobalEventCapacity(eventId, body.remaining_tickets, body.badge);
+        }
+        if (body.mutex_enabled !== undefined) {
+          const state = await dlm.getGlobalEventState(eventId);
+          if (state && state.mutex_enabled !== Boolean(body.mutex_enabled)) {
+            await dlm.toggleGlobalMutex(eventId);
+          }
+        }
         return sendJson(res, 200, { success: true, hackathon: updated });
       }
 
@@ -85,7 +102,8 @@ async function handleApiRequest(req, res, pathname, queryParams, body) {
     const toggleMatch = pathname.match(/^\/api\/hackathons\/(\d+)\/toggle-mutex$/);
     if (toggleMatch && method === 'POST') {
       const eventId = Number(toggleMatch[1]);
-      const event = db.toggleMutex(eventId);
+      const globalEnabled = await dlm.toggleGlobalMutex(eventId);
+      const event = db.updateHackathon(eventId, { mutex_enabled: globalEnabled });
       if (!event) return sendJson(res, 404, { success: false, error: "Hackathon not found" });
       return sendJson(res, 200, {
         success: true,

@@ -743,6 +743,10 @@ module.exports = { KeyedMutexRegistry, defaultRegistry };"""
         page-break-inside: avoid !important;
         break-inside: avoid !important;
     }}
+    .code-card-body, .code-table, .code-table tbody, .code-table tr, .code-table td {{
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }}
     .code-header {{
         background: #f8fafc;
         border-bottom: 1px solid #e2e8f0;
@@ -817,6 +821,10 @@ module.exports = { KeyedMutexRegistry, defaultRegistry };"""
         margin: 8px 0;
         overflow: hidden;
         box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }}
+    .trace-body, .trace-header {{
         page-break-inside: avoid !important;
         break-inside: avoid !important;
     }}
